@@ -9,7 +9,7 @@ export default class Items extends React.Component {
   constructor(props) {
     super(props)
     this.store = new Store()
-    
+
     this.handleSubmitItem = this.handleSubmitItem.bind(this)
 
     this.state = {
@@ -21,18 +21,18 @@ export default class Items extends React.Component {
     }
   }
 
-  fetchItems = () => {    
+  fetchItems = () => {
     this.store.getAllItem().then(
       (items) => {
         this.setState({ items: items })
-        
+
         // update imageUrl for all characters
-        items.forEach((c,idx)=> 
+        items.forEach((c, idx) =>
           this.store.getImageURL(c._id).then((url) => {
             c.imageUrl = url
             let newitems = [...this.state.items]
             newitems[idx] = c
-            this.setState({items: newitems})
+            this.setState({ items: newitems })
           })
         )
       }
@@ -40,7 +40,7 @@ export default class Items extends React.Component {
   }
 
   handleSubmitItem() {
-    this.fetchItems()    
+    this.fetchItems()
     this.unSelectItem()
   }
 
@@ -61,7 +61,7 @@ export default class Items extends React.Component {
   deleteDialogHandleOpen = () => this.setState({ isDeleteDialogOpen: true });
   deleteDialgohandleClose = () => this.setState({ isDeleteDialogOpen: false });
 
-  deleteItem = () => {    
+  deleteItem = () => {
 
     let deleteResult = this.store.delete(this.state.selectedItem)
       .then((res) => {
@@ -93,7 +93,7 @@ export default class Items extends React.Component {
       <main>
         <article>
           <h2>Items</h2>
-          <Button onClick={()=>this.onSelectItem(null)} 
+          <Button onClick={() => this.onSelectItem(null)}
             icon='add'
             disabled={this.state.isItemSelected}>New</Button>
         </article>
@@ -102,22 +102,26 @@ export default class Items extends React.Component {
           title="Add new Item"
           onClose={this.unSelectItem}
           canOutsideClickClose={true}
-          size='350px'>
-          <ItemForm
-            submitComplete={this.handleSubmitItem} 
-            Item={this.state.selectedItem}
-            onDelete={this.deleteDialogHandleOpen}
-            addImage={this.addImage} />
+          size='40vw'>
+          <div className={Classes.DRAWER_BODY}>
+            <div className={Classes.DIALOG_BODY}>
+              <ItemForm
+                submitComplete={this.handleSubmitItem}
+                Item={this.state.selectedItem}
+                onDelete={this.deleteDialogHandleOpen}
+                addImage={this.addImage} />
+            </div>
+          </div>
         </Drawer>
 
         <DandCards
           elements={this.state.items}
           onSelect={this.onSelectItem}
-          title = "name"
-          subtitle = "class"
-          description = "description"
-          imageUrl = "imageUrl"
-          />
+          title="name"
+          subtitle="class"
+          description="description"
+          imageUrl="imageUrl"
+        />
 
         <Dialog isOpen={this.state.isDeleteDialogOpen}
           icon="delete"
@@ -129,7 +133,7 @@ export default class Items extends React.Component {
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button onClick={this.deleteDialgohandleClose}>Bless it</Button>
               <Button onClick={this.deleteItem}
-              intent={Intent.DANGER}>Delete that shit!</Button>
+                intent={Intent.DANGER}>Delete that shit!</Button>
             </div>
           </div>
         </Dialog>

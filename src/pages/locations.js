@@ -70,7 +70,7 @@ export default class Locations extends React.Component {
       <main>
         <article>
           <h2>Locations</h2>
-          <Button onClick={()=>this.onSelectLocation(null)} 
+          <Button onClick={() => this.onSelectLocation(null)}
             icon='add'
             disabled={this.state.isLocationSelected}>New</Button>
 
@@ -85,33 +85,37 @@ export default class Locations extends React.Component {
 
         </article>
 
-          <Drawer isOpen={this.state.isLocationSelected}
-            title="Add Location"
-            onClose={this.unSelectLocation}
-            canOutsideClickClose={true}
-            size='350px'>
-            <LocationForm
-              submitComplete={this.handleSubmitLocation}
-              location={this.state.selectedLocation}
-              onDelete={this.deleteDialogHandleOpen}
-              addImage={this.addImage} />
-          </Drawer>
-
-          
-          <Dialog isOpen={this.state.isDeleteDialogOpen}
-            icon="delete"
-            title="Deleting location">
+        <Drawer isOpen={this.state.isLocationSelected}
+          title="Add Location"
+          onClose={this.unSelectLocation}
+          canOutsideClickClose={true}
+          size='40vw'>
+          <div className={Classes.DRAWER_BODY}>
             <div className={Classes.DIALOG_BODY}>
-              <p>Do you want to delete this pretty location for real?</p>
+              <LocationForm
+                submitComplete={this.handleSubmitLocation}
+                location={this.state.selectedLocation}
+                onDelete={this.deleteDialogHandleOpen}
+                addImage={this.addImage} />
             </div>
-            <div className={Classes.DIALOG_FOOTER}>
-              <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                <Button onClick={this.deleteDialgohandleClose}>Bless him</Button>
-                <Button onClick={this.deleteLocation}
-                  intent={Intent.DANGER}>Delete that shit!</Button>
-              </div>
+          </div>
+        </Drawer>
+
+
+        <Dialog isOpen={this.state.isDeleteDialogOpen}
+          icon="delete"
+          title="Deleting location">
+          <div className={Classes.DIALOG_BODY}>
+            <p>Do you want to delete this pretty location for real?</p>
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button onClick={this.deleteDialgohandleClose}>Bless him</Button>
+              <Button onClick={this.deleteLocation}
+                intent={Intent.DANGER}>Delete that shit!</Button>
             </div>
-          </Dialog>
+          </div>
+        </Dialog>
       </main>
     )
   }

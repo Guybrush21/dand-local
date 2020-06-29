@@ -11,7 +11,7 @@ export default class Characters extends React.Component {
   constructor(props) {
     super(props)
     this.store = new Store()
-    
+
     this.handleSubmitCharacter = this.handleSubmitCharacter.bind(this)
 
     this.state = {
@@ -23,18 +23,18 @@ export default class Characters extends React.Component {
     }
   }
 
-  fetchCharacters = () => {    
+  fetchCharacters = () => {
     this.store.getAllCharacter().then(
       (characters) => {
         this.setState({ characters: characters })
-        
+
         // update imageUrl for all characters
-        characters.forEach((c,idx)=> 
+        characters.forEach((c, idx) =>
           this.store.getImageURL(c._id).then((url) => {
             c.imageUrl = url
             let newcharacthers = [...this.state.characters]
             newcharacthers[idx] = c
-            this.setState({characters: newcharacthers})
+            this.setState({ characters: newcharacthers })
           })
         )
       }
@@ -42,7 +42,7 @@ export default class Characters extends React.Component {
   }
 
   handleSubmitCharacter() {
-    this.fetchCharacters()    
+    this.fetchCharacters()
     this.unSelectCharacter()
   }
 
@@ -63,7 +63,7 @@ export default class Characters extends React.Component {
   deleteDialogHandleOpen = () => this.setState({ isDeleteDialogOpen: true });
   deleteDialgohandleClose = () => this.setState({ isDeleteDialogOpen: false });
 
-  deleteCharacter = () => {    
+  deleteCharacter = () => {
 
     let deleteResult = this.store.delete(this.state.selectedCharacter)
       .then((res) => {
@@ -95,7 +95,7 @@ export default class Characters extends React.Component {
       <main>
         <article>
           <h2>Characters</h2>
-          <Button onClick={()=>this.onSelectCharacter(null)} 
+          <Button onClick={() => this.onSelectCharacter(null)}
             icon='add'
             disabled={this.state.isCharacterSelected}>New</Button>
         </article>
@@ -104,22 +104,26 @@ export default class Characters extends React.Component {
           title="Add new Character"
           onClose={this.unSelectCharacter}
           canOutsideClickClose={true}
-          size='350px'>
-          <CharacterForm
-            submitComplete={this.handleSubmitCharacter} 
-            character={this.state.selectedCharacter}
-            onDelete={this.deleteDialogHandleOpen}
-            addImage={this.addImage} />
+          size='40vw'>
+          <div className={Classes.DRAWER_BODY}>
+            <div className={Classes.DIALOG_BODY}>
+              <CharacterForm
+                submitComplete={this.handleSubmitCharacter}
+                character={this.state.selectedCharacter}
+                onDelete={this.deleteDialogHandleOpen}
+                addImage={this.addImage} />
+            </div>
+          </div>
         </Drawer>
 
         <DandCards
           elements={this.state.characters}
           onSelect={this.onSelectCharacter}
-          title = "name"
-          subtitle = "class"
-          description = "description"
-          imageUrl = "imageUrl"
-          />
+          title="name"
+          subtitle="class"
+          description="description"
+          imageUrl="imageUrl"
+        />
 
         <Dialog isOpen={this.state.isDeleteDialogOpen}
           icon="delete"
@@ -131,7 +135,7 @@ export default class Characters extends React.Component {
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button onClick={this.deleteDialgohandleClose}>Bless him</Button>
               <Button onClick={this.deleteCharacter}
-              intent={Intent.DANGER}>Delete that bitch!</Button>
+                intent={Intent.DANGER}>Delete that bitch!</Button>
             </div>
           </div>
         </Dialog>

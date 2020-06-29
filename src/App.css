@@ -2,27 +2,21 @@
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
 
-
-#root-flex{
-    display: flex;
-}
-
-nav {
-    flex: 1;
-    flex-flow: column;        
-    border-right: #eceded solid 3px;
-    margin-right: 1em;
-    display: flex;
-}
-
 main {
-    flex: 11;
     padding: 2em;
 }
 
 .drawer {
     padding: 1em;
 }
-.list{
-    margin: 1em 0;
+
+.dashboard{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+}
+
+article.dashboard{
+    flex: 1 auto;
 }

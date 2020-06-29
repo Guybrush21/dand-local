@@ -17,7 +17,7 @@ export default class DandCards extends React.Component {
         <h3>{c[title]}</h3>
         <small>{c[subtitle]}</small>
         <p>{c[description]}</p>
-        <img src={c[imageUrl]} alt="item" className="dandCards-image"></img>
+        { (c[imageUrl]) ?  <img src={c[imageUrl]} alt="item" className="dandCards-image"></img>  : '' }
       </Card>
       )
     )

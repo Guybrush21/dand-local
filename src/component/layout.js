@@ -21,10 +21,10 @@ export default class Layout extends React.Component {
 
   render() {
     return (
-      <div id='dand-layout'>
+      <div>
         <Header pageChange={this.onPageChange.bind(this)} />
         
-        <div id='root-flex'>          
+        <div>          
           {this.state.layout === CHARACTERS && <Characters />}
           {this.state.layout === LOCATIONS && <Locations />}
           {this.state.layout === ITEMS && <Items />}

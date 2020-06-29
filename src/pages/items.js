@@ -3,9 +3,7 @@ import DandCards from '../component/common/dandCards'
 import ItemForm from '../component/item/item.form'
 import Store from '../store'
 import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
-import Item from '../model/item'
 import '../component/item/item.css'
-
 
 export default class Items extends React.Component {
   constructor(props) {

@@ -27,7 +27,7 @@ export default class Header extends React.Component {
               text="Characters" onClick={this.handleChange.bind(this,CHARACTERS)} />
             <Button className="bp3-minimal" icon="map"
               text="Locations" onClick={this.handleChange.bind(this,LOCATIONS)} />
-            <Button className="bp3-minimal" icon="map"
+            <Button className="bp3-minimal" icon="key"
               text="Items" onClick={this.handleChange.bind(this,ITEMS)} />
           </Navbar.Group>
         </Navbar>

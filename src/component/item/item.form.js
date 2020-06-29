@@ -5,6 +5,7 @@ import {
   Button, Drawer, Label, FormGroup, InputGroup,
   RadioGroup, Radio, Intent, Switch, FileInput
 } from '@blueprintjs/core'
+
 export default class ItemForm extends React.Component {
   constructor(props) {
     super(props)

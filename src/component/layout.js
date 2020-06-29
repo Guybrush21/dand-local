@@ -2,7 +2,7 @@ import Header from './header'
 import React from 'react'
 import Characters from '../pages/characters'
 import Locations from '../pages/locations'
-import Items from '../pages/characters'
+import Items from '../pages/items'
 import Dashboard from '../pages/dashboard'
 
 export const DASHBOARD = 'DASHBOARD'

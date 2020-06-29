@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Button} from '@blueprintjs/core'
 
-import { DASHBOARD, CHARACTERS, LOCATIONS } from './layout'
+import { DASHBOARD, CHARACTERS, LOCATIONS, ITEMS } from './layout'
 
 export default class Header extends React.Component {
 
@@ -27,6 +27,8 @@ export default class Header extends React.Component {
               text="Characters" onClick={this.handleChange.bind(this,CHARACTERS)} />
             <Button className="bp3-minimal" icon="map"
               text="Locations" onClick={this.handleChange.bind(this,LOCATIONS)} />
+            <Button className="bp3-minimal" icon="map"
+              text="Items" onClick={this.handleChange.bind(this,ITEMS)} />
           </Navbar.Group>
         </Navbar>
       </header>

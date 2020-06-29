@@ -1,0 +1,22 @@
+.detail-image{
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+    border: black 2px solid;
+    border-radius: 1em;
+}
+
+.flex-card-container{
+    display: flex ;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+.flex-card{
+    margin: 2em;
+    padding: 2em;
+    width: 400px;
+}
+
+.item-list-image{
+    max-width:200px;
+}

@@ -1,6 +1,7 @@
 import PouchDB from 'pouchdb'
 export const CHARACTER_TYPE = 'CHARACTER'
 export const LOCATION_TYPE = 'LOCATION'
+export const ITEM_TYPE = 'ITEM'
 
 export default class Store {
   constructor() {
@@ -15,6 +16,11 @@ export default class Store {
     this.addLocation = function (location) {
       location.type = LOCATION_TYPE
       this.store.put(location)
+    }
+
+    this.addItem = function(item) {
+      item.type = ITEM_TYPE
+      this.store.put(item)
     }
 
     this.add = function(obj, name) {
@@ -44,6 +50,10 @@ export default class Store {
 
     this.getAllLocation = function () {
       return this.getAllByType(LOCATION_TYPE)
+    }
+
+    this.getAllItem = function () {
+      return this.getAllByType(ITEM_TYPE)
     }
 
     this.getAllByTypeName = function(typeName) {

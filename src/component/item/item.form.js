@@ -2,8 +2,8 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import {
-  Button, Drawer, Label, FormGroup, InputGroup,
-  RadioGroup, Radio, Intent, Switch, FileInput
+  Button, FormGroup, InputGroup,
+  Intent, Switch, FileInput
 } from '@blueprintjs/core'
 
 export default class ItemForm extends React.Component {

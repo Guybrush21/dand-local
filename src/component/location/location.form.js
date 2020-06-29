@@ -2,8 +2,8 @@ import React from 'react'
 import uuid from 'uuid'
 import Store from '../../store'
 import {
-  Button, Drawer, Label, FormGroup, InputGroup,
-  RadioGroup, Radio, Intent, Switch, FileInput
+  Button, FormGroup, InputGroup,
+  Intent, Switch, FileInput
 } from '@blueprintjs/core'
 
 export default class LocationForm extends React.Component {
@@ -77,7 +77,7 @@ export default class LocationForm extends React.Component {
         {(this.state.imageUrl) ?
           <img className="detail-image" 
           src={this.state.imageUrl} 
-          alt='location image' >            
+          alt='location' >            
           </img>
           :
           <FormGroup>

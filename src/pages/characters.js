@@ -3,9 +3,7 @@ import DandCards from '../component/common/dandCards'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
 import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
-import Character from '../model/character'
 import '../component/character/character.css'
-
 
 export default class Characters extends React.Component {
   constructor(props) {

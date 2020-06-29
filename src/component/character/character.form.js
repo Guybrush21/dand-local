@@ -2,7 +2,7 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import {
-  Button, Drawer, Label, FormGroup, InputGroup,
+  Button, FormGroup, InputGroup,
   RadioGroup, Radio, Intent, Switch, FileInput
 } from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {

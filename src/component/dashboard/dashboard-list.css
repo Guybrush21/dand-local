@@ -1,8 +1,6 @@
 .dasboard-list-image{
     width: auto;
-    max-height: 80%;    
-    border: black 1px solid;
-    border-radius: 100%;
+    max-height: 80%;        
 }
 .dashboard-card{
     margin: 1em;

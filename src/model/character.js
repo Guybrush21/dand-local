@@ -7,6 +7,5 @@ export default class Character {
         this.class = ""
         this.imageUrl = ""
         this.isFavorite = false        
-    }
-    
+    }    
 }

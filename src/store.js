@@ -60,12 +60,10 @@ export default class Store {
       return this.getAllByType(typeName)
     }
 
-    this.getAllByType = function (type) {
-      return this.store.allDocs({ include_docs: true, descending: true })
-        .then(function (doc) {
-          return doc.rows.map(i => i.doc)
-            .filter(i => i.type === type)
-        })
+    this.getAllByType = async function (type) {
+      const doc = await this.store.allDocs({ include_docs: true, descending: true })
+      return doc.rows.map(i => i.doc)
+        .filter(i_1 => i_1.type === type)        
     }
 
     this.delete = function (item) {
@@ -79,5 +77,25 @@ export default class Store {
       return this.store.put(item)
         .then(function (val) { return val.ok })
     }
+    
+    this.getFavoriteByType = async function(type){
+      const doc = await this.store.allDocs({ 
+        include_docs: true, 
+        descending: true})
+        const result = doc.rows.map(r => r.doc)
+        .filter(i => i.type === type && i.isFavorite)
+        
+        result.forEach(async (element) => {
+          element.imageUrl = await this.getImageURL(element._id)
+        });
+
+        return result
+
+    }
+
+    this.getAllFavoriteCharacthers = async () => this.getFavoriteByType(CHARACTER_TYPE)
+    this.getAllFavoriteLocations = async () => this.getFavoriteByType(LOCATION_TYPE)
+    this.getAllFavoriteItems = async () => this.getFavoriteByType(ITEM_TYPE)
+
   }
 }

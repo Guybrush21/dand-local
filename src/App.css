@@ -17,6 +17,6 @@ main {
     align-content: flex-start;
 }
 
-article.dashboard{
-    flex: 1 auto;
+.dashboard article{    
+    flex: 1 auto;    
 }

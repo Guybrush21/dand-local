@@ -1,0 +1,9 @@
+.dasboard-list-image{
+    width: auto;
+    max-height: 80%;    
+    border: black 1px solid;
+    border-radius: 100%;
+}
+.flex-card{
+    height: 200px;
+}

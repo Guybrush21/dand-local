@@ -4,6 +4,9 @@
     border: black 1px solid;
     border-radius: 100%;
 }
-.flex-card{
+.dashboard-card{
+    margin: 1em;
+    padding: 1em;
     height: 200px;
+    border-radius:8px;
 }

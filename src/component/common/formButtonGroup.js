@@ -10,12 +10,14 @@ export default function FormButtonGroup(props){
           fill={true}
           text='Save'
           onClick={props.save}
-          intent={Intent.PRIMARY} />
+          intent={Intent.PRIMARY}
+          icon='archive' />
         <Button
           onClick={() => props.delete()}
           text="Delete"
           intent={Intent.DANGER}
-          disabled={!props.canDelete} />
+          disabled={!props.canDelete}
+          icon='delete' />
       </ButtonGroup>
     )
 

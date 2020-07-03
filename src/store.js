@@ -64,7 +64,11 @@ export default class Store {
       const doc = await this.store.allDocs({ include_docs: true, descending: true })
       const result = doc.rows.map(i => i.doc)
         .filter(i_1 => i_1.type === type)      
-
+        await Promise.all(
+          result.map(async (el) => {
+            el.imageUrl = await this.getImageURL(el._id)
+          })
+        )
       return result
     }
 

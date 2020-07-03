@@ -1,10 +1,11 @@
 import React from 'react'
 import './dandCards.css'
-import {Card} from '@blueprintjs/core'
+import { Card, Icon, Intent } from '@blueprintjs/core'
+import { INTENT_PRIMARY } from '@blueprintjs/core/lib/esm/common/classes'
 
 export default class DandCards extends React.Component {
   render() {
-    
+
     const title = this.props.title
     const subtitle = this.props.subtitle
     const description = this.props.description
@@ -13,14 +14,19 @@ export default class DandCards extends React.Component {
     const list = this.props.elements.map(c => (
       <Card interactive={true} key={c._id}
         onClick={(e) => this.props.onSelect(c, e)}
-        className='flex-card'>                
-        <h3>{c[title]}</h3>
-        <small>{c[subtitle]}</small>
-        <p>{c[description]}</p>
-        { (c[imageUrl]) ?  <img src={c[imageUrl]} alt="item" className="dandCards-image"></img>  : '' }
+        className='flex-card'>
+        <div className='dandcard-relative'>
+        {(c.isFavorite) ? <Icon className='favorite-icon' 
+        icon='bookmark' 
+        intent={Intent.PRIMARY} 
+        iconSize='64'></Icon> : ''}
+          <h3>{c[title]}</h3>
+          <small>{c[subtitle]}</small>
+          <p>{c[description]}</p>
+          {(c[imageUrl]) ? <img src={c[imageUrl]} alt="item" className="dandCards-image"></img> : ''}
+        </div>
       </Card>
-      )
-    )
+    ))
 
     return (
       <article className="flex-card-container">

@@ -12,3 +12,13 @@
 .dandCards-image{
     max-width:200px;
 }
+
+.favorite-icon{
+    position: absolute;
+    top: -50px;
+    left: 97%;
+}
+
+.dandcard-relative{
+    position:relative
+}

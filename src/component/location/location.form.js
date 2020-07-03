@@ -2,8 +2,8 @@ import React from 'react'
 import uuid from 'uuid'
 import Store from '../../store'
 import {
-  Button, FormGroup, InputGroup,
-  Intent, Switch, FileInput, TextArea, ButtonGroup
+  FormGroup, InputGroup,
+  Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
 

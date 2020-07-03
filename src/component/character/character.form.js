@@ -2,10 +2,10 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import {
-  Button, FormGroup, InputGroup, ButtonGroup,
-  RadioGroup, Radio, Intent, Switch, FileInput, TextArea
+  FormGroup, InputGroup, RadioGroup, Radio, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
+
 export default class CharacterForm extends React.Component {
   constructor(props) {
     super(props)

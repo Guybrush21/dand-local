@@ -1,7 +1,6 @@
 import React from 'react'
 import './dandCards.css'
 import { Card, Icon, Intent } from '@blueprintjs/core'
-import { INTENT_PRIMARY } from '@blueprintjs/core/lib/esm/common/classes'
 
 export default class DandCards extends React.Component {
   render() {

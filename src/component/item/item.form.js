@@ -2,9 +2,10 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import {
-  Button, FormGroup, InputGroup,
+  Button, FormGroup, InputGroup, ButtonGroup,
   Intent, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
+import FormButtonGroup from '../common/formButtonGroup'
 
 export default class ItemForm extends React.Component {
   constructor(props) {
@@ -51,6 +52,12 @@ export default class ItemForm extends React.Component {
   render() {
     return (
       <div className='drawer'>
+        <FormButtonGroup
+          save={this.saveItem}
+          delete={this.props.onDelete}
+          canDelete={!this.state.isNew}
+        ></FormButtonGroup>
+
         <FormGroup>
           <Switch checked={this.state.isFavorite}
             name="isFavorite"
@@ -90,15 +97,6 @@ export default class ItemForm extends React.Component {
               type="file" ></FileInput >
           </FormGroup>
         }
-
-        <FormGroup>
-          <Button onClick={(e) => this.props.onDelete(this.props.item)}
-            text="Delete"
-            intent={Intent.DANGER}
-            disabled={this.state.isNew} />
-        </FormGroup>
-        <Button text='Save' onClick={this.saveItem}
-          intent={Intent.PRIMARY} />
 
       </div>
     )

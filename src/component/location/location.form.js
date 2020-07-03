@@ -3,8 +3,9 @@ import uuid from 'uuid'
 import Store from '../../store'
 import {
   Button, FormGroup, InputGroup,
-  Intent, Switch, FileInput, TextArea
+  Intent, Switch, FileInput, TextArea, ButtonGroup
 } from '@blueprintjs/core'
+import FormButtonGroup from '../common/formButtonGroup'
 
 export default class LocationForm extends React.Component {
   constructor(props) {
@@ -21,15 +22,15 @@ export default class LocationForm extends React.Component {
       isFavorite: false,
       isNew: true,
     }
-    if(this.props.location != null){
-      this.state = {...this.props.location, isNew: false}
+    if (this.props.location != null) {
+      this.state = { ...this.props.location, isNew: false }
     }
   }
 
   saveLocation(event) {
     event.preventDefault()
 
-    const newLocation = {...this.state}
+    const newLocation = { ...this.state }
     this.store.addLocation(newLocation)
     console.info(newLocation)
     this.props.submitComplete()
@@ -49,8 +50,14 @@ export default class LocationForm extends React.Component {
   }
 
   render() {
-    return (      
-        <div className='drawer'>
+    return (
+      <div className='drawer'>        
+        <FormButtonGroup
+          save={this.saveLocation}
+          delete={this.props.onDelete}
+          canDelete={!this.state.isNew}
+        ></FormButtonGroup>
+
         <FormGroup>
           <Switch checked={this.state.isFavorite}
             name="isFavorite"
@@ -69,43 +76,35 @@ export default class LocationForm extends React.Component {
           <InputGroup name="area" placeholder="area"
             value={this.state.area}
             onChange={this.handleChange} />
-        </FormGroup>  
+        </FormGroup>
         <FormGroup
           label="Description"
           labelFor="description">
-          <TextArea name="description"           
+          <TextArea name="description"
             value={this.state.description}
             growVertically={true}
-            large={true}    
-            fill={true}   
+            large={true}
+            fill={true}
             onChange={this.handleChange} />
-        </FormGroup>      
-
-
-        {(this.state.imageUrl) ?
-          <img className="detail-image" 
-          src={this.state.imageUrl} 
-          alt='location' >            
-          </img>
-          :
-          <FormGroup>
-            <FileInput id="image" name="image"
-              onChange={(e) => this.props.addImage(e, this.state)}
-              type="file" ></FileInput >
-          </FormGroup>
-        }
-
-        <FormGroup>
-          <Button onClick={(e) => this.props.onDelete(this.props.location)}
-            text="Delete"
-            intent={Intent.DANGER}
-            disabled={this.state.isNew} />
         </FormGroup>
-        <Button text='Save' onClick={this.saveLocation}
-          intent={Intent.PRIMARY} />
+
+        <div>
+          {(this.state.imageUrl) ?
+            <img className="detail-image"
+              src={this.state.imageUrl}
+              alt='location' >
+            </img>
+            :
+            <FormGroup>
+              <FileInput id="image" name="image"
+                onChange={(e) => this.props.addImage(e, this.state)}
+                type="file" ></FileInput >
+            </FormGroup>
+          }
+        </div>
 
       </div>
-      
+
     )
   }
 }

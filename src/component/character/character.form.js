@@ -2,9 +2,10 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import {
-  Button, FormGroup, InputGroup,
-  RadioGroup, Radio, Intent, Switch, FileInput,TextArea
+  Button, FormGroup, InputGroup, ButtonGroup,
+  RadioGroup, Radio, Intent, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
+import FormButtonGroup from '../common/formButtonGroup'
 export default class CharacterForm extends React.Component {
   constructor(props) {
     super(props)
@@ -51,7 +52,12 @@ export default class CharacterForm extends React.Component {
 
   render() {
     return (
-      <div className='drawer'>
+      <div className='drawer'>        
+        <FormButtonGroup
+          save={this.saveCharacter}
+          delete={this.props.onDelete}
+          canDelete={!this.state.isNew}
+        ></FormButtonGroup>
         <FormGroup>
           <Switch checked={this.state.isFavorite}
             name="isFavorite"
@@ -74,7 +80,7 @@ export default class CharacterForm extends React.Component {
         </FormGroup>
         <FormGroup>
           <RadioGroup
-            label="Sex" 
+            label="Sex"
             name="sex"
             onChange={this.handleChange}
             selectedValue={this.state.sex}>
@@ -86,35 +92,26 @@ export default class CharacterForm extends React.Component {
           <TextArea
             name='description'
             growVertically={true}
-            large={true}    
-            fill={true}   
+            large={true}
+            fill={true}
             onChange={this.handleChange}
             value={this.state.description}
           />
         </FormGroup>
-
-        {(this.state.imageUrl) ?
-          <img className="detail-image"
-            src={this.state.imageUrl}
-            alt='character profile' >
-          </img>
-          :
-          <FormGroup>
-            <FileInput id="image" name="image"
-              onChange={(e) => this.props.addImage(e, this.state)}
-              type="file" ></FileInput >
-          </FormGroup>
-        }
-
-        <FormGroup>
-          <Button onClick={(e) => this.props.onDelete(this.props.character)}
-            text="Delete"
-            intent={Intent.DANGER}
-            disabled={this.state.isNew} />
-        </FormGroup>
-        <Button text='Save' onClick={this.saveCharacter}
-          intent={Intent.PRIMARY} />
-
+        <div>
+          {(this.state.imageUrl) ?
+            <img className="detail-image"
+              src={this.state.imageUrl}
+              alt='character profile' >
+            </img>
+            :
+            <FormGroup>
+              <FileInput id="image" name="image"
+                onChange={(e) => this.props.addImage(e, this.state)}
+                type="file" ></FileInput >
+            </FormGroup>
+          }
+        </div>
       </div>
     )
   }

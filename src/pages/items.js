@@ -97,7 +97,7 @@ export default class Items extends React.Component {
             <div className={Classes.DIALOG_BODY}>
               <ItemForm
                 submitComplete={this.handleSubmitItem}
-                Item={this.state.selectedItem}
+                item={this.state.selectedItem}
                 onDelete={this.deleteDialogHandleOpen}
                 addImage={this.addImage} />
             </div>

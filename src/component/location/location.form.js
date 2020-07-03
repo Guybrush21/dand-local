@@ -3,7 +3,7 @@ import uuid from 'uuid'
 import Store from '../../store'
 import {
   Button, FormGroup, InputGroup,
-  Intent, Switch, FileInput
+  Intent, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 
 export default class LocationForm extends React.Component {
@@ -51,27 +51,35 @@ export default class LocationForm extends React.Component {
   render() {
     return (      
         <div className='drawer'>
-        <FormGroup
-          label="Name"
-          labelFor="name"
-          labelInfo="(required)">
-          <InputGroup name="name" placeholder="name"
-            value={this.state.name} onChange={this.handleChange} />
-        </FormGroup>
-        <FormGroup
-          label="Area"
-          labelFor="area"
-          labelInfo="(required)">
-          <InputGroup name="area" placeholder="area"
-            value={this.state.area}
-            onChange={this.handleChange} />
-        </FormGroup>        
         <FormGroup>
           <Switch checked={this.state.isFavorite}
             name="isFavorite"
             label="Favorite"
             onChange={this.handleChange} />
         </FormGroup>
+        <FormGroup
+          label="Name"
+          labelFor="name">
+          <InputGroup name="name" placeholder="name"
+            value={this.state.name} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup
+          label="Area"
+          labelFor="area">
+          <InputGroup name="area" placeholder="area"
+            value={this.state.area}
+            onChange={this.handleChange} />
+        </FormGroup>  
+        <FormGroup
+          label="Description"
+          labelFor="description">
+          <TextArea name="description"           
+            value={this.state.description}
+            growVertically={true}
+            large={true}    
+            fill={true}   
+            onChange={this.handleChange} />
+        </FormGroup>      
 
 
         {(this.state.imageUrl) ?

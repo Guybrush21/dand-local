@@ -3,7 +3,7 @@ import Store from '../../store'
 import uuid from 'uuid'
 import {
   Button, FormGroup, InputGroup,
-  RadioGroup, Radio, Intent, Switch, FileInput
+  RadioGroup, Radio, Intent, Switch, FileInput,TextArea
 } from '@blueprintjs/core'
 export default class CharacterForm extends React.Component {
   constructor(props) {
@@ -18,11 +18,13 @@ export default class CharacterForm extends React.Component {
       name: '',
       class: '',
       sex: '',
+      race: '',
+      description: '',
       isFavorite: false,
-      isNew: true,      
+      isNew: true,
     }
-    if(this.props.character)
-      this.state = {...this.props.character, isNew: false}
+    if (this.props.character)
+      this.state = { ...this.props.character, isNew: false }
 
   }
 
@@ -50,42 +52,51 @@ export default class CharacterForm extends React.Component {
   render() {
     return (
       <div className='drawer'>
-        <FormGroup
-          label="Name"
-          labelFor="name"
-          labelInfo="(required)">
-          <InputGroup name="name" placeholder="name"
-            value={this.state.name} onChange={this.handleChange} />
-        </FormGroup>
-        <FormGroup
-          label="Class"
-          labelFor="class"
-          labelInfo="(required)">
-          <InputGroup name="class" placeholder="class"
-            value={this.state.class}
-            onChange={this.handleChange} />
-        </FormGroup>
-        <FormGroup>
-          <RadioGroup
-            label="Sex" name="sex"
-            onChange={this.handleChange}
-            selectedValue={this.state.sex}>
-            <Radio label="Male" value="male" />
-            <Radio label="Female" value="female" />
-          </RadioGroup>
-        </FormGroup>
         <FormGroup>
           <Switch checked={this.state.isFavorite}
             name="isFavorite"
             label="Favorite"
             onChange={this.handleChange} />
         </FormGroup>
-
+        <FormGroup label="Name" labelFor="name">
+          <InputGroup name="name" placeholder="Name"
+            value={this.state.name} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup label="Race" labelFor="race">
+          <InputGroup name="race" placeholder="Race"
+            value={this.state.race}
+            onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup label="Class" labelFor="class">
+          <InputGroup name="class" placeholder="Class"
+            value={this.state.class}
+            onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup>
+          <RadioGroup
+            label="Sex" 
+            name="sex"
+            onChange={this.handleChange}
+            selectedValue={this.state.sex}>
+            <Radio label="Male" value="male" />
+            <Radio label="Female" value="female" />
+          </RadioGroup>
+        </FormGroup>
+        <FormGroup label="Description" labelFor="description">
+          <TextArea
+            name='description'
+            growVertically={true}
+            large={true}    
+            fill={true}   
+            onChange={this.handleChange}
+            value={this.state.description}
+          />
+        </FormGroup>
 
         {(this.state.imageUrl) ?
-          <img className="detail-image" 
-          src={this.state.imageUrl} 
-          alt='character profile' >            
+          <img className="detail-image"
+            src={this.state.imageUrl}
+            alt='character profile' >
           </img>
           :
           <FormGroup>

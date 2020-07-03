@@ -3,7 +3,7 @@ import Store from '../../store'
 import uuid from 'uuid'
 import {
   Button, FormGroup, InputGroup,
-  Intent, Switch, FileInput
+  Intent, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 
 export default class ItemForm extends React.Component {
@@ -17,11 +17,13 @@ export default class ItemForm extends React.Component {
     this.state = {
       _id: uuid.v4(),
       name: '',
+      itemtype: '',
+      description: '',
       isFavorite: false,
-      isNew: true,      
+      isNew: true,
     }
-    if(this.props.item)
-      this.state = {...this.props.item, isNew: false}
+    if (this.props.item)
+      this.state = { ...this.props.item, isNew: false }
 
   }
 
@@ -49,33 +51,37 @@ export default class ItemForm extends React.Component {
   render() {
     return (
       <div className='drawer'>
-        <FormGroup
-          label="Name"
-          labelFor="name"
-          labelInfo="(required)">
-          <InputGroup name="name" placeholder="name"
-            value={this.state.name} onChange={this.handleChange} />
-        </FormGroup>
-        <FormGroup
-          label="Description"
-          labelFor="description"
-          labelInfo="(required)">
-          <InputGroup name="description" placeholder="description"
-            value={this.state.description}
-            onChange={this.handleChange} />
-        </FormGroup>
         <FormGroup>
           <Switch checked={this.state.isFavorite}
             name="isFavorite"
             label="Favorite"
             onChange={this.handleChange} />
         </FormGroup>
-
+        <FormGroup label="Name" labelFor="name">
+          <InputGroup name="name" placeholder="name"
+            value={this.state.name} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup
+          label="Type"
+          labelFor="type">
+          <InputGroup name="type" placeholder="Type"
+            value={this.state.itemtype} onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup
+          label="Description"
+          labelFor="description">
+          <TextArea name="description"
+            value={this.state.description}
+            growVertically={true}
+            large={true}
+            fill={true}
+            onChange={this.handleChange} />
+        </FormGroup>
 
         {(this.state.imageUrl) ?
-          <img className="detail-image" 
-          src={this.state.imageUrl} 
-          alt='item profile' >            
+          <img className="detail-image"
+            src={this.state.imageUrl}
+            alt='item profile' >
           </img>
           :
           <FormGroup>

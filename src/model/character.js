@@ -5,6 +5,7 @@ export default class Character {
         this.sex = ""
         this.description = ""
         this.class = ""
+        this.race = ""
         this.imageUrl = ""
         this.isFavorite = false        
     }    

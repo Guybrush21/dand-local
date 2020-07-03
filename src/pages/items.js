@@ -25,16 +25,6 @@ export default class Items extends React.Component {
     this.store.getAllItem().then(
       (items) => {
         this.setState({ items: items })
-
-        // update imageUrl for all characters
-        items.forEach((c, idx) =>
-          this.store.getImageURL(c._id).then((url) => {
-            c.imageUrl = url
-            let newitems = [...this.state.items]
-            newitems[idx] = c
-            this.setState({ items: newitems })
-          })
-        )
       }
     )
   }

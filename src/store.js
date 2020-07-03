@@ -18,12 +18,12 @@ export default class Store {
       this.store.put(location)
     }
 
-    this.addItem = function(item) {
+    this.addItem = function (item) {
       item.type = ITEM_TYPE
       this.store.put(item)
     }
 
-    this.add = function(obj, name) {
+    this.add = function (obj, name) {
       obj.type = name
       this.store.put(obj)
     }
@@ -33,15 +33,15 @@ export default class Store {
         .then((res) => console.log(res))
     }
 
-    this.getImageURL = (id) => {
-      return this.store.getAttachment(id, id)
-        .then((image) => {
-          let url = URL.createObjectURL(image)
-          return url
-        })
-        .catch((e) => {          
-          console.error(e)
-        })
+    this.getImageURL = async (id) => {
+      try {
+        const image = await this.store.getAttachment(id, id)
+        let url = URL.createObjectURL(image)
+        return url
+      }
+      catch (e) {
+        console.error(e)
+      }
     }
 
     this.getAllCharacter = function () {
@@ -56,14 +56,16 @@ export default class Store {
       return this.getAllByType(ITEM_TYPE)
     }
 
-    this.getAllByTypeName = function(typeName) {
+    this.getAllByTypeName = function (typeName) {
       return this.getAllByType(typeName)
     }
 
     this.getAllByType = async function (type) {
       const doc = await this.store.allDocs({ include_docs: true, descending: true })
-      return doc.rows.map(i => i.doc)
-        .filter(i_1 => i_1.type === type)        
+      const result = doc.rows.map(i => i.doc)
+        .filter(i_1 => i_1.type === type)      
+
+      return result
     }
 
     this.delete = function (item) {
@@ -77,20 +79,22 @@ export default class Store {
       return this.store.put(item)
         .then(function (val) { return val.ok })
     }
-    
-    this.getFavoriteByType = async function(type){
-      const doc = await this.store.allDocs({ 
-        include_docs: true, 
-        descending: true})
-        const result = doc.rows.map(r => r.doc)
+
+    this.getFavoriteByType = async function (type) {
+      const doc = await this.store.allDocs({
+        include_docs: true,
+        descending: true
+      })
+      const result = doc.rows.map(r => r.doc)
         .filter(i => i.type === type && i.isFavorite)
-        
-        result.forEach(async (element) => {
-          element.imageUrl = await this.getImageURL(element._id)
-        });
 
-        return result
+        await Promise.all(
+          result.map(async (el) => {
+            el.imageUrl = await this.getImageURL(el._id)
+          })
+        )
 
+      return result
     }
 
     this.getAllFavoriteCharacthers = async () => this.getFavoriteByType(CHARACTER_TYPE)

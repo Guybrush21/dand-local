@@ -25,16 +25,6 @@ export default class Characters extends React.Component {
     this.store.getAllCharacter().then(
       (characters) => {
         this.setState({ characters: characters })
-
-        // update imageUrl for all characters
-        characters.forEach((c, idx) =>
-          this.store.getImageURL(c._id).then((url) => {
-            c.imageUrl = url
-            let newcharacthers = [...this.state.characters]
-            newcharacthers[idx] = c
-            this.setState({ characters: newcharacthers })
-          })
-        )
       }
     )
   }

@@ -32,14 +32,13 @@ export default class Locations extends React.Component {
     })
   }
 
-  fetchLocations = () => {
-    this.store.getAllLocation().then(
-      (locations) =>
-        this.setState({ locations: locations })
-    )
+  fetchLocations = async () => {  
+    let locations =  await this.store.getAllLocation()    
+    //debugger;
+    this.setState({locations: locations})
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchLocations()
   }
 
@@ -60,6 +59,11 @@ export default class Locations extends React.Component {
     this.deleteDialgohandleClose()
   };
 
+
+  addImage = (e, character) => {
+    let image = e.target.files[0]
+    this.store.addImage(character, image)
+  }
 
   deleteDialogHandleOpen = () => this.setState({ isDeleteDialogOpen: true });
   deleteDialgohandleClose = () => this.setState({ isDeleteDialogOpen: false });

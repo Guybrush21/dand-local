@@ -79,7 +79,7 @@ export default class Store {
     this.getAllByType = async function (type) {
       const doc = await this.store.allDocs({ include_docs: true, descending: true })
       const result = doc.rows.map(i => i.doc)
-        .filter(i_1 => i_1.type === type)
+        .filter(i_1 => i_1.type === type )
       await Promise.all(
         result.map(async (el) => {
           el.imageUrl = await this.getImageURL(el._id)
@@ -103,18 +103,9 @@ export default class Store {
     }
 
     this.getFavoriteByType = async function (type) {
-      const doc = await this.store.allDocs({
-        include_docs: true,
-        descending: true
-      })
-      const result = doc.rows.map(r => r.doc)
-        .filter(i => i.type === type && i.isFavorite)
+      const doc = await this.getAllByType(type)
 
-      await Promise.all(
-        result.map(async (el) => {
-          el.imageUrl = await this.getImageURL(el._id)
-        })
-      )
+      let result = doc.filter(i => i.isFavorite)
 
       return result
     }

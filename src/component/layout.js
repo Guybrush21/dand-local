@@ -13,7 +13,7 @@ export const ITEMS = 'ITEMS'
 export default class Layout extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { layout: CHARACTERS }    
+    this.state = { layout: DASHBOARD }    
   }
   onPageChange(page) {
     this.setState({ layout: page })

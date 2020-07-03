@@ -5,12 +5,12 @@ export default class Generator{
     }
 
     getRandom() {
-        let min = Math.ceil(0);
-        let max = Math.floor(this.values.length);
+        let min = 0;
+        let max = Math.floor(this.values.length-1);
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       }
 
-    next(){
+    next(){        
         return this.values[this.getRandom()]
     }
 }

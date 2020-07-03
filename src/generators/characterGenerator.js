@@ -25,7 +25,7 @@ export default class CharacterGenerator extends Generator {
         
         character.sex = this.sexGenerator.next()
         character.name = this.maleGenerator.next()
-        if(!character.sex === "Male")
+        if(character.sex != "male")
             character.name = this.femaleGenerator.next()
 
         character.name = [character.name, this.lastnameGenerator.next()].join(' ') 

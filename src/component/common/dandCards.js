@@ -7,6 +7,7 @@ export default class DandCards extends React.Component {
 
     const title = this.props.title
     const subtitle = this.props.subtitle
+    const subtitle2 = this.props.subtitle2
     const description = this.props.description
     const imageUrl = this.props.imageUrl
 
@@ -14,16 +15,20 @@ export default class DandCards extends React.Component {
       <Card interactive={true} key={c._id}
         onClick={(e) => this.props.onSelect(c, e)}
         className='flex-card'>
+
         <div className='dandcard-relative'>
         {(c.isFavorite) ? <Icon className='favorite-icon' 
         icon='bookmark' 
         intent={Intent.PRIMARY} 
         iconSize='64'></Icon> : ''}
-          <h3>{c[title]}</h3>
-          <small>{c[subtitle]}</small>
+        
+          <strong>{c[title]}</strong>
+          <small className='inline'>{c[subtitle]}{c[subtitle2] ? ' - ' + c[subtitle2] : ''}</small> 
           <p>{c[description]}</p>
           {(c[imageUrl]) ? <img src={c[imageUrl]} alt="item" className="dandCards-image"></img> : ''}
+
         </div>
+
       </Card>
     ))
 

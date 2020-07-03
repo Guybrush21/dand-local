@@ -1,5 +1,8 @@
 import PouchDB from 'pouchdb'
 import { v4 } from 'uuid'
+import defaultMaleImg from "./assets/default-male.svg"
+import defaultFemaleImg from "./assets/default-female.svg"
+
 export const CHARACTER_TYPE = 'CHARACTER'
 export const LOCATION_TYPE = 'LOCATION'
 export const ITEM_TYPE = 'ITEM'
@@ -10,19 +13,19 @@ export default class Store {
     this.store = new PouchDB('dand')
 
     this.addCharacter = function (character) {
-      if(!character._id) character._id = v4()
+      if (!character._id) character._id = v4()
       character.type = CHARACTER_TYPE
       this.store.put(character)
     }
 
     this.addLocation = function (location) {
-      if(!location._id) location._id = v4()
+      if (!location._id) location._id = v4()
       location.type = LOCATION_TYPE
       this.store.put(location)
     }
 
     this.addItem = function (item) {
-      if(!item._id) item._id = v4()
+      if (!item._id) item._id = v4()
       item.type = ITEM_TYPE
       this.store.put(item)
     }
@@ -64,15 +67,26 @@ export default class Store {
       return this.getAllByType(typeName)
     }
 
+    this.getDefaultImage = (el) => {
+      if (el.type === CHARACTER_TYPE) {
+        if (el.sex == "male")
+          return defaultMaleImg
+        else
+          return defaultFemaleImg
+      }
+    }
+
     this.getAllByType = async function (type) {
       const doc = await this.store.allDocs({ include_docs: true, descending: true })
       const result = doc.rows.map(i => i.doc)
-        .filter(i_1 => i_1.type === type)      
-        await Promise.all(
-          result.map(async (el) => {
-            el.imageUrl = await this.getImageURL(el._id)
-          })
-        )
+        .filter(i_1 => i_1.type === type)
+      await Promise.all(
+        result.map(async (el) => {
+          el.imageUrl = await this.getImageURL(el._id)
+          if (el.imageUrl === undefined)
+            el.imageUrl = this.getDefaultImage(el)
+        })
+      )
       return result
     }
 
@@ -96,11 +110,11 @@ export default class Store {
       const result = doc.rows.map(r => r.doc)
         .filter(i => i.type === type && i.isFavorite)
 
-        await Promise.all(
-          result.map(async (el) => {
-            el.imageUrl = await this.getImageURL(el._id)
-          })
-        )
+      await Promise.all(
+        result.map(async (el) => {
+          el.imageUrl = await this.getImageURL(el._id)
+        })
+      )
 
       return result
     }

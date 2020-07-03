@@ -99,6 +99,7 @@ export default class Characters extends React.Component {
             onSelect={this.onSelectCharacter}
             title="name"
             subtitle="class"
+            subtitle2="race"
             description="description"
             imageUrl="imageUrl"
           />

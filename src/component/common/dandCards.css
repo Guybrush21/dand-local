@@ -10,7 +10,9 @@
 }
 
 .dandCards-image{
-    max-width:200px;
+    max-width:100px;
+    border-radius: 50%;
+    border: 4px #394B59 solid;
 }
 
 .favorite-icon{

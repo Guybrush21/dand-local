@@ -3,7 +3,7 @@ import Generator from './generator'
 export default class SexGenerator extends Generator{
 
     constructor(){
-        let races = [ "Male", "Female"]
+        let races = [ "female", "male"]
         super(races)
     }
 

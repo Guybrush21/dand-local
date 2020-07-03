@@ -2,15 +2,16 @@ import React from 'react'
 import DandCards from '../component/common/dandCards'
 import CharacterForm from '../component/character/character.form'
 import Store from '../store'
-import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
+import { Button, Drawer, Dialog, Classes, Intent, ButtonGroup } from '@blueprintjs/core'
 import '../component/character/character.css'
+import CharacterGenerator from "../generators/characterGenerator"
 
 export default class Characters extends React.Component {
   constructor(props) {
     super(props)
-    this.store = new Store()
 
-    this.handleSubmitCharacter = this.handleSubmitCharacter.bind(this)
+    this.store = new Store()
+    this.characterGenerator = new CharacterGenerator()
 
     this.state = {
       isCharacterFormVisible: false,
@@ -29,7 +30,7 @@ export default class Characters extends React.Component {
     )
   }
 
-  handleSubmitCharacter() {
+  handleSubmitCharacter = () => {
     this.fetchCharacters()
     this.unSelectCharacter()
   }
@@ -83,9 +84,24 @@ export default class Characters extends React.Component {
       <main>
         <article>
           <h2>Characters</h2>
-          <Button onClick={() => this.onSelectCharacter(null)}
-            icon='add'
-            disabled={this.state.isCharacterSelected}>New</Button>
+          <ButtonGroup>
+            <Button onClick={() => this.onSelectCharacter(null)}
+              icon='add'
+              disabled={this.state.isCharacterSelected}>New</Button>
+
+            <Button onClick={() => this.onSelectCharacter(this.characterGenerator.next())}
+              icon='random'
+              disabled={this.state.isCharacterSelected}>Create Random</Button>
+          </ButtonGroup>
+
+          <DandCards
+            elements={this.state.characters}
+            onSelect={this.onSelectCharacter}
+            title="name"
+            subtitle="class"
+            description="description"
+            imageUrl="imageUrl"
+          />
         </article>
 
         <Drawer isOpen={this.state.isCharacterSelected}
@@ -104,14 +120,6 @@ export default class Characters extends React.Component {
           </div>
         </Drawer>
 
-        <DandCards
-          elements={this.state.characters}
-          onSelect={this.onSelectCharacter}
-          title="name"
-          subtitle="class"
-          description="description"
-          imageUrl="imageUrl"
-        />
 
         <Dialog isOpen={this.state.isDeleteDialogOpen}
           icon="delete"

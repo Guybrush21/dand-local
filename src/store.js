@@ -1,4 +1,5 @@
 import PouchDB from 'pouchdb'
+import { v4 } from 'uuid'
 export const CHARACTER_TYPE = 'CHARACTER'
 export const LOCATION_TYPE = 'LOCATION'
 export const ITEM_TYPE = 'ITEM'
@@ -9,16 +10,19 @@ export default class Store {
     this.store = new PouchDB('dand')
 
     this.addCharacter = function (character) {
+      if(!character._id) character._id = v4()
       character.type = CHARACTER_TYPE
       this.store.put(character)
     }
 
     this.addLocation = function (location) {
+      if(!location._id) location._id = v4()
       location.type = LOCATION_TYPE
       this.store.put(location)
     }
 
     this.addItem = function (item) {
+      if(!item._id) item._id = v4()
       item.type = ITEM_TYPE
       this.store.put(item)
     }

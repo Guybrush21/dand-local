@@ -21,13 +21,16 @@ export default class DandCards extends React.Component {
         icon='bookmark' 
         intent={Intent.PRIMARY} 
         iconSize='64'></Icon> : ''}
-        
+
           <strong>{c[title]}</strong>
           <small className='inline'>{c[subtitle]}{c[subtitle2] ? ' - ' + c[subtitle2] : ''}</small> 
-          <p>{c[description]}</p>
-          {(c[imageUrl]) ? <img src={c[imageUrl]} alt="item" className="dandCards-image"></img> : ''}
+          <section className="dandcard-flexcontainer">
+            <p>{c[description]}</p>
+            <img src={c[imageUrl]} alt="item" className="dandCards-image"></img>
+          </section>
 
         </div>
+
 
       </Card>
     ))

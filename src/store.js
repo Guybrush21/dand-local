@@ -83,7 +83,7 @@ export default class Store {
 
     this.getDefaultImage = (el) => {
       if (el.type === CHARACTER_TYPE) {
-        if (el.sex == "male")
+        if (el.sex === "male")
           return defaultMaleImg
         else
           return defaultFemaleImg

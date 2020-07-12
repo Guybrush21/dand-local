@@ -31,8 +31,8 @@ export default class Characters extends React.Component {
   }
 
   handleSubmitCharacter = () => {
-    this.fetchCharacters()
     this.unSelectCharacter()
+    this.fetchCharacters()
   }
 
   onSelectCharacter = (character) => {

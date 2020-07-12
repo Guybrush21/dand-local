@@ -6,26 +6,23 @@ import defaultFemaleImg from './assets/default-female.svg'
 const CHARACTER_TYPE = 'CHARACTER'
 const LOCATION_TYPE = 'LOCATION'
 const ITEM_TYPE = 'ITEM'
-const CHAREACTER_PROFILE = 'CHAREACTER_PROFILE'
+const CHARACTER_PROFILE = 'CHARACTER_PROFILE'
 
 export default class Store {
   constructor () {
     this.store = new PouchDB('dand')
 
-    this.addCharacter = function (character, image = null) {
+    this.addCharacter = async function (character, image = null) {
       character.type = CHARACTER_TYPE
 
       if (!character._id) { character._id = v4() }
 
-      // let doc = await this.store.get(character._id)
-      // character._rev = doc._rev
-
-      return this.store.put(character).then(res => {
-        if (image != null) {
-          return this.store.putAttachment(res.id, CHAREACTER_PROFILE, res.rev, image, image.type).then(imgRes => { return imgRes.ok })
-        }
-        return res.ok
-      })
+      const res = await this.store.put(character)
+      if (image != null) {
+        return this.store.putAttachment(res.id, CHARACTER_PROFILE, res.rev, image, image.type)
+          .then(imgRes => { return imgRes.ok })
+      }
+      return res.ok
     }
 
     this.addLocation = function (location, image = null) {
@@ -52,11 +49,11 @@ export default class Store {
 
     this.getImageURL = async (id) => {
       try {
-        const image = await this.store.getAttachment(id, CHAREACTER_PROFILE)
+        const image = await this.store.getAttachment(id, CHARACTER_PROFILE)
         const url = URL.createObjectURL(image)
         return url
       } catch (e) {
-        console.error(e)
+        console.debug(e)
       }
     }
 

@@ -5,7 +5,7 @@ import {
   FormGroup, InputGroup, RadioGroup, Radio, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
-import Chatacter from '../../model/character'
+import Character from '../../model/character'
 
 export default class CharacterForm extends React.Component {
   constructor (props) {
@@ -25,21 +25,22 @@ export default class CharacterForm extends React.Component {
       isFavorite: false,
       isNew: true,
       imageText: 'Choose image...',
+      imageUrl: null,
       newImage: null
     }
-    if (this.props.character) { this.state = { ...this.props.character, isNew: false, newImage: null } }
+    if (this.props.character) { this.state = { ...this.props.character, isNew: false, newImage: null, imageUrl: null, } }
   }
 
-  saveCharacter (event) {
+  async saveCharacter (event) {
     event.preventDefault()
     const newChar = this.getCharacterFromState()
 
-    const saveResult = this.store.addCharacter(newChar, this.state.newImage)
+    const saveResult = await this.store.addCharacter(newChar, this.state.newImage)
     if (saveResult) { this.props.submitComplete() } else { console.error('Error during saving character') }
   }
 
   getCharacterFromState () {
-    const c = new Chatacter()
+    const c = new Character()
     c._id = this.state._id
     c._rev = this.state._rev
     c.class = this.state.class

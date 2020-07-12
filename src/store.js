@@ -11,52 +11,64 @@ const CHARACTER_TYPE = 'CHARACTER'
 const LOCATION_TYPE = 'LOCATION'
 const ITEM_TYPE = 'ITEM'
 const CHARACTER_PROFILE = 'CHARACTER_PROFILE'
+const ITEM_PICTURE = 'ITEM_PICTURE'
+const LOCATION_PICTURE = 'LOCATION_PICTURE'
 
 export default class Store {
   constructor() {
     this.store = new PouchDB('dand')
 
     this.addCharacter = async function (character, image = null) {
-      character.type = CHARACTER_TYPE
-
-      if (!character._id) { character._id = v4() }
-
-      const res = await this.store.put(character)
-      if (image != null) {
-        return this.store.putAttachment(res.id, CHARACTER_PROFILE, res.rev, image, image.type)
-          .then(imgRes => { return imgRes.ok })
-      }
-      return res.ok
+      return this.save(character, image, CHARACTER_TYPE)
     }
 
     this.addLocation = async function (location, image = null) {
-      if (!location._id) location._id = v4()
-      location.type = LOCATION_TYPE
-
-      const res = await this.store.put(location)
-      if (image != null) {
-        return this.store.putAttachment(res.id, CHARACTER_PROFILE, res.rev, image, image.type)
-          .then(imgRes => { return imgRes.ok })
-      }
-      return res.ok
-
+      return this.save(location, image, LOCATION_TYPE)
     }
 
     this.addItem = async function (item, image = null) {
-      if (!item._id) item._id = v4()
-      item.type = ITEM_TYPE
-      const res = await this.store.put(item)
-      if (image != null) {
-        return this.store.putAttachment(res.id, CHARACTER_PROFILE, res.rev, image, image.type)
-          .then(imgRes => { return imgRes.ok })
-      }
-      return res.ok
-
+      return this.save(item, image, ITEM_TYPE)
     }
 
-    this.getImageURL = async (id) => {
+    this.save = async function (doc, image, type) {
+      doc.type = type
+      if (!doc._id) doc._id = v4()
+      const res = await this.store.put(doc)
+      return this.addImage(res, image, this.getCorrectAttachmentType(type))
+    }
+
+    this.addImage = async (saveResult, image, attachmentType) => {
+
+      if (image != null) {
+        return this.store.putAttachment(
+          saveResult.id,
+          attachmentType,
+          saveResult.rev,
+          image,
+          image.type)
+          .then(imgRes => { return imgRes.ok })
+      }
+
+      return saveResult.ok
+    }
+
+    this.getCorrectAttachmentType = (type) => {
+      switch (type) {
+        case ITEM_TYPE: return ITEM_PICTURE
+        case CHARACTER_TYPE: return CHARACTER_PROFILE
+        case LOCATION_TYPE: return LOCATION_PICTURE
+        default:
+          {
+            console.error('Type [' + type + '] not supported as standard attachment')
+            return ITEM_PICTURE
+          }
+      }
+    }
+
+    this.getImageURL = async (item) => {
       try {
-        const image = await this.store.getAttachment(id, CHARACTER_PROFILE)
+        const attachmentID = this.getCorrectAttachmentType(item.type)
+        const image = await this.store.getAttachment(item._id, attachmentID)
         const url = URL.createObjectURL(image)
         return url
       } catch (e) {
@@ -87,11 +99,11 @@ export default class Store {
       }
       if (el.type === ITEM_TYPE) {
         if (el.name.length % 2 === 0) { return defaultSwordImg }
-        else { return defaultPotionImg}
+        else { return defaultPotionImg }
       }
       if (el.type === LOCATION_TYPE) {
         if (el.name.length % 2 === 0) { return defaultTowerImg }
-        else { return defaultTavernImg}
+        else { return defaultTavernImg }
       }
       else console.error("Missing default image for " + el.type)
     }
@@ -102,7 +114,7 @@ export default class Store {
         .filter(i_1 => i_1.type === type)
       await Promise.all(
         result.map(async (el) => {
-          el.imageUrl = await this.getImageURL(el._id)
+          el.imageUrl = await this.getImageURL(el)
           if (el.imageUrl === undefined) { el.imageUrl = this.getDefaultImage(el) }
         })
       )

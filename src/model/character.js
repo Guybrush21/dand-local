@@ -1,5 +1,8 @@
-export default class Character {
+import Base from "./base"
+
+export default class Character extends Base {
   constructor () {
+    super()
     this.name = ''
     this.type = ''
     this.sex = ''

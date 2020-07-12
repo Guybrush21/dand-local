@@ -43,6 +43,7 @@ export default class CharacterForm extends React.Component {
     const c = new Character()
     c._id = this.state._id
     c._rev = this.state._rev
+    c._attachments = this.state._attachments
     c.class = this.state.class
     c.name = this.state.name
     c.sex = this.state.sex

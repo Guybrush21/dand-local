@@ -28,7 +28,7 @@ export default class CharacterForm extends React.Component {
       imageUrl: null,
       newImage: null
     }
-    if (this.props.character) { this.state = { ...this.props.character, isNew: false, newImage: null, imageUrl: null, } }
+    if (this.props.character) { this.state = { ...this.props.character, isNew: false, newImage: null } }
   }
 
   async saveCharacter (event) {

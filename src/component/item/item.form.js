@@ -6,6 +6,7 @@ import {
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
 import Item from '../../model/item'
+
 export default class ItemForm extends React.Component {
   constructor(props) {
     super(props)
@@ -25,7 +26,7 @@ export default class ItemForm extends React.Component {
       imageUrl: null,
       newImage: null
     }
-    if (this.props.item) { this.state = { ...this.props.item, isNew: false, imageUrl: null,newImage: null } }
+    if (this.props.item) { this.state = { ...this.props.item, isNew: false, newImage: null } }
   }
 
   getItemFromState() {
@@ -40,12 +41,15 @@ export default class ItemForm extends React.Component {
     return item
   }
 
-  saveItem(event) {
+  async saveItem(event) {
     event.preventDefault()
     const newItem = this.getItemFromState()
-    
-    this.store.addItem(newItem)
-    this.props.submitComplete()
+
+    const saveResult = await this.store.addItem(newItem, this.state.newImage)
+    if (saveResult)
+      this.props.submitComplete()
+    else
+      console.error('Error during saving item')
   }
 
   handleChange(event) {
@@ -116,22 +120,23 @@ export default class ItemForm extends React.Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-
-        {(this.state.imageUrl)
-          ? <img
-            className='detail-image'
-            src={this.state.imageUrl}
-            alt='item profile'
-          >
-          </img>
-          : <FormGroup>
+        <div>
+          {(this.state.imageUrl)
+            ? <img
+              className='detail-image'
+              src={this.state.imageUrl}
+              alt='item profile'
+            >
+            </img>
+            : ''}
+          <FormGroup>
             <FileInput
               id='image' name='image' text={this.state.imageText}
               onChange={this.handleChange} fill
               type='file'
             />
-          </FormGroup>}
-
+          </FormGroup>
+        </div>
       </div>
     )
   }

@@ -5,13 +5,14 @@ import {
   FormGroup, InputGroup, RadioGroup, Radio, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
+import Chatacter from '../../model/character'
 
 export default class CharacterForm extends React.Component {
   constructor(props) {
     super(props)
     this.saveCharacter = this.saveCharacter.bind(this)
     this.handleChange = this.handleChange.bind(this)
-
+    
     this.store = new Store()
 
     this.state = {
@@ -23,18 +24,36 @@ export default class CharacterForm extends React.Component {
       description: '',
       isFavorite: false,
       isNew: true,
+      imageText: "Choose image...",
+      newImage: null
     }
     if (this.props.character)
-      this.state = { ...this.props.character, isNew: false }
+      this.state = { ...this.props.character, isNew: false, newImage: null }
 
   }
 
   saveCharacter(event) {
     event.preventDefault()
-    const newChar = { ...this.state }
-    console.info(newChar)
-    this.store.addCharacter(newChar)
-    this.props.submitComplete()
+    const newChar = this.getCharacterFromState()
+    
+    let saveResult = this.store.addCharacter(newChar, this.state.newImage)   
+    if(saveResult)
+      this.props.submitComplete()
+    else 
+      console.error("Error during saving character")
+  }
+
+  getCharacterFromState() {
+    const c = new Chatacter();
+    c._id = this.state._id
+    c._rev = this.state._rev
+    c.class = this.state.class
+    c.name = this.state.name
+    c.sex = this.state.sex
+    c.race = this.state.race
+    c.isFavorite = this.state.isFavorite
+    c.description = this.state.description
+    return c
   }
 
   handleChange(event) {
@@ -45,6 +64,16 @@ export default class CharacterForm extends React.Component {
     if (target.type === 'checkbox')
       value = target.checked
 
+    if (target.type === 'file') {
+      if (target.files[0]) {
+        this.setState(
+          { imageText: target.files[0].name,
+            imageUrl: URL.createObjectURL(target.files[0]),
+            newImage: target.files[0]
+          })
+      }
+    }
+
     this.setState({
       [name]: value
     })
@@ -52,7 +81,7 @@ export default class CharacterForm extends React.Component {
 
   render() {
     return (
-      <div className='drawer'>        
+      <div className='drawer'>
         <FormButtonGroup
           save={this.saveCharacter}
           delete={this.props.onDelete}
@@ -104,13 +133,13 @@ export default class CharacterForm extends React.Component {
               src={this.state.imageUrl}
               alt='character profile' >
             </img>
-            :
-            <FormGroup>
-              <FileInput id="image" name="image"
-                onChange={(e) => this.props.addImage(e, this.state)}
-                type="file" ></FileInput >
-            </FormGroup>
-          }
+            : ''}
+          <FormGroup>
+            <FileInput id="image" name="image" text={this.state.imageText}
+              onChange={this.handleChange} fill={true}
+              type="file" ></FileInput >
+          </FormGroup>
+
         </div>
       </div>
     )

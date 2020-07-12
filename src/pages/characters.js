@@ -70,11 +70,6 @@ export default class Characters extends React.Component {
     this.deleteDialgohandleClose()
   }
 
-  addImage = (e, character) => {
-    let image = e.target.files[0]
-    this.store.addImage(character, image)
-  }
-
   componentDidMount() {
     this.fetchCharacters()
   }
@@ -115,8 +110,7 @@ export default class Characters extends React.Component {
               <CharacterForm
                 submitComplete={this.handleSubmitCharacter}
                 character={this.state.selectedCharacter}
-                onDelete={this.deleteDialogHandleOpen}
-                addImage={this.addImage} />
+                onDelete={this.deleteDialogHandleOpen}/>
             </div>
           </div>
         </Drawer>

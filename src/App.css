@@ -10,21 +10,29 @@ main {
     padding: 1em;
 }
 
-.dashboard{
+.drawer input {
+    max-width: 100%;
+}
+
+.dashboard {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     align-content: flex-start;
 }
 
-.dashboard article{    
-    flex: 1 auto;    
+.dashboard article {
+    flex: 1 auto;
 }
- .buttons-area{
-     position:sticky;
-     top: 0;
-     z-index: 10;
- }
-strong{
+
+.buttons-area {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 0 1em 1em 1em;
+    background-color: #fff;
+}
+
+strong {
     margin: 0 1em 0 0;
 }

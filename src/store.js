@@ -3,28 +3,42 @@ import { v4 } from 'uuid'
 import defaultMaleImg from "./assets/default-male.svg"
 import defaultFemaleImg from "./assets/default-female.svg"
 
-export const CHARACTER_TYPE = 'CHARACTER'
-export const LOCATION_TYPE = 'LOCATION'
-export const ITEM_TYPE = 'ITEM'
+const CHARACTER_TYPE = 'CHARACTER'
+const LOCATION_TYPE = 'LOCATION'
+const ITEM_TYPE = 'ITEM'
+const CHAREACTER_PROFILE = 'CHAREACTER_PROFILE'
+
 
 export default class Store {
   constructor() {
 
     this.store = new PouchDB('dand')
 
-    this.addCharacter = function (character) {
-      if (!character._id) character._id = v4()
+    this.addCharacter = function (character, image = null) {
       character.type = CHARACTER_TYPE
-      this.store.put(character)
+
+      if (!character._id)
+        character._id = v4()
+
+      // let doc = await this.store.get(character._id)
+      // character._rev = doc._rev
+
+      return this.store.put(character).then(res => {
+        if (image != null) {
+          return this.store.putAttachment(res.id, CHAREACTER_PROFILE, res.rev, image, image.type).then(imgRes => {return imgRes.ok})
+        }  
+        return res.ok
+      })
+
     }
 
-    this.addLocation = function (location) {
+    this.addLocation = function (location, image = null) {
       if (!location._id) location._id = v4()
       location.type = LOCATION_TYPE
       this.store.put(location)
     }
 
-    this.addItem = function (item) {
+    this.addItem = function (item, image = null) {
       if (!item._id) item._id = v4()
       item.type = ITEM_TYPE
       this.store.put(item)
@@ -42,7 +56,7 @@ export default class Store {
 
     this.getImageURL = async (id) => {
       try {
-        const image = await this.store.getAttachment(id, id)
+        const image = await this.store.getAttachment(id, CHAREACTER_PROFILE)
         let url = URL.createObjectURL(image)
         return url
       }
@@ -79,7 +93,7 @@ export default class Store {
     this.getAllByType = async function (type) {
       const doc = await this.store.allDocs({ include_docs: true, descending: true })
       const result = doc.rows.map(i => i.doc)
-        .filter(i_1 => i_1.type === type )
+        .filter(i_1 => i_1.type === type)
       await Promise.all(
         result.map(async (el) => {
           el.imageUrl = await this.getImageURL(el._id)

@@ -7,7 +7,7 @@ import {
 import FormButtonGroup from '../common/formButtonGroup'
 
 export default class ItemForm extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.saveItem = this.saveItem.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -20,14 +20,12 @@ export default class ItemForm extends React.Component {
       itemtype: '',
       description: '',
       isFavorite: false,
-      isNew: true,
+      isNew: true
     }
-    if (this.props.item)
-      this.state = { ...this.props.item, isNew: false }
-
+    if (this.props.item) { this.state = { ...this.props.item, isNew: false } }
   }
 
-  saveItem(event) {
+  saveItem (event) {
     event.preventDefault()
     const newItem = { ...this.state }
     console.info(newItem)
@@ -35,67 +33,78 @@ export default class ItemForm extends React.Component {
     this.props.submitComplete()
   }
 
-  handleChange(event) {
+  handleChange (event) {
     const target = event.target
     let value = target.value
     const name = target.name
 
-    if (target.type === 'checkbox')
-      value = target.checked
+    if (target.type === 'checkbox') { value = target.checked }
 
     this.setState({
       [name]: value
     })
   }
 
-  render() {
+  render () {
     return (
       <div className='drawer'>
         <FormButtonGroup
           save={this.saveItem}
           delete={this.props.onDelete}
           canDelete={!this.state.isNew}
-        ></FormButtonGroup>
+        />
 
         <FormGroup>
-          <Switch checked={this.state.isFavorite}
-            name="isFavorite"
-            label="Favorite"
-            onChange={this.handleChange} />
+          <Switch
+            checked={this.state.isFavorite}
+            name='isFavorite'
+            label='Favorite'
+            onChange={this.handleChange}
+          />
         </FormGroup>
-        <FormGroup label="Name" labelFor="name">
-          <InputGroup name="name" placeholder="name"
-            value={this.state.name} onChange={this.handleChange} />
-        </FormGroup>
-        <FormGroup
-          label="Type"
-          labelFor="type">
-          <InputGroup name="type" placeholder="Type"
-            value={this.state.itemtype} onChange={this.handleChange} />
+        <FormGroup label='Name' labelFor='name'>
+          <InputGroup
+            name='name' placeholder='name'
+            value={this.state.name} onChange={this.handleChange}
+          />
         </FormGroup>
         <FormGroup
-          label="Description"
-          labelFor="description">
-          <TextArea name="description"
+          label='Type'
+          labelFor='type'
+        >
+          <InputGroup
+            name='type' placeholder='Type'
+            value={this.state.itemtype} onChange={this.handleChange}
+          />
+        </FormGroup>
+        <FormGroup
+          label='Description'
+          labelFor='description'
+        >
+          <TextArea
+            name='description'
             value={this.state.description}
-            growVertically={true}
-            large={true}
-            fill={true}
-            onChange={this.handleChange} />
+            growVertically
+            large
+            fill
+            onChange={this.handleChange}
+          />
         </FormGroup>
 
-        {(this.state.imageUrl) ?
-          <img className="detail-image"
+        {(this.state.imageUrl)
+          ? <img
+            className='detail-image'
             src={this.state.imageUrl}
-            alt='item profile' >
-          </img>
-          :
-          <FormGroup>
-            <FileInput id="image" name="image"
+            alt='item profile'
+            >
+            </img>
+          : <FormGroup>
+            <FileInput
+              id='image' name='image'
               onChange={(e) => this.props.addImage(e, this.state)}
-              type="file" ></FileInput >
-          </FormGroup>
-        }
+              type='file'
+            />
+            </FormGroup>}
 
       </div>
     )

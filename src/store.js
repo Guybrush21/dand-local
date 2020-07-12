@@ -1,35 +1,31 @@
 import PouchDB from 'pouchdb'
 import { v4 } from 'uuid'
-import defaultMaleImg from "./assets/default-male.svg"
-import defaultFemaleImg from "./assets/default-female.svg"
+import defaultMaleImg from './assets/default-male.svg'
+import defaultFemaleImg from './assets/default-female.svg'
 
 const CHARACTER_TYPE = 'CHARACTER'
 const LOCATION_TYPE = 'LOCATION'
 const ITEM_TYPE = 'ITEM'
 const CHAREACTER_PROFILE = 'CHAREACTER_PROFILE'
 
-
 export default class Store {
-  constructor() {
-
+  constructor () {
     this.store = new PouchDB('dand')
 
     this.addCharacter = function (character, image = null) {
       character.type = CHARACTER_TYPE
 
-      if (!character._id)
-        character._id = v4()
+      if (!character._id) { character._id = v4() }
 
       // let doc = await this.store.get(character._id)
       // character._rev = doc._rev
 
       return this.store.put(character).then(res => {
         if (image != null) {
-          return this.store.putAttachment(res.id, CHAREACTER_PROFILE, res.rev, image, image.type).then(imgRes => {return imgRes.ok})
-        }  
+          return this.store.putAttachment(res.id, CHAREACTER_PROFILE, res.rev, image, image.type).then(imgRes => { return imgRes.ok })
+        }
         return res.ok
       })
-
     }
 
     this.addLocation = function (location, image = null) {
@@ -57,10 +53,9 @@ export default class Store {
     this.getImageURL = async (id) => {
       try {
         const image = await this.store.getAttachment(id, CHAREACTER_PROFILE)
-        let url = URL.createObjectURL(image)
+        const url = URL.createObjectURL(image)
         return url
-      }
-      catch (e) {
+      } catch (e) {
         console.error(e)
       }
     }
@@ -83,10 +78,7 @@ export default class Store {
 
     this.getDefaultImage = (el) => {
       if (el.type === CHARACTER_TYPE) {
-        if (el.sex === "male")
-          return defaultMaleImg
-        else
-          return defaultFemaleImg
+        if (el.sex === 'male') { return defaultMaleImg } else { return defaultFemaleImg }
       }
     }
 
@@ -97,8 +89,7 @@ export default class Store {
       await Promise.all(
         result.map(async (el) => {
           el.imageUrl = await this.getImageURL(el._id)
-          if (el.imageUrl === undefined)
-            el.imageUrl = this.getDefaultImage(el)
+          if (el.imageUrl === undefined) { el.imageUrl = this.getDefaultImage(el) }
         })
       )
       return result
@@ -119,7 +110,7 @@ export default class Store {
     this.getFavoriteByType = async function (type) {
       const doc = await this.getAllByType(type)
 
-      let result = doc.filter(i => i.isFavorite)
+      const result = doc.filter(i => i.isFavorite)
 
       return result
     }
@@ -127,6 +118,5 @@ export default class Store {
     this.getAllFavoriteCharacthers = async () => this.getFavoriteByType(CHARACTER_TYPE)
     this.getAllFavoriteLocations = async () => this.getFavoriteByType(LOCATION_TYPE)
     this.getAllFavoriteItems = async () => this.getFavoriteByType(ITEM_TYPE)
-
   }
 }

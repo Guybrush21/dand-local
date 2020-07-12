@@ -3,8 +3,7 @@ import './dandCards.css'
 import { Card, Icon, Intent } from '@blueprintjs/core'
 
 export default class DandCards extends React.Component {
-  render() {
-
+  render () {
     const title = this.props.title
     const subtitle = this.props.subtitle
     const subtitle2 = this.props.subtitle2
@@ -12,31 +11,35 @@ export default class DandCards extends React.Component {
     const imageUrl = this.props.imageUrl
 
     const list = this.props.elements.map(c => (
-      <Card interactive={true} key={c._id}
+      <Card
+        interactive key={c._id}
         onClick={(e) => this.props.onSelect(c, e)}
-        className='flex-card'>
+        className='flex-card'
+      >
 
         <div className='dandcard-relative'>
-        {(c.isFavorite) ? <Icon className='favorite-icon' 
-        icon='bookmark' 
-        intent={Intent.PRIMARY} 
-        iconSize='64'></Icon> : ''}
+          {(c.isFavorite) ? <Icon
+            className='favorite-icon'
+            icon='bookmark'
+            intent={Intent.PRIMARY}
+            iconSize='64'
+                            >
+          </Icon> : ''}
 
           <strong>{c[title]}</strong>
-          <small className='inline'>{c[subtitle]}{c[subtitle2] ? ' - ' + c[subtitle2] : ''}</small> 
-          <section className="dandcard-flexcontainer">
+          <small className='inline'>{c[subtitle]}{c[subtitle2] ? ' - ' + c[subtitle2] : ''}</small>
+          <section className='dandcard-flexcontainer'>
             <p>{c[description]}</p>
-            <img src={c[imageUrl]} alt="item" className="dandCards-image"></img>
+            <img src={c[imageUrl]} alt='item' className='dandCards-image' />
           </section>
 
         </div>
-
 
       </Card>
     ))
 
     return (
-      <article className="flex-card-container">
+      <article className='flex-card-container'>
         {list}
       </article>
     )

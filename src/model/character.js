@@ -1,12 +1,12 @@
 export default class Character {
-    constructor(){
-        this.name = ""
-        this.type = ""
-        this.sex = ""
-        this.description = ""
-        this.class = ""
-        this.race = ""
-        this.imageUrl = ""
-        this.isFavorite = false        
-    }    
+  constructor () {
+    this.name = ''
+    this.type = ''
+    this.sex = ''
+    this.description = ''
+    this.class = ''
+    this.race = ''
+    this.imageUrl = ''
+    this.isFavorite = false
+  }
 }

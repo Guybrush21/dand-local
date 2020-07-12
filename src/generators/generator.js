@@ -1,16 +1,15 @@
-export default class Generator{
+export default class Generator {
+  constructor (values) {
+    this.values = values
+  }
 
-    constructor(values){
-        this.values = values
-    }
+  getRandom () {
+    const min = 0
+    const max = Math.floor(this.values.length - 1)
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
 
-    getRandom() {
-        let min = 0;
-        let max = Math.floor(this.values.length-1);
-        return Math.floor(Math.random() * (max - min + 1)) + min; 
-      }
-
-    next(){        
-        return this.values[this.getRandom()]
-    }
+  next () {
+    return this.values[this.getRandom()]
+  }
 }

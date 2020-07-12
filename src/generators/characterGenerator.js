@@ -8,29 +8,27 @@ import MaleNameGenerator from './maleNameGenerator'
 import LastnameGenerator from './lastnameGenerator'
 
 export default class CharacterGenerator extends Generator {
-    constructor() {
-        super()
-        this.classGenrator = new ClassGenerator()
-        this.raceGenerator = new RaceGenerator()
-        this.lastnameGenerator = new LastnameGenerator()
-        this.sexGenerator = new SexGenerator()
-        this.maleGenerator = new MaleNameGenerator()
-        this.femaleGenerator = new FemaleNameGenerator()
-    }
+  constructor () {
+    super()
+    this.classGenrator = new ClassGenerator()
+    this.raceGenerator = new RaceGenerator()
+    this.lastnameGenerator = new LastnameGenerator()
+    this.sexGenerator = new SexGenerator()
+    this.maleGenerator = new MaleNameGenerator()
+    this.femaleGenerator = new FemaleNameGenerator()
+  }
 
-    next() {
-        let character = new Character()
-        character.class = this.classGenrator.next()
-        character.race = this.raceGenerator.next()
-        
-        character.sex = this.sexGenerator.next()
-        character.name = this.maleGenerator.next()
-        if(character.sex !== "male")
-            character.name = this.femaleGenerator.next()
+  next () {
+    const character = new Character()
+    character.class = this.classGenrator.next()
+    character.race = this.raceGenerator.next()
 
-        character.name = [character.name, this.lastnameGenerator.next()].join(' ') 
+    character.sex = this.sexGenerator.next()
+    character.name = this.maleGenerator.next()
+    if (character.sex !== 'male') { character.name = this.femaleGenerator.next() }
 
-        return character
-    }
+    character.name = [character.name, this.lastnameGenerator.next()].join(' ')
 
+    return character
+  }
 }

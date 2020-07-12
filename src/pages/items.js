@@ -69,11 +69,6 @@ export default class Items extends React.Component {
     this.deleteDialgohandleClose()
   }
 
-  addImage = (e, item) => {
-    let image = e.target.files[0]
-    this.store.addImage(item, image)
-  }
-
   componentDidMount() {
     this.fetchItems()
   }
@@ -98,8 +93,7 @@ export default class Items extends React.Component {
               <ItemForm
                 submitComplete={this.handleSubmitItem}
                 item={this.state.selectedItem}
-                onDelete={this.deleteDialogHandleOpen}
-                addImage={this.addImage} />
+                onDelete={this.deleteDialogHandleOpen}/>
             </div>
           </div>
         </Drawer>

@@ -2,6 +2,10 @@ import PouchDB from 'pouchdb'
 import { v4 } from 'uuid'
 import defaultMaleImg from './assets/default-male.svg'
 import defaultFemaleImg from './assets/default-female.svg'
+import defaultSwordImg from './assets/sword.svg'
+import defaultPotionImg from './assets/bottle.svg'
+import defaultTavernImg from './assets/tavern.svg'
+import defaultTowerImg from './assets/tower.svg'
 
 const CHARACTER_TYPE = 'CHARACTER'
 const LOCATION_TYPE = 'LOCATION'
@@ -9,7 +13,7 @@ const ITEM_TYPE = 'ITEM'
 const CHARACTER_PROFILE = 'CHARACTER_PROFILE'
 
 export default class Store {
-  constructor () {
+  constructor() {
     this.store = new PouchDB('dand')
 
     this.addCharacter = async function (character, image = null) {
@@ -25,26 +29,29 @@ export default class Store {
       return res.ok
     }
 
-    this.addLocation = function (location, image = null) {
+    this.addLocation = async function (location, image = null) {
       if (!location._id) location._id = v4()
       location.type = LOCATION_TYPE
-      this.store.put(location)
+
+      const res = await this.store.put(location)
+      if (image != null) {
+        return this.store.putAttachment(res.id, CHARACTER_PROFILE, res.rev, image, image.type)
+          .then(imgRes => { return imgRes.ok })
+      }
+      return res.ok
+
     }
 
-    this.addItem = function (item, image = null) {
+    this.addItem = async function (item, image = null) {
       if (!item._id) item._id = v4()
       item.type = ITEM_TYPE
-      this.store.put(item)
-    }
+      const res = await this.store.put(item)
+      if (image != null) {
+        return this.store.putAttachment(res.id, CHARACTER_PROFILE, res.rev, image, image.type)
+          .then(imgRes => { return imgRes.ok })
+      }
+      return res.ok
 
-    this.add = function (obj, name) {
-      obj.type = name
-      this.store.put(obj)
-    }
-
-    this.addImage = function (item, attachment) {
-      this.store.putAttachment(item._id, item._id, item._rev, attachment, attachment.type)
-        .then((res) => console.log(res))
     }
 
     this.getImageURL = async (id) => {
@@ -75,8 +82,18 @@ export default class Store {
 
     this.getDefaultImage = (el) => {
       if (el.type === CHARACTER_TYPE) {
-        if (el.sex === 'male') { return defaultMaleImg } else { return defaultFemaleImg }
+        if (el.sex === 'male') { return defaultMaleImg }
+        else { return defaultFemaleImg }
       }
+      if (el.type === ITEM_TYPE) {
+        if (el.name.length % 2 === 0) { return defaultSwordImg }
+        else { return defaultPotionImg}
+      }
+      if (el.type === LOCATION_TYPE) {
+        if (el.name.length % 2 === 0) { return defaultTowerImg }
+        else { return defaultTavernImg}
+      }
+      else console.error("Missing default image for " + el.type)
     }
 
     this.getAllByType = async function (type) {

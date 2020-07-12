@@ -3,5 +3,6 @@ export default class Base {
         this._id = ''
         this._rev = ''
         this._attachments = ''
+        this.type = ''
     }
 }

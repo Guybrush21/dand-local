@@ -5,9 +5,9 @@ import {
   FormGroup, InputGroup, Switch, FileInput, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
-
+import Item from '../../model/item'
 export default class ItemForm extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.saveItem = this.saveItem.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -20,32 +20,58 @@ export default class ItemForm extends React.Component {
       itemtype: '',
       description: '',
       isFavorite: false,
-      isNew: true
+      isNew: true,
+      imageText: 'Choose image...',
+      imageUrl: null,
+      newImage: null
     }
-    if (this.props.item) { this.state = { ...this.props.item, isNew: false } }
+    if (this.props.item) { this.state = { ...this.props.item, isNew: false, imageUrl: null,newImage: null } }
   }
 
-  saveItem (event) {
+  getItemFromState() {
+    const item = new Item()
+    item._id = this.state._id
+    item._rev = this.state._rev
+    item._attachments = this.state._attachments
+    item.name = this.state.name
+    item.itemtype = this.state.itemtype
+    item.description = this.state.description
+    item.isFavorite = this.state.isFavorite
+    return item
+  }
+
+  saveItem(event) {
     event.preventDefault()
-    const newItem = { ...this.state }
-    console.info(newItem)
+    const newItem = this.getItemFromState()
+    
     this.store.addItem(newItem)
     this.props.submitComplete()
   }
 
-  handleChange (event) {
+  handleChange(event) {
     const target = event.target
     let value = target.value
     const name = target.name
 
     if (target.type === 'checkbox') { value = target.checked }
 
+    if (target.type === 'file') {
+      if (target.files[0]) {
+        this.setState(
+          {
+            imageText: target.files[0].name,
+            imageUrl: URL.createObjectURL(target.files[0]),
+            newImage: target.files[0]
+          })
+      }
+    }
+
     this.setState({
       [name]: value
     })
   }
 
-  render () {
+  render() {
     return (
       <div className='drawer'>
         <FormButtonGroup
@@ -73,7 +99,7 @@ export default class ItemForm extends React.Component {
           labelFor='type'
         >
           <InputGroup
-            name='type' placeholder='Type'
+            name='itemtype' placeholder='Type'
             value={this.state.itemtype} onChange={this.handleChange}
           />
         </FormGroup>
@@ -96,15 +122,15 @@ export default class ItemForm extends React.Component {
             className='detail-image'
             src={this.state.imageUrl}
             alt='item profile'
-            >
-            </img>
+          >
+          </img>
           : <FormGroup>
             <FileInput
-              id='image' name='image'
-              onChange={(e) => this.props.addImage(e, this.state)}
+              id='image' name='image' text={this.state.imageText}
+              onChange={this.handleChange} fill
               type='file'
             />
-            </FormGroup>}
+          </FormGroup>}
 
       </div>
     )

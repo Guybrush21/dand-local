@@ -3,10 +3,11 @@ import uuid from 'uuid'
 import Store from '../../store'
 import {
   FormGroup, InputGroup,
-  Switch, FileInput, TextArea
+  Switch, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
 import Location from '../../model/location'
+import ImageFormInput from '../common/imageFormInput'
 
 export default class LocationForm extends React.Component {
   constructor (props) {
@@ -124,23 +125,12 @@ export default class LocationForm extends React.Component {
           />
         </FormGroup>
 
-        <div>
-          {(this.state.imageUrl)
-            ? <img
-              className='detail-image'
-              src={this.state.imageUrl}
-              alt='location'
-              >
-              </img>
-            : ''}
-            <FormGroup>
-              <FileInput
-                id='image' name='image'
-                onChange={this.handleChange} fill
-                type='file'
-              />
-              </FormGroup>
-        </div>
+        <ImageFormInput
+          onChange={this.handleChange}
+          alternativeText='character'
+          imageUrl={this.state.imageUrl}
+          imageText={this.state.imageText}
+        ></ImageFormInput>
 
       </div>
 

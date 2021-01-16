@@ -35,7 +35,7 @@ export default class ItemForm extends React.Component {
 
   handleChange (event) {
     const target = event.target
-    let value = target.value
+    const value = target.value
     const name = target.name
 
     if (target.type === 'checkbox') { value = target.checked }

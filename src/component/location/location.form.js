@@ -3,9 +3,11 @@ import uuid from 'uuid'
 import Store from '../../store'
 import {
   FormGroup, InputGroup,
-  Switch, FileInput, TextArea
+  Switch, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
+import Location from '../../model/location'
+import ImageFormInput from '../common/imageFormInput'
 
 export default class LocationForm extends React.Component {
   constructor (props) {
@@ -23,17 +25,31 @@ export default class LocationForm extends React.Component {
       isNew: true
     }
     if (this.props.location != null) {
-      this.state = { ...this.props.location, isNew: false }
+      this.state = { ...this.props.location, isNew: false,
+      imageText: 'Choose image...',      
+      newImage: null }
     }
   }
 
-  saveLocation (event) {
+  async saveLocation (event) {
     event.preventDefault()
 
-    const newLocation = { ...this.state }
-    this.store.addLocation(newLocation)
-    console.info(newLocation)
-    this.props.submitComplete()
+    const newLocation = this.getLocationFromState()
+        
+    const saveResult = await this.store.addLocation(newLocation, this.state.newImage)
+    if (saveResult) { this.props.submitComplete() } else { console.error('Error during saving character') }
+  }
+
+  getLocationFromState () {
+    const c = new Location()
+    c._id = this.state._id
+    c._rev = this.state._rev
+    c._attachments = this.state._attachments    
+    c.name = this.state.name
+    c.area = this.state.sex    
+    c.isFavorite = this.state.isFavorite
+    c.description = this.state.description
+    return c
   }
 
   handleChange (event) {
@@ -42,6 +58,17 @@ export default class LocationForm extends React.Component {
     const name = target.name
 
     if (target.type === 'checkbox') { value = target.checked }
+
+    if (target.type === 'file') {
+      if (target.files[0]) {
+        this.setState(
+          {
+            imageText: target.files[0].name,
+            imageUrl: URL.createObjectURL(target.files[0]),
+            newImage: target.files[0]
+          })
+      }
+    }
 
     this.setState({
       [name]: value
@@ -98,22 +125,12 @@ export default class LocationForm extends React.Component {
           />
         </FormGroup>
 
-        <div>
-          {(this.state.imageUrl)
-            ? <img
-              className='detail-image'
-              src={this.state.imageUrl}
-              alt='location'
-              >
-              </img>
-            : <FormGroup>
-              <FileInput
-                id='image' name='image'
-                onChange={(e) => this.props.addImage(e, this.state)}
-                type='file'
-              />
-              </FormGroup>}
-        </div>
+        <ImageFormInput
+          onChange={this.handleChange}
+          alternativeText='character'
+          imageUrl={this.state.imageUrl}
+          imageText={this.state.imageText}
+        ></ImageFormInput>
 
       </div>
 

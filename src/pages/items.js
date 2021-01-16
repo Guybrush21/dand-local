@@ -3,7 +3,6 @@ import DandCards from '../component/common/dandCards'
 import ItemForm from '../component/item/item.form'
 import Store from '../store'
 import { Button, Drawer, Dialog, Classes, Intent } from '@blueprintjs/core'
-import '../component/item/item.css'
 
 export default class Items extends React.Component {
   constructor(props) {
@@ -69,11 +68,6 @@ export default class Items extends React.Component {
     this.deleteDialgohandleClose()
   }
 
-  addImage = (e, item) => {
-    let image = e.target.files[0]
-    this.store.addImage(item, image)
-  }
-
   componentDidMount() {
     this.fetchItems()
   }
@@ -98,8 +92,7 @@ export default class Items extends React.Component {
               <ItemForm
                 submitComplete={this.handleSubmitItem}
                 item={this.state.selectedItem}
-                onDelete={this.deleteDialogHandleOpen}
-                addImage={this.addImage} />
+                onDelete={this.deleteDialogHandleOpen}/>
             </div>
           </div>
         </Drawer>

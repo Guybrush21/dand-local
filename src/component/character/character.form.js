@@ -2,10 +2,11 @@ import React from 'react'
 import Store from '../../store'
 import uuid from 'uuid'
 import {
-  FormGroup, InputGroup, RadioGroup, Radio, Switch, FileInput, TextArea
+  FormGroup, InputGroup, RadioGroup, Radio, Switch, TextArea
 } from '@blueprintjs/core'
 import FormButtonGroup from '../common/formButtonGroup'
 import Character from '../../model/character'
+import ImageFormInput from '../common/imageFormInput'
 
 export default class CharacterForm extends React.Component {
   constructor (props) {
@@ -28,7 +29,7 @@ export default class CharacterForm extends React.Component {
       imageUrl: null,
       newImage: null
     }
-    if (this.props.character) { this.state = { ...this.props.character, isNew: false, newImage: null, imageUrl: null, } }
+    if (this.props.character) { this.state = { ...this.props.character, isNew: false, newImage: null } }
   }
 
   async saveCharacter (event) {
@@ -43,6 +44,7 @@ export default class CharacterForm extends React.Component {
     const c = new Character()
     c._id = this.state._id
     c._rev = this.state._rev
+    c._attachments = this.state._attachments
     c.class = this.state.class
     c.name = this.state.name
     c.sex = this.state.sex
@@ -132,24 +134,12 @@ export default class CharacterForm extends React.Component {
             value={this.state.description}
           />
         </FormGroup>
-        <div>
-          {(this.state.imageUrl)
-            ? <img
-              className='detail-image'
-              src={this.state.imageUrl}
-              alt='character profile'
-              >
-              </img>
-            : ''}
-          <FormGroup>
-            <FileInput
-              id='image' name='image' text={this.state.imageText}
-              onChange={this.handleChange} fill
-              type='file'
-            />
-          </FormGroup>
-
-        </div>
+        <ImageFormInput
+          onChange={this.handleChange}
+          alternativeText='character'
+          imageUrl={this.state.imageUrl}
+          imageText={this.state.imageText}
+        ></ImageFormInput>        
       </div>
     )
   }

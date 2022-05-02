@@ -1,0 +1,11 @@
+<p-dataView [value]="characters$ | async">
+    <ng-template pTemplate="header">Character list</ng-template>
+    <ng-template let-character pTemplate="listItem">
+        <div class="col-12">
+            <div class="character-list-item m-3">
+                <p-avatar icon="pi pi-user" size="large"></p-avatar>
+                {{ character.name }} - {{ character.race }}
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>

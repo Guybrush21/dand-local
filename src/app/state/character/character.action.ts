@@ -8,7 +8,7 @@ export const addCharacter = createAction(
 
 export const removeCharacter = createAction(
     '[Characters] Remove character',
-    props<{ id: string }>()
+    props<{ character: Character }>()
 );
 
 export const generateRandomCharacter = createAction(

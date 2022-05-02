@@ -4,6 +4,7 @@ import Character from '../../model/character.model';
 import {
     addCharacter,
     generateRandomCharacter,
+    removeCharacter,
     retriveCharacter,
 } from './character.action';
 
@@ -37,6 +38,12 @@ export const charactersReducer = createReducer(
     on(addCharacter, (state, { character }) =>
         produce(state, (draft) => {
             draft.push(character);
+        })
+    ),
+    on(removeCharacter, (state, { character }) =>
+        produce(state, (draft) => {
+            const index = draft.findIndex((c) => c._id === character._id);
+            if (index !== -1) draft.splice(index, 1);
         })
     )
 );

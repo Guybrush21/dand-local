@@ -4,8 +4,9 @@
         {{ character.name }} - {{ character.race }}
     </div>
     <p-button
-        (onClick)="remove(character)"
+        (onClick)="confirmDelete($event, character)"
         label="Delete"
         icon="pi pi-trash"
     ></p-button>
 </div>
+<p-confirmPopup></p-confirmPopup>

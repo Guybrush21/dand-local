@@ -3,12 +3,11 @@ import Character from '../model/character.model';
 export interface AppState {
     uid: string;
     characters: Character[];
+    characterUI: CharacterUIState;
 }
 
-// export interface CharacterState {
-//     characters: Character[];
-// }
-
-// export function getInitialState(): AppState {
-//     return { characterState: initialCharacterState };
-// }
+export interface CharacterUIState {
+    isNewFormOpen: boolean;
+    isDetailOpen: boolean;
+    selectedCharacter?: Character;
+}

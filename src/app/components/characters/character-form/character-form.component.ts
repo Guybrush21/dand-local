@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import Character from 'src/app/model/character.model';
 import { addCharacter } from 'src/app/state/character/character.action';
-import { AppState } from 'src/app/state/state';
+import { closeForm } from 'src/app/state/character/ui/character.ui.action';
 @Component({
     selector: 'app-character-form',
     templateUrl: './character-form.component.html',
@@ -33,5 +33,11 @@ export class CharacterFormComponent implements OnInit {
             description: this.characterForm.controls['description'].value,
         };
         this.store.dispatch(addCharacter({ character: char }));
+        this.closeForm();
+    }
+
+    closeForm() {
+        this.store.dispatch(closeForm());
+        this.characterForm.reset();
     }
 }

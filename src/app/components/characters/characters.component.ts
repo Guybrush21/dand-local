@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import Character from 'src/app/model/character.model';
-import { retriveCharacter } from 'src/app/state/character/character.action';
-import { selectAllCharacters } from 'src/app/state/character/character.selector';
-import { AppState } from 'src/app/state/state';
+import {
+    closeForm,
+    openNewForm,
+} from 'src/app/state/character/ui/character.ui.action';
+import { characterUISelector } from 'src/app/state/character/ui/character.ui.selector';
+import { CharacterUIState } from 'src/app/state/state';
 
 @Component({
     selector: 'app-characters',
@@ -12,5 +13,17 @@ import { AppState } from 'src/app/state/state';
     styleUrls: ['./characters.component.scss'],
 })
 export class CharactersComponent implements OnInit {
-    ngOnInit(): void {}
+    ui: CharacterUIState;
+    constructor(private store: Store) {}
+    ngOnInit(): void {
+        this.store
+            .select(characterUISelector)
+            .subscribe((data) => (this.ui = data));
+    }
+    openNewForm() {
+        this.store.dispatch(openNewForm());
+    }
+    closeForm() {
+        this.store.dispatch(closeForm());
+    }
 }

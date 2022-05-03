@@ -32,6 +32,8 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { CharacterFormComponent } from './components/characters/character-form/character-form.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { charactersUIReducer } from './state/character/ui/character.ui.reducer';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
     imports: [
@@ -41,12 +43,16 @@ import { InputTextModule } from 'primeng/inputtext';
         AppRoutingModule,
         InputTextModule,
         HttpClientModule,
+        SidebarModule,
         AvatarModule,
         BrowserAnimationsModule,
         DataViewModule,
         ReactiveFormsModule,
         StyleClassModule,
-        StoreModule.forRoot({ characters: charactersReducer }),
+        StoreModule.forRoot({
+            characters: charactersReducer,
+            characterUI: charactersUIReducer,
+        }),
         EffectsModule.forRoot([]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,

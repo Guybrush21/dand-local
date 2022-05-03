@@ -11,13 +11,13 @@
                 <p-button label="Random" icon="pi pi-book"></p-button>
             </div>
             <app-characters-list></app-characters-list>
-            <p-sidebar
-                [(visible)]="ui.isNewFormOpen"
-                (onHide)="closeForm()"
-                position="right"
-            >
-                <app-character-form></app-character-form>
-            </p-sidebar>
         </div>
     </div>
 </div>
+<p-sidebar
+    [(visible)]="ui.isNewFormOpen"
+    (onHide)="closeForm()"
+    position="right"
+>
+    <app-character-form></app-character-form>
+</p-sidebar>

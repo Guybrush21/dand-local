@@ -34,6 +34,9 @@ import { CharacterFormComponent } from './components/characters/character-form/c
 import { InputTextModule } from 'primeng/inputtext';
 import { charactersUIReducer } from './state/character/ui/character.ui.reducer';
 import { SidebarModule } from 'primeng/sidebar';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+import { CharacterItemListComponent } from './components/characters/characters-list/character-item/character-item-list.component';
 
 @NgModule({
     imports: [
@@ -45,6 +48,7 @@ import { SidebarModule } from 'primeng/sidebar';
         HttpClientModule,
         SidebarModule,
         AvatarModule,
+        ConfirmPopupModule,
         BrowserAnimationsModule,
         DataViewModule,
         ReactiveFormsModule,
@@ -71,11 +75,13 @@ import { SidebarModule } from 'primeng/sidebar';
         LocationsComponent,
         CharactersListComponent,
         CharacterFormComponent,
+        CharacterItemListComponent,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         MenuService,
         ConfigService,
+        ConfirmationService,
     ],
     bootstrap: [AppComponent],
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { DbService } from 'src/app/db/db.service';
 import Character from 'src/app/model/character.model';
 import { addCharacter } from 'src/app/state/character/character.action';
 import { closeForm } from 'src/app/state/character/ui/character.ui.action';
@@ -18,7 +19,7 @@ export class CharacterFormComponent implements OnInit {
         description: new FormControl(''),
     });
 
-    constructor(private store: Store) {}
+    constructor(private store: Store, private dbService: DbService) {}
 
     ngOnInit(): void {}
 
@@ -34,6 +35,7 @@ export class CharacterFormComponent implements OnInit {
         };
         this.store.dispatch(addCharacter({ character: char }));
         this.closeForm();
+        this.dbService.save();
     }
 
     closeForm() {

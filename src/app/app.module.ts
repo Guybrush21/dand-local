@@ -18,7 +18,7 @@ import { AppMenuitemComponent } from './app.menuitem.component';
 
 import { MenuService } from './service/app.menu.service';
 import { ConfigService } from './service/app.config.service';
-import { StoreModule } from '@ngrx/store';
+import { MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
@@ -37,6 +37,10 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { CharacterItemListComponent } from './components/characters/characters-list/character-item/character-item-list.component';
+import { HydrationEffects } from './state/hydration/hydration.effects';
+import { hydrationMetaReducer } from './state/hydration/hydration.reducer';
+
+export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
     imports: [
@@ -53,11 +57,14 @@ import { CharacterItemListComponent } from './components/characters/characters-l
         DataViewModule,
         ReactiveFormsModule,
         StyleClassModule,
-        StoreModule.forRoot({
-            characters: charactersReducer,
-            characterUI: charactersUIReducer,
-        }),
-        EffectsModule.forRoot([]),
+        StoreModule.forRoot(
+            {
+                characters: charactersReducer,
+                characterUI: charactersUIReducer,
+            },
+            { metaReducers }
+        ),
+        EffectsModule.forRoot([HydrationEffects]),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,

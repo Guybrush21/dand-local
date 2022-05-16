@@ -15,7 +15,7 @@ export class DbService {
 
     save() {
         debugger;
-        this.store.select(selectAllCharacters).subscribe((data) => {
+        this.store.subscribe((data) => {
             this.db.put({
                 _id: '1',
                 ...data,

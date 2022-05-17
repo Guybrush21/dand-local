@@ -1,0 +1,7 @@
+version: "3.3"
+services:
+    dand:
+        container_name: dand
+        build: ./
+        ports:
+            - "9000:80"

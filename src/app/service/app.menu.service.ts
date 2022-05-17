@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class MenuService {
-
     private menuSource = new Subject<string>();
     private resetSource = new Subject();
 
@@ -15,6 +14,6 @@ export class MenuService {
     }
 
     reset() {
-       this.resetSource.next(true);
+        this.resetSource.next(true);
     }
 }

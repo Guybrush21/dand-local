@@ -1,8 +1,8 @@
-import Generator from './generator'
+import Generator from './generator';
 
 export default class SexGenerator extends Generator {
-  constructor () {
-    const races = ['female', 'male']
-    super(races)
-  }
+    constructor() {
+        const races = ['female', 'male'];
+        super(races);
+    }
 }

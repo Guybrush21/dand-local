@@ -4,12 +4,11 @@ import { AppConfig } from '../api/appconfig';
 
 @Injectable()
 export class ConfigService {
-
     config: AppConfig = {
         theme: 'lara-light-indigo',
         dark: false,
         inputStyle: 'outlined',
-        ripple: true
+        ripple: true,
     };
 
     private configUpdate = new Subject<AppConfig>();

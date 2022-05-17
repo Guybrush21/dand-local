@@ -5,11 +5,10 @@ import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-topbar',
-    templateUrl: './app.topbar.component.html'
+    templateUrl: './app.topbar.component.html',
 })
 export class AppTopBarComponent {
-
     items: MenuItem[];
 
-    constructor(public appMain: AppMainComponent) { }
+    constructor(public appMain: AppMainComponent) {}
 }

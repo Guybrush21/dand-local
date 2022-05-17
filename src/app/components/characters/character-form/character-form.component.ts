@@ -10,7 +10,7 @@ import { closeForm } from 'src/app/state/character/ui/character.ui.action';
     templateUrl: './character-form.component.html',
     styleUrls: ['./character-form.component.scss'],
 })
-export class CharacterFormComponent implements OnInit {
+export class CharacterFormComponent {
     characterForm = new FormGroup({
         name: new FormControl(''),
         race: new FormControl(''),
@@ -20,8 +20,6 @@ export class CharacterFormComponent implements OnInit {
     });
 
     constructor(private store: Store, private dbService: DbService) {}
-
-    ngOnInit(): void {}
 
     onSubmit() {
         let char: Character = {

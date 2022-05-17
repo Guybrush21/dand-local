@@ -10,14 +10,13 @@ import { AppState } from 'src/app/state/state';
     templateUrl: './character-item-list.component.html',
     styleUrls: ['./character-item-list.component.scss'],
 })
-export class CharacterItemListComponent implements OnInit {
+export class CharacterItemListComponent {
     @Input() character: Character;
 
     constructor(
         private store: Store<AppState>,
         private confirmationService: ConfirmationService
     ) {}
-    ngOnInit(): void {}
 
     confirmDelete(event: Event, character: Character) {
         this.confirmationService.confirm({

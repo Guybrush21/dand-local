@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-
 import produce from 'immer';
 import { AppState, CharacterUIState } from '../../state';
 import {
@@ -29,8 +28,3 @@ export const charactersUIReducer = createReducer(
     })),
     on(deselectCharachter, (state) => ({ ...state, selectedCharacter: null }))
 );
-
-// export const randomCharachterReducer = createReducer(
-//     initialState,
-//     on(generateRandomCharacter, (state, { character }) => characters)
-// );

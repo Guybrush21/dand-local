@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-    selector: 'app-topbar',
-    templateUrl: './app.topbar.component.html',
+  selector: 'app-topbar',
+  templateUrl: './app.topbar.component.html',
 })
 export class AppTopBarComponent {
-    items: MenuItem[];
+  items: MenuItem[];
 
-    constructor(public appMain: AppMainComponent) {}
+  constructor(public appMain: AppMainComponent) {}
 }

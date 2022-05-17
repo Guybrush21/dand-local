@@ -43,53 +43,53 @@ import { hydrationMetaReducer } from './state/hydration/hydration.reducer';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ButtonModule,
-        AppRoutingModule,
-        InputTextModule,
-        HttpClientModule,
-        SidebarModule,
-        AvatarModule,
-        ConfirmPopupModule,
-        BrowserAnimationsModule,
-        DataViewModule,
-        ReactiveFormsModule,
-        StyleClassModule,
-        StoreModule.forRoot(
-            {
-                characters: charactersReducer,
-                characterUI: charactersUIReducer,
-            },
-            { metaReducers }
-        ),
-        EffectsModule.forRoot([HydrationEffects]),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-            logOnly: environment.production,
-        }),
-    ],
-    declarations: [
-        AppComponent,
-        AppMainComponent,
-        AppTopBarComponent,
-        AppFooterComponent,
-        AppMenuComponent,
-        AppMenuitemComponent,
-        CharactersComponent,
-        ItemsComponent,
-        LocationsComponent,
-        CharactersListComponent,
-        CharacterFormComponent,
-        CharacterItemListComponent,
-    ],
-    providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy },
-        MenuService,
-        ConfigService,
-        ConfirmationService,
-    ],
-    bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ButtonModule,
+    AppRoutingModule,
+    InputTextModule,
+    HttpClientModule,
+    SidebarModule,
+    AvatarModule,
+    ConfirmPopupModule,
+    BrowserAnimationsModule,
+    DataViewModule,
+    ReactiveFormsModule,
+    StyleClassModule,
+    StoreModule.forRoot(
+      {
+        characters: charactersReducer,
+        characterUI: charactersUIReducer,
+      },
+      { metaReducers }
+    ),
+    EffectsModule.forRoot([HydrationEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+  ],
+  declarations: [
+    AppComponent,
+    AppMainComponent,
+    AppTopBarComponent,
+    AppFooterComponent,
+    AppMenuComponent,
+    AppMenuitemComponent,
+    CharactersComponent,
+    ItemsComponent,
+    LocationsComponent,
+    CharactersListComponent,
+    CharacterFormComponent,
+    CharacterItemListComponent,
+  ],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    MenuService,
+    ConfigService,
+    ConfirmationService,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

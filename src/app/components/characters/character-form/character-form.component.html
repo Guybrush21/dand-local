@@ -1,57 +1,37 @@
 <div class="grid">
-    <div class="col">
-        <div class="card p-fluid">
-            <h5>Character</h5>
-            <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
-                <div class="field">
-                    <label for="name">Name</label>
-                    <input
-                        pInputText
-                        formControlName="name"
-                        id="name"
-                        type="text"
-                    />
-                </div>
-                <div class="field">
-                    <label for="race">Race</label>
-                    <input
-                        pInputText
-                        id="race"
-                        formControlName="race"
-                        type="text"
-                    />
-                </div>
-                <div class="field">
-                    <label for="class">Class</label>
-                    <input
-                        pInputText
-                        id="class"
-                        formControlName="class"
-                        type="text"
-                    />
-                </div>
-                <div class="field">
-                    <label for="age">Age</label>
-                    <input
-                        pInputText
-                        formControlName="age"
-                        id="age"
-                        type="number"
-                    />
-                </div>
-                <div class="field">
-                    <label for="description">Description</label>
-                    <input
-                        pInputText
-                        formControlName="description"
-                        id="description"
-                        type="text"
-                    />
-                </div>
-                <p-button type="submit" [disabled]="!characterForm.valid">
-                    Save
-                </p-button>
-            </form>
+  <div class="col">
+    <div class="card p-fluid">
+      <h5>Character</h5>
+      <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label for="name">Name</label>
+          <input pInputText formControlName="name" id="name" type="text" />
         </div>
+        <div class="field">
+          <label for="race">Race</label>
+          <input pInputText id="race" formControlName="race" type="text" />
+        </div>
+        <div class="field">
+          <label for="class">Class</label>
+          <input pInputText id="class" formControlName="class" type="text" />
+        </div>
+        <div class="field">
+          <label for="age">Age</label>
+          <input pInputText formControlName="age" id="age" type="number" />
+        </div>
+        <div class="field">
+          <label for="description">Description</label>
+          <input
+            pInputText
+            formControlName="description"
+            id="description"
+            type="text"
+          />
+        </div>
+        <p-button type="submit" [disabled]="!characterForm.valid">
+          Save
+        </p-button>
+      </form>
     </div>
+  </div>
 </div>

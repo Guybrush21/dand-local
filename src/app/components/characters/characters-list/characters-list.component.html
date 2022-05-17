@@ -1,10 +1,10 @@
 <p-dataView [value]="characters$ | async">
-    <ng-template pTemplate="header">Character list</ng-template>
-    <ng-template let-character pTemplate="listItem">
-        <div class="col-12">
-            <app-character-item-list
-                [character]="character"
-            ></app-character-item-list>
-        </div>
-    </ng-template>
+  <ng-template pTemplate="header">Character list</ng-template>
+  <ng-template let-character pTemplate="listItem">
+    <div class="col-12">
+      <app-character-item-list
+        [character]="character"
+      ></app-character-item-list>
+    </div>
+  </ng-template>
 </p-dataView>

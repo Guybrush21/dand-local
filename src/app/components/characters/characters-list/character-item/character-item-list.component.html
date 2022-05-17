@@ -1,12 +1,12 @@
 <div class="flex align-items-center">
-    <div class="m-3 flex-grow-1">
-        <p-avatar icon="pi pi-user" size="large"></p-avatar>
-        {{ character.name }} - {{ character.race }}
-    </div>
-    <p-button
-        (onClick)="confirmDelete($event, character)"
-        label="Delete"
-        icon="pi pi-trash"
-    ></p-button>
+  <div class="m-3 flex-grow-1">
+    <p-avatar icon="pi pi-user" size="large"></p-avatar>
+    {{ character.name }} - {{ character.race }}
+  </div>
+  <p-button
+    (onClick)="confirmDelete($event, character)"
+    label="Delete"
+    icon="pi pi-trash"
+  ></p-button>
 </div>
 <p-confirmPopup></p-confirmPopup>

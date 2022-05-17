@@ -6,16 +6,16 @@ import { selectAllCharacters } from 'src/app/state/character/character.selector'
 import { AppState } from 'src/app/state/state';
 
 @Component({
-    selector: 'app-characters-list',
-    templateUrl: './characters-list.component.html',
-    styleUrls: ['./characters-list.component.scss'],
+  selector: 'app-characters-list',
+  templateUrl: './characters-list.component.html',
+  styleUrls: ['./characters-list.component.scss'],
 })
 export class CharactersListComponent implements OnInit {
-    characters$: Observable<Array<Character>>;
+  characters$: Observable<Array<Character>>;
 
-    constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {}
 
-    ngOnInit(): void {
-        this.characters$ = this.store.select(selectAllCharacters);
-    }
+  ngOnInit(): void {
+    this.characters$ = this.store.select(selectAllCharacters);
+  }
 }

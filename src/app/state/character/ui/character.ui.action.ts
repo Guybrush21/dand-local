@@ -10,10 +10,10 @@ export const openDetail = createAction('[UI - Character] Open Detail');
 export const closeDetail = createAction('[UI - Character] Close Detail');
 
 export const selectCharachter = createAction(
-    '[UI - Character] Select character',
-    props<{ character: Character }>()
+  '[UI - Character] Select character',
+  props<{ character: Character }>()
 );
 
 export const deselectCharachter = createAction(
-    '[UI - Character] Deselect character'
+  '[UI - Character] Deselect character'
 );

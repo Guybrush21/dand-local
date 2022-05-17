@@ -12,8 +12,7 @@ export const removeCharacter = createAction(
 );
 
 export const generateRandomCharacter = createAction(
-    '[Characters] Generate random character',
-    props<{ character: Character }>()
+    '[Characters] Generate random character'
 );
 
 export const retriveCharacter = createAction(

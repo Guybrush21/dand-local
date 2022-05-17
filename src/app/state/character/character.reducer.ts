@@ -10,6 +10,7 @@ import {
 
 import produce from 'immer';
 import { AppState } from '../state';
+import CharacterGenerator from 'src/app/generators/characterGenerator';
 
 export const initialState: ReadonlyArray<Character> = [
     {
@@ -45,10 +46,12 @@ export const charactersReducer = createReducer(
             const index = draft.findIndex((c) => c._id === character._id);
             if (index !== -1) draft.splice(index, 1);
         })
+    ),
+    on(generateRandomCharacter, (state) =>
+        produce(state, (draft) => {
+            const generator = new CharacterGenerator();
+            const randomCharacter = generator.next();
+            draft.push(randomCharacter);
+        })
     )
 );
-
-// export const randomCharachterReducer = createReducer(
-//     initialState,
-//     on(generateRandomCharacter, (state, { character }) => characters)
-// );

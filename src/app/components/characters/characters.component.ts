@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { generateRandomCharacter } from 'src/app/state/character/character.action';
 import {
     closeForm,
     openNewForm,
@@ -25,5 +26,8 @@ export class CharactersComponent implements OnInit {
     }
     closeForm() {
         this.store.dispatch(closeForm());
+    }
+    generteRandomCharacter() {
+        this.store.dispatch(generateRandomCharacter());
     }
 }

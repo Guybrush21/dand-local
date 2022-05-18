@@ -6,6 +6,7 @@ import FemaleNameGenerator from './femaleNameGenerator';
 import MaleNameGenerator from './maleNameGenerator';
 import LastnameGenerator from './lastnameGenerator';
 import Character from '../model/character.model';
+import { v4 as uuidv4 } from 'uuid';
 
 const CHARACTER_TYPE = 'character';
 
@@ -16,6 +17,7 @@ export default class CharacterGenerator extends Generator {
   sexGenerator: SexGenerator;
   maleGenerator: MaleNameGenerator;
   femaleGenerator: FemaleNameGenerator;
+
   constructor() {
     super([]);
     this.classGenrator = new ClassGenerator();
@@ -32,6 +34,7 @@ export default class CharacterGenerator extends Generator {
       race: this.raceGenerator.next(),
       sex: this.sexGenerator.next(),
       name: this.maleGenerator.next(),
+      _id: uuidv4(),
       isFavorite: false,
       type: CHARACTER_TYPE,
     };

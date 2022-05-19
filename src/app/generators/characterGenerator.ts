@@ -7,8 +7,7 @@ import MaleNameGenerator from './maleNameGenerator';
 import LastnameGenerator from './lastnameGenerator';
 import Character from '../model/character.model';
 import { v4 as uuidv4 } from 'uuid';
-
-const CHARACTER_TYPE = 'character';
+import { CHARACTER_TYPE } from '../common/constant';
 
 export default class CharacterGenerator extends Generator {
   classGenrator: ClassGenerator;

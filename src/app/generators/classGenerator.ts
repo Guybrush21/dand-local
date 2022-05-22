@@ -2,7 +2,7 @@ import Generator from './generator';
 
 export default class ClassGenerator extends Generator {
   constructor() {
-    const races = [
+    const classes = [
       'Barbarian',
       'Bard',
       'Cleric',
@@ -16,6 +16,6 @@ export default class ClassGenerator extends Generator {
       'Warlock',
       'Wizard',
     ];
-    super(races);
+    super(classes);
   }
 }

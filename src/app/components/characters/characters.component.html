@@ -18,6 +18,10 @@
     </div>
   </div>
 </div>
-<p-sidebar [visible]="ui.isNewFormOpen" (onHide)="closeForm()" position="right">
+<p-sidebar
+  [visible]="(ui$ | async).isNewFormOpen"
+  (onHide)="closeForm()"
+  position="right"
+>
   <app-character-form></app-character-form>
 </p-sidebar>

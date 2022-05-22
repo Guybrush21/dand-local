@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { tap, pipe } from 'rxjs';
+import Character from 'src/app/model/character.model';
 import { generateRandomCharacter } from 'src/app/state/character/character.action';
 import {
   closeForm,
@@ -13,20 +16,19 @@ import { CharacterUIState } from 'src/app/state/state';
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.scss'],
 })
-export class CharactersComponent implements OnInit {
-  ui: CharacterUIState;
+export class CharactersComponent {
+  ui$ = this.store.select(characterUISelector);
+
   constructor(private store: Store) {}
-  ngOnInit(): void {
-    this.store
-      .select(characterUISelector)
-      .subscribe((data) => (this.ui = data));
-  }
+
   openNewForm() {
     this.store.dispatch(openNewForm());
   }
+
   closeForm() {
     this.store.dispatch(closeForm());
   }
+
   generteRandomCharacter() {
     this.store.dispatch(generateRandomCharacter());
   }

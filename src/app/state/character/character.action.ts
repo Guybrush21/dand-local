@@ -19,3 +19,4 @@ export const retriveCharacter = createAction(
   '[Characters] Retrive characters',
   props<{ characters: ReadonlyArray<Character> }>()
 );
+

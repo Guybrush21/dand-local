@@ -17,3 +17,7 @@ export const selectCharachter = createAction(
 export const deselectCharachter = createAction(
   '[UI - Character] Deselect character'
 );
+
+export const editCharachter = createAction(
+  '[UI - Character] Open Edit character'
+);

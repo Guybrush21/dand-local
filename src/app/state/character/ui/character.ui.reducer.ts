@@ -5,6 +5,7 @@ import {
   closeDetail,
   closeForm,
   deselectCharachter,
+  editCharachter,
   openDetail,
   openNewForm,
   selectCharachter,
@@ -26,5 +27,10 @@ export const charactersUIReducer = createReducer(
     ...state,
     selectedCharacter: character,
   })),
-  on(deselectCharachter, (state) => ({ ...state, selectedCharacter: null }))
+  on(deselectCharachter, (state) => ({ ...state, selectedCharacter: null })),
+  on(editCharachter, (state) =>
+    produce(state, (draft) => {
+      draft.isNewFormOpen = true;
+    })
+  )
 );

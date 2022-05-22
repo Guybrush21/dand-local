@@ -38,7 +38,9 @@ export const charactersReducer = createReducer(
   on(retriveCharacter, (state, { characters }) => characters),
   on(addCharacter, (state, { character }) =>
     produce(state, (draft) => {
-      draft.push(character);
+      const id = draft.findIndex((x) => x._id == character._id);
+      if (id === -1) draft.push(character);
+      else draft[id] = character;
     })
   ),
   on(removeCharacter, (state, { character }) =>

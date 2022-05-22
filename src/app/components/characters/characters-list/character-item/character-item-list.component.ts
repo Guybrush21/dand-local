@@ -3,6 +3,10 @@ import { Store } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
 import Character from 'src/app/model/character.model';
 import { removeCharacter } from 'src/app/state/character/character.action';
+import {
+  editCharachter,
+  selectCharachter,
+} from 'src/app/state/character/ui/character.ui.action';
 import { AppState } from 'src/app/state/state';
 
 @Component({
@@ -30,5 +34,10 @@ export class CharacterItemListComponent {
         //reject action
       },
     });
+  }
+
+  edit(character: Character) {
+    this.store.dispatch(selectCharachter({ character }));
+    this.store.dispatch(editCharachter());
   }
 }

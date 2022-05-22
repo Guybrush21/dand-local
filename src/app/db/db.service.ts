@@ -14,7 +14,6 @@ export class DbService {
   }
 
   save() {
-    debugger;
     this.store.subscribe((data) => {
       this.db.put({
         _id: '1',

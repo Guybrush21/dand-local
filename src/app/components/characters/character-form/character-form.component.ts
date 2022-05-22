@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, take, takeLast, tap } from 'rxjs';
 import { CHARACTER_TYPE } from 'src/app/common/constant';
@@ -21,11 +21,6 @@ import { CharacterUIState } from 'src/app/state/state';
   styleUrls: ['./character-form.component.scss'],
 })
 export class CharacterFormComponent {
-  ui$ = this.store
-    .select(characterUISelector)
-    .pipe(filter((x) => !!x.selectedCharacter))
-    .subscribe((x) => this.mapForm(x.selectedCharacter));
-
   characterForm = new FormGroup({
     id: new FormControl(),
     name: new FormControl(''),
@@ -34,6 +29,11 @@ export class CharacterFormComponent {
     age: new FormControl(''),
     description: new FormControl(''),
   });
+
+  ui$ = this.store
+    .select(characterUISelector)
+    .pipe(filter((x) => !!x.selectedCharacter))
+    .subscribe((x) => this.mapForm(x.selectedCharacter));
 
   constructor(private store: Store, private dbService: DbService) {}
 
@@ -63,7 +63,6 @@ export class CharacterFormComponent {
 
     this.store.dispatch(addCharacter({ character: char }));
     this.closeForm();
-    this.dbService.save();
   }
 
   closeForm() {

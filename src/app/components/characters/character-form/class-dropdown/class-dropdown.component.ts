@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormGroupDirective,
 } from '@angular/forms';
+import { classes as commonClasses } from 'src/app/common/character.common';
 
 @Component({
   selector: 'app-class-dropdown',
@@ -15,15 +16,13 @@ export class ClassDropdownComponent implements OnInit {
   @Input() controlName: FormGroup;
 
   form: FormGroup;
-
-  allClasses = ['mage', 'warrior', 'ranger', 'cleric', 'paladin'];
   classes: string[];
 
   constructor(private controlContainer: ControlContainer) {}
 
   ngOnInit(): void {
     this.form = this.controlContainer.control as FormGroup;
-    this.classes = [...this.allClasses];
+    this.classes = [...commonClasses];
   }
 
   search(event) {

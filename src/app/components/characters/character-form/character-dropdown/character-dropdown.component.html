@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form">
   <p-autoComplete
     [formControlName]="controlName"
-    [suggestions]="classes"
+    [suggestions]="sources"
     (completeMethod)="search($event)"
     [dropdown]="true"
   ></p-autoComplete>

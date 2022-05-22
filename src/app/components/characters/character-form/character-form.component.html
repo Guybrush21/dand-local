@@ -9,13 +9,19 @@
         </div>
         <div class="field">
           <label for="race">Race</label>
-          <input pInputText id="race" formControlName="race" type="text" />
+          <app-class-dropdown
+            id="race"
+            [parentForm]="characterForm"
+            type="RACE"
+            controlName="race"
+          ></app-class-dropdown>
         </div>
         <div class="field">
           <label for="class">Class</label>
           <app-class-dropdown
             id="class"
             [parentForm]="characterForm"
+            type="CLASS"
             controlName="class"
           ></app-class-dropdown>
         </div>

@@ -39,7 +39,7 @@ import { ConfirmationService } from 'primeng/api';
 import { CharacterItemListComponent } from './components/characters/characters-list/character-item/character-item-list.component';
 import { HydrationEffects } from './state/hydration/hydration.effects';
 import { hydrationMetaReducer } from './state/hydration/hydration.reducer';
-import { ClassDropdownComponent } from './components/characters/character-form/class-dropdown/class-dropdown.component';
+import { CharacterDropdownComponent } from './components/characters/character-form/character-dropdown/character-dropdown.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
@@ -85,7 +85,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     CharactersListComponent,
     CharacterFormComponent,
     CharacterItemListComponent,
-    ClassDropdownComponent,
+    CharacterDropdownComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

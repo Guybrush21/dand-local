@@ -42,6 +42,11 @@ import { hydrationMetaReducer } from './state/hydration/hydration.reducer';
 import { CharacterDropdownComponent } from './components/characters/character-form/character-dropdown/character-dropdown.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ItemsListComponent } from './components/items/items-list/items-list.component';
+import { ItemsFormComponent } from './components/items/items-form/items-form.component';
+import { ItemLitsElementComponent } from './components/items/items-list/item-lits-element/item-lits-element.component';
+import { itemsReducer } from './state/items/item.reducer';
+import { itemsUIReducer } from './state/items/ui/item.ui.reducer';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
@@ -66,6 +71,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
       {
         characters: charactersReducer,
         characterUI: charactersUIReducer,
+        items: itemsReducer,
+        itemsUI: itemsUIReducer,
       },
       { metaReducers }
     ),
@@ -89,6 +96,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     CharacterFormComponent,
     CharacterItemListComponent,
     CharacterDropdownComponent,
+    ItemsListComponent,
+    ItemsFormComponent,
+    ItemLitsElementComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

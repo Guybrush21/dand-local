@@ -41,6 +41,8 @@ import { HydrationEffects } from './state/hydration/hydration.effects';
 import { hydrationMetaReducer } from './state/hydration/hydration.reducer';
 import { CharacterDropdownComponent } from './components/characters/character-form/character-dropdown/character-dropdown.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -58,6 +60,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     DataViewModule,
     ReactiveFormsModule,
     StyleClassModule,
+    InputTextareaModule,
     AutoCompleteModule,
     StoreModule.forRoot(
       {

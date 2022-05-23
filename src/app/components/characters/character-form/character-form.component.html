@@ -31,12 +31,11 @@
         </div>
         <div class="field">
           <label for="description">Description</label>
-          <input
-            pInputText
+          <textarea
+            pInputTextarea
             formControlName="description"
             id="description"
-            type="text"
-          />
+          ></textarea>
         </div>
         <p-button type="submit" [disabled]="!characterForm.valid">
           Save

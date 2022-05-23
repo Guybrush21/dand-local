@@ -2,26 +2,26 @@ import { createReducer, on } from '@ngrx/store';
 import produce from 'immer';
 import { AppState, CharacterUIState } from '../../state';
 import {
-  closeDetail,
   closeForm,
   deselectCharachter,
   editCharachter,
-  openDetail,
   openNewForm,
   selectCharachter,
 } from './character.ui.action';
 
-export const initialState = {
+export const initialState: CharacterUIState = {
   isDetailOpen: false,
   isNewFormOpen: false,
-  selectCharachter: null,
+  selectedCharacter: null,
 };
 
 export const charactersUIReducer = createReducer(
   initialState,
-  on(openDetail, (state) => ({ ...state, isDetailOpen: true })),
-  on(closeDetail, (state) => ({ ...state, isDetailOpen: false })),
-  on(openNewForm, (state) => ({ ...state, isNewFormOpen: true })),
+  on(openNewForm, (state) => ({
+    ...state,
+    isNewFormOpen: true,
+    selectedCharacter: null,
+  })),
   on(closeForm, (state) => ({ ...state, isNewFormOpen: false })),
   on(selectCharachter, (state, { character }) => ({
     ...state,

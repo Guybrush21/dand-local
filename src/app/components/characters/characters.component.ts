@@ -21,7 +21,7 @@ export class CharactersComponent {
 
   constructor(private store: Store) {}
 
-  openNewForm() {
+  openNewForm() {    
     this.store.dispatch(openNewForm());
   }
 

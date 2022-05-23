@@ -32,20 +32,21 @@ export class CharacterFormComponent {
 
   ui$ = this.store
     .select(characterUISelector)
-    .pipe(filter((x) => !!x.selectedCharacter))
     .subscribe((x) => this.mapForm(x.selectedCharacter));
 
   constructor(private store: Store, private dbService: DbService) {}
 
   mapForm(x: Character): void {
-    this.characterForm.patchValue({
-      id: x._id,
-      name: x.name,
-      race: x.race,
-      class: x.class,
-      age: x.age,
-      description: x.description,
-    });
+    if (x == null) this.characterForm.reset();
+    else
+      this.characterForm.patchValue({
+        id: x._id,
+        name: x.name,
+        race: x.race,
+        class: x.class,
+        age: x.age,
+        description: x.description,
+      });
   }
 
   onSubmit() {

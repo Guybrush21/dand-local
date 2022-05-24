@@ -1,6 +1,8 @@
 <p-dataView [value]="items$ | async">
   <ng-template pTemplate="header">Items list</ng-template>
-  <ng-template let-character pTemplate="listItem">
-    <div class="col-12"></div>
+  <ng-template let-item pTemplate="listItem">
+    <div class="col-12">
+      <app-item-list-element [item]="item"></app-item-list-element>
+    </div>
   </ng-template>
 </p-dataView>

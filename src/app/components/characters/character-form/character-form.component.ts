@@ -14,6 +14,7 @@ import {
 } from 'src/app/state/character/ui/character.ui.action';
 import { characterUISelector } from 'src/app/state/character/ui/character.ui.selector';
 import { CharacterUIState } from 'src/app/state/state';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-character-form',
@@ -61,6 +62,7 @@ export class CharacterFormComponent {
       type: CHARACTER_TYPE,
       description: this.characterForm.controls['description'].value,
     };
+    if (char._id === null || char._id === undefined) char._id = v4();
 
     this.store.dispatch(addCharacter({ character: char }));
     this.closeForm();

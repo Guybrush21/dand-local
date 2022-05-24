@@ -1,0 +1,19 @@
+<div class="flex align-items-center">
+  <div class="m-3 flex-grow-1">
+    <p-avatar icon="pi pi-user" class="mx-2" size="large"></p-avatar>
+    {{ item.name }}
+  </div>
+  <p-button
+    class="mx-2"
+    (onClick)="edit(item)"
+    label="Edit"
+    icon="pi pi-user-edit"
+  ></p-button>
+  <p-button
+    class="mx-2"
+    (onClick)="confirmDelete($event, item)"
+    label="Delete"
+    icon="pi pi-trash"
+  ></p-button>
+</div>
+<p-confirmPopup></p-confirmPopup>

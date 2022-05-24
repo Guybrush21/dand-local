@@ -2,7 +2,6 @@ import Base from './base.model';
 
 export default interface Item extends Base {
   name: string;
-  itemType: string;
+  type: string;
   description: string;
-  imageUrl: string;
 }

@@ -44,7 +44,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ItemsListComponent } from './components/items/items-list/items-list.component';
 import { ItemsFormComponent } from './components/items/items-form/items-form.component';
-import { ItemLitsElementComponent } from './components/items/items-list/item-lits-element/item-lits-element.component';
+import { ItemListElementComponent } from './components/items/items-list/item-lits-element/item-list-element.component';
 import { itemsReducer } from './state/items/item.reducer';
 import { itemsUIReducer } from './state/items/ui/item.ui.reducer';
 
@@ -98,7 +98,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     CharacterDropdownComponent,
     ItemsListComponent,
     ItemsFormComponent,
-    ItemLitsElementComponent,
+    ItemListElementComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

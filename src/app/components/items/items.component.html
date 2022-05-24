@@ -4,14 +4,16 @@
       <h2>Campaign Items</h2>
       <div class="py-3">
         <p-button
+          class="mx-2"
           label="New"
           icon="pi pi-plus"
           (onClick)="openNewForm()"
         ></p-button>
         <p-button
+          class="mx-2"
           label="Random"
           icon="pi pi-book"
-          disabled="disabled"
+          (onClick)="generateRandomItem()"
         ></p-button>
       </div>
       <app-items-list></app-items-list>

@@ -9,6 +9,7 @@ import {
   removeItem,
   retriveItem,
 } from './item.actions';
+import itemGenerator from 'src/app/generators/itemGenerator';
 
 export const initialState: ReadonlyArray<Item> = [];
 
@@ -28,15 +29,11 @@ export const itemsReducer = createReducer(
       if (index !== -1) draft.splice(index, 1);
     })
   ),
-  on(
-    generateRandomItem,
-    (state) => {
-      throw new Error('not implemented yet');
-    }
-    // produce(state, (draft) => {
-    //   const generator = new itemGenerator();
-    //   const randomitem = generator.next();
-    //   draft.push(randomitem);
-    // })
+  on(generateRandomItem, (state) =>
+    produce(state, (draft) => {
+      const generator = new itemGenerator();
+      const randomitem = generator.next();
+      draft.push(randomitem);
+    })
   )
 );

@@ -17,6 +17,7 @@ export class ItemsFormComponent {
     id: new FormControl(),
     name: new FormControl(''),
     description: new FormControl(''),
+    isFavorite: new FormControl(false),
   });
 
   ui$ = this.store
@@ -32,6 +33,7 @@ export class ItemsFormComponent {
         id: x._id,
         name: x.name,
         description: x.description,
+        isFavorite: x.isFavorite,
       });
   }
 
@@ -39,7 +41,7 @@ export class ItemsFormComponent {
     const item: Item = {
       _id: this.form.controls['id'].value,
       name: this.form.controls['name'].value,
-      isFavorite: false,
+      isFavorite: this.form.controls['isFavorite'].value,
       type: ITEM_TYPE,
       description: this.form.controls['description'].value,
     };

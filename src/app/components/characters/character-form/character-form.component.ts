@@ -29,6 +29,7 @@ export class CharacterFormComponent {
     class: new FormControl(''),
     age: new FormControl(''),
     description: new FormControl(''),
+    isFavorite: new FormControl(false),
   });
 
   ui$ = this.store
@@ -47,6 +48,7 @@ export class CharacterFormComponent {
         class: x.class,
         age: x.age,
         description: x.description,
+        isFavorite: x.isFavorite,
       });
   }
 
@@ -56,7 +58,7 @@ export class CharacterFormComponent {
       name: this.characterForm.controls['name'].value,
       race: this.characterForm.controls['race'].value,
       class: this.characterForm.controls['class'].value,
-      isFavorite: false,
+      isFavorite: this.characterForm.controls['isFavorite'].value,
       sex: 'male',
       age: this.characterForm.controls['age'].value,
       type: CHARACTER_TYPE,

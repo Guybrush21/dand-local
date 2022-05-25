@@ -7,6 +7,7 @@
           <label for="name">Name</label>
           <input pInputText formControlName="name" id="name" type="text" />
         </div>
+
         <div class="field">
           <label for="race">Race</label>
           <app-class-dropdown
@@ -36,6 +37,15 @@
             formControlName="description"
             id="description"
           ></textarea>
+        </div>
+        <div class="field">
+          <label for="isFavorite">Favorite</label>
+          <div>
+            <p-inputSwitch
+              formControlName="isFavorite"
+              id="isFavorite"
+            ></p-inputSwitch>
+          </div>
         </div>
         <p-button type="submit" [disabled]="!characterForm.valid">
           Save

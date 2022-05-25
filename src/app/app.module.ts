@@ -47,6 +47,9 @@ import { ItemsFormComponent } from './components/items/items-form/items-form.com
 import { ItemListElementComponent } from './components/items/items-list/item-lits-element/item-list-element.component';
 import { itemsReducer } from './state/items/item.reducer';
 import { itemsUIReducer } from './state/items/ui/item.ui.reducer';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
@@ -67,6 +70,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     StyleClassModule,
     InputTextareaModule,
     AutoCompleteModule,
+    CheckboxModule,
+    ToggleButtonModule,
+    InputSwitchModule,
     StoreModule.forRoot(
       {
         characters: charactersReducer,

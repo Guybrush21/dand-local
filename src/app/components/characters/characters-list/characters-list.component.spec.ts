@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { ConfirmationService } from 'primeng/api';
 
 import { CharactersListComponent } from './characters-list.component';
 
@@ -9,6 +11,7 @@ describe('CharactersListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CharactersListComponent],
+      providers: [provideMockStore({})],
     }).compileComponents();
   });
 

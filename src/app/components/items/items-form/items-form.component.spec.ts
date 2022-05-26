@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { ItemsFormComponent } from './items-form.component';
 
@@ -9,6 +10,7 @@ describe('ItemsFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ItemsFormComponent],
+      providers: [provideMockStore({})],
     }).compileComponents();
   });
 

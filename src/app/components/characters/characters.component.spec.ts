@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { CharactersComponent } from './characters.component';
 
@@ -8,7 +9,13 @@ describe('CharactersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      
       declarations: [CharactersComponent],
+      providers: [
+        provideMockStore({
+          initialState: { characterUI: { isNewFormOpen: false } },
+        }),
+      ],
     }).compileComponents();
   });
 

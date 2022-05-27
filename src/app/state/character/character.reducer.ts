@@ -5,7 +5,7 @@ import {
   addCharacter,
   generateRandomCharacter,
   removeCharacter,
-  retriveCharacter,
+  loadCharacters,
 } from './character.action';
 
 import produce from 'immer';
@@ -35,7 +35,7 @@ export const initialState: ReadonlyArray<Character> = [
 
 export const charactersReducer = createReducer(
   initialState,
-  on(retriveCharacter, (state, { characters }) => characters),
+  on(loadCharacters, (state) => state),
   on(addCharacter, (state, { character }) =>
     produce(state, (draft) => {
       const id = draft.findIndex((x) => x._id == character._id);

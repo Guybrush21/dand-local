@@ -15,8 +15,10 @@ export const generateRandomCharacter = createAction(
   '[Characters] Generate random character'
 );
 
-export const retriveCharacter = createAction(
-  '[Characters] Retrive characters',
-  props<{ characters: ReadonlyArray<Character> }>()
+export const loadCharacters = createAction('[Characters] Load characters');
+export const loadCharactersSuccess = createAction(
+  '[Characters] Load characters success'
 );
-
+export const loadCharactersFail = createAction(
+  '[Characters] Load characters fail'
+);

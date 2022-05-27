@@ -72,7 +72,6 @@ export default class CharacterGenerator extends Generator {
 
   next() {
     let item: Item = {
-      _id: uuidv4(),
       isFavorite: false,
       type: ITEM_TYPE,
       name: super.next(),

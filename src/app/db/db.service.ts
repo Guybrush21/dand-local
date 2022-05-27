@@ -7,22 +7,26 @@ import { CHARACTER_TYPE } from '../common/constant';
   providedIn: 'root',
 })
 export class DbService {
-  campaign_id = 'default';
+  campaign_id = 'dand';
   db: PouchDB.Database<{}>;
   constructor() {
-    this.db = new PouchDB('dand');
+    this.db = new PouchDB(this.campaign_id);
   }
 
-  loadCharacters(): Character[] {
-    return [];
+  getId(character: Character) {
+    return `${this.campaign_id}/${CHARACTER_TYPE}/${character.name}`;
   }
 
-  async addCharacter(character: Character): Promise<Character> {
+  async saveCharacter(character: Character): Promise<Character> {
     if (!character._id)
-      character._id = `${this.campaign_id}/${CHARACTER_TYPE}/${character.name}`;
+      character = { ...character, _id: this.getId(character) };
 
     const doc = await this.db.put(character);
     return character;
+  }
+
+  async getCharacter(id: string): Promise<Character> {
+    return await this.db.get<Character>(id);
   }
 
   async getAllCharacter(): Promise<Character[]> {
@@ -33,5 +37,12 @@ export class DbService {
     });
 
     return result.rows.map((x) => x.doc);
+  }
+
+  async removeCharacter(character: Character): Promise<boolean> {
+    let doc = await this.db.get<Character>(character._id);
+    let result = await this.db.remove(doc);
+
+    return result.ok;
   }
 }

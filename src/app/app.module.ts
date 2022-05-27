@@ -50,6 +50,7 @@ import { itemsUIReducer } from './state/items/ui/item.ui.reducer';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { CharacterEffects } from './state/character/character.effects';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
@@ -79,10 +80,13 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
         characterUI: charactersUIReducer,
         items: itemsReducer,
         itemsUI: itemsUIReducer,
-      },
-      { metaReducers }
+      }
+      //{ metaReducers }
     ),
-    EffectsModule.forRoot([HydrationEffects]),
+    EffectsModule.forRoot([
+      //HydrationEffects,
+      CharacterEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

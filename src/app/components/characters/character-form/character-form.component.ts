@@ -63,8 +63,7 @@ export class CharacterFormComponent {
       age: this.characterForm.controls['age'].value,
       type: CHARACTER_TYPE,
       description: this.characterForm.controls['description'].value,
-    };
-    if (char._id === null || char._id === undefined) char._id = v4();
+    };    
 
     this.store.dispatch(addCharacter({ character: char }));
     this.closeForm();

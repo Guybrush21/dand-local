@@ -46,7 +46,7 @@ export class ItemsFormComponent {
       description: this.form.controls['description'].value,
     };
 
-    if (item._id === null || item._id === undefined) item._id = v4();
+    //if (item._id === null || item._id === undefined) item._id = v4();
 
     this.store.dispatch(addItem({ item: item }));
     this.closeForm();

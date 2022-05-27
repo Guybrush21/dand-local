@@ -1,24 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
-import { loadCharacters } from './character.action';
+import { Store } from '@ngrx/store';
+import { EMPTY, from, pipe } from 'rxjs';
+import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { DbService } from 'src/app/db/db.service';
+import {
+  addCharacter,
+  loadCharacters,
+  loadCharactersSuccess,
+} from './character.action';
 
 @Injectable()
-export class MovieEffects {
-    constructor(
-      private actions$: Actions,        
-    ) { }
-    
-    // loadCharacters$ = createEffect(() => this.actions$.pipe(
-    //     ofType(loadCharacters),
-    //     mergeMap(() => this.
-    //       .pipe(
-    //         map(movies => ({ type: '[Movies API] Movies Loaded Success', payload: movies })),
-    //         catchError(() => EMPTY)
-    //       ))
-    //     )
-    //   );
-     
-    }
+export class CharacterEffects {
+  constructor(
+    private actions$: Actions,
+    private db: DbService,
+    private store: Store
+  ) {}
+
+  loadCharacters$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadCharacters),
+      mergeMap(() =>
+        from(this.db.getAllCharacter()).pipe(
+          map((a) => loadCharactersSuccess({ characters: a }))
+        )
+      )
+    )
+  );
+
+  addCharacters$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(addCharacter),
+      mergeMap((action) =>
+        from(this.db.saveCharacter(action.character)).pipe(
+          map((a) => loadCharacters())
+        )
+      )
+    )
+  );
 }

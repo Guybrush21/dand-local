@@ -17,7 +17,8 @@ export const generateRandomCharacter = createAction(
 
 export const loadCharacters = createAction('[Characters] Load characters');
 export const loadCharactersSuccess = createAction(
-  '[Characters] Load characters success'
+  '[Characters] Load characters success',
+  props<{ characters: Character[] }>()
 );
 export const loadCharactersFail = createAction(
   '[Characters] Load characters fail'

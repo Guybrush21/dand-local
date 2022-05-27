@@ -1,28 +1,37 @@
 import PouchDB from 'pouchdb';
-
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { selectAllCharacters } from '../state/character/character.selector';
+import Character from '../model/character.model';
+import { CHARACTER_TYPE } from '../common/constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
+  campaign_id = 'default';
   db: PouchDB.Database<{}>;
-  constructor(private store: Store) {
-    this.db = new PouchDB('campaign');
+  constructor() {
+    this.db = new PouchDB('dand');
   }
 
-  save() {
-    this.store.subscribe((data) => {
-      this.db.put({
-        _id: '1',
-        ...data,
-      });
+  loadCharacters(): Character[] {
+    return [];
+  }
+
+  async addCharacter(character: Character): Promise<Character> {
+    if (!character._id)
+      character._id = `${this.campaign_id}/${CHARACTER_TYPE}/${character.name}`;
+
+    const doc = await this.db.put(character);
+    return character;
+  }
+
+  async getAllCharacter(): Promise<Character[]> {
+    let result = await this.db.allDocs<Character>({
+      include_docs: true,
+      attachments: true,
+      startkey: `${this.campaign_id}/${CHARACTER_TYPE}/`,
     });
-  }
 
-  load() {
-    return this.db.get('1');
+    return result.rows.map((x) => x.doc);
   }
 }

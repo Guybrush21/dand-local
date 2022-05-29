@@ -8,9 +8,16 @@ import { CHARACTER_TYPE } from '../common/constant';
 })
 export class DbService {
   campaign_id = 'dand';
+  remoteDB = new PouchDB('https://couchdb.elaine.pw/dand');
   db: PouchDB.Database<{}>;
   constructor() {
     this.db = new PouchDB(this.campaign_id);
+    this.db
+      .sync(this.remoteDB, {
+        live: true,
+      })
+      .on('change', (change) => console.log(change))
+      .on('error', (error) => console.log(error));
   }
 
   getId(character: Character) {

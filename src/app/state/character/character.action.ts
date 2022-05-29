@@ -11,6 +11,16 @@ export const removeCharacter = createAction(
   props<{ character: Character }>()
 );
 
+export const removeCharacterSuccess = createAction(
+  '[Characters] Remove character Success',
+  props<{ character: Character }>()
+);
+
+export const removeCharacterFail = createAction(
+  '[Characters] Remove character fail',
+  props<{ string }>()
+);
+
 export const generateRandomCharacter = createAction(
   '[Characters] Generate random character'
 );

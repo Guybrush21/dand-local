@@ -7,6 +7,7 @@ import {
   removeCharacter,
   loadCharacters,
   loadCharactersSuccess,
+  removeCharacterSuccess,
 } from './character.action';
 
 import produce from 'immer';
@@ -49,7 +50,7 @@ export const charactersReducer = createReducer(
       else draft[id] = character;
     })
   ),
-  on(removeCharacter, (state, { character }) =>
+  on(removeCharacterSuccess, (state, { character }) =>
     produce(state, (draft) => {
       const index = draft.findIndex((c) => c._id === character._id);
       if (index !== -1) draft.splice(index, 1);

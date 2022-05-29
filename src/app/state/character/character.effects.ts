@@ -8,6 +8,9 @@ import {
   addCharacter,
   loadCharacters,
   loadCharactersSuccess,
+  removeCharacter,
+  removeCharacterFail,
+  removeCharacterSuccess,
 } from './character.action';
 
 @Injectable()
@@ -35,6 +38,20 @@ export class CharacterEffects {
       mergeMap((action) =>
         from(this.db.saveCharacter(action.character)).pipe(
           map((a) => loadCharacters())
+        )
+      )
+    )
+  );
+
+  removeCharacter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(removeCharacter),
+      mergeMap((removeAction) =>
+        from(this.db.removeCharacter(removeAction.character)).pipe(
+          map((a) =>
+            removeCharacterSuccess({ character: removeAction.character })
+          ),
+          catchError(async (err) => removeCharacterFail(err))
         )
       )
     )

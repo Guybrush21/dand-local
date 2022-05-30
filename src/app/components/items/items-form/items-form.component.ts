@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ITEM_TYPE } from 'src/app/common/constant';
 import Item from 'src/app/model/item.model';
-import { addItem } from 'src/app/state/items/item.actions';
+import { SaveItem } from 'src/app/state/items/item.actions';
 import { closeForm } from 'src/app/state/items/ui/item.ui.action';
 import { itemUISelector } from 'src/app/state/items/ui/item.ui.selector';
 import { v4 } from 'uuid';
@@ -48,7 +48,7 @@ export class ItemsFormComponent {
 
     //if (item._id === null || item._id === undefined) item._id = v4();
 
-    this.store.dispatch(addItem({ item: item }));
+    this.store.dispatch(SaveItem({ item: item }));
     this.closeForm();
   }
 

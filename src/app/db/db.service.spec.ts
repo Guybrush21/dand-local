@@ -48,7 +48,9 @@ describe('DbService', () => {
   });
 
   it('should get default character', async () => {
-    const c = await service.getCharacter(service.getId(defaultCharacter));
+    const c = await service.getCharacter(
+      service.getCharacterId(defaultCharacter)
+    );
 
     expect(c.name).toEqual(defaultCharacter.name);
     expect(c.class).toEqual(defaultCharacter.class);
@@ -63,7 +65,9 @@ describe('DbService', () => {
   });
 
   it('should remove character', async () => {
-    const c = await service.getCharacter(service.getId(defaultCharacter));
+    const c = await service.getCharacter(
+      service.getCharacterId(defaultCharacter)
+    );
     const removeResult = await service.removeCharacter(c);
 
     expect(removeResult).toBeTrue();

@@ -14,26 +14,7 @@ import produce from 'immer';
 import { AppState } from '../state';
 import CharacterGenerator from 'src/app/generators/characterGenerator';
 
-export const initialState: ReadonlyArray<Character> = [
-  // {
-  //   class: 'mage',
-  //   name: 'Komarash Ferroblu',
-  //   race: 'Half-orc',
-  //   sex: 'male',
-  //   _id: '0',
-  //   type: 'bu',
-  //   isFavorite: false,
-  // },
-  // {
-  //   class: 'thief',
-  //   name: 'Hel Vela',
-  //   race: 'Human',
-  //   sex: 'male',
-  //   _id: '1',
-  //   type: 'bu',
-  //   isFavorite: false,
-  // },
-];
+export const initialState: ReadonlyArray<Character> = [];
 
 export const charactersReducer = createReducer(
   initialState,

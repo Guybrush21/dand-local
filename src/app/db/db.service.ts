@@ -1,7 +1,8 @@
 import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
 import Character from '../model/character.model';
-import { CHARACTER_TYPE } from '../common/constant';
+import { CHARACTER_TYPE, ITEM_TYPE } from '../common/constant';
+import Item from '../model/item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,16 +21,18 @@ export class DbService {
       .on('error', (error) => console.log(error));
   }
 
-  getId(character: Character) {
-    return `${this.campaign_id}/${CHARACTER_TYPE}/${character.name}`;
-  }
+  getCharacterId = (character: Character): string =>
+    `${this.campaign_id}/${CHARACTER_TYPE}/${character.name}`;
+
+  getItemId = (item: Item): string =>
+    `${this.campaign_id}/${ITEM_TYPE}/${item.name}`;
 
   async saveCharacter(character: Character): Promise<Character> {
     if (!character._id)
-      character = { ...character, _id: this.getId(character) };
+      character = { ...character, _id: this.getCharacterId(character) };
 
     const doc = await this.db.put(character);
-    return character;
+    return { ...character, _rev: doc.rev };
   }
 
   async getCharacter(id: string): Promise<Character> {
@@ -48,6 +51,30 @@ export class DbService {
 
   async removeCharacter(character: Character): Promise<boolean> {
     let doc = await this.db.get<Character>(character._id);
+    let result = await this.db.remove(doc);
+
+    return result.ok;
+  }
+
+  async getAllItems(): Promise<Item[]> {
+    const result = await this.db.allDocs<Item>({
+      include_docs: true,
+      attachments: true,
+      startkey: `${this.campaign_id}/${ITEM_TYPE}/`,
+    });
+
+    return result.rows.map((x) => x.doc);
+  }
+
+  async saveItem(item: Item): Promise<Item> {
+    if (!item._id) item = { ...item, _id: this.getItemId(item) };
+
+    const doc = await this.db.put<Item>(item);
+    return { ...item, _rev: doc.rev };
+  }
+
+  async removeItem(item: Item): Promise<boolean> {
+    let doc = await this.db.get<Item>(item._id);
     let result = await this.db.remove(doc);
 
     return result.ok;

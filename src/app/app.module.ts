@@ -32,7 +32,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
 import { CharacterFormComponent } from './components/characters/character-form/character-form.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { charactersUIReducer } from './state/character/ui/character.ui.reducer';
+import { uiReducer } from './state/ui/ui.reducer';
 import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
@@ -46,13 +46,13 @@ import { ItemsListComponent } from './components/items/items-list/items-list.com
 import { ItemsFormComponent } from './components/items/items-form/items-form.component';
 import { ItemListElementComponent } from './components/items/items-list/item-lits-element/item-list-element.component';
 import { itemsReducer } from './state/items/item.reducer';
-import { itemsUIReducer } from './state/items/ui/item.ui.reducer';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CharacterEffects } from './state/character/character.effects';
 import { ItemsEffects } from './state/items/item.effects';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MultiSidebarComponent } from './components/common/multi-sidebar/multi-sidebar.component';
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
@@ -79,9 +79,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     StoreModule.forRoot(
       {
         characters: charactersReducer,
-        characterUI: charactersUIReducer,
+        characterUI: uiReducer,
         items: itemsReducer,
-        itemsUI: itemsUIReducer,
+        ui: uiReducer,
       }
       //{ metaReducers }
     ),
@@ -113,6 +113,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     ItemsListComponent,
     ItemsFormComponent,
     ItemListElementComponent,
+    MultiSidebarComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

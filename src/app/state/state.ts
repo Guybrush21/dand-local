@@ -4,18 +4,13 @@ import Item from '../model/item.model';
 export interface AppState {
   uid: string;
   characters: Character[];
-  characterUI: CharacterUIState;
+  ui: UIState;
   items: Item[];
-  itemsUI: ItemUiState;
 }
 
-export interface CharacterUIState {
-  isNewFormOpen: boolean;
-  isDetailOpen: boolean;
-  selectedCharacter?: Character;
-}
-
-export interface ItemUiState {
-  isNewFormOpen: boolean;
+export interface UIState {
+  isFormOpen: boolean;
   selectedItem?: Item;
+  selectedCharacter?: Character;
+  selectedType: string;
 }

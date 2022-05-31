@@ -5,8 +5,8 @@ import { AppConfig } from '../api/appconfig';
 @Injectable()
 export class ConfigService {
   config: AppConfig = {
-    theme: 'lara-light-indigo',
-    dark: false,
+    theme: 'lara-dark-indigo',
+    dark: true,
     inputStyle: 'outlined',
     ripple: true,
   };

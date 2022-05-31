@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { ConfirmationService } from 'primeng/api';
 import Item from 'src/app/model/item.model';
 import { removeItem } from 'src/app/state/items/item.actions';
-import { editItem, selectItem } from 'src/app/state/items/ui/item.ui.action';
 import { AppState } from 'src/app/state/state';
+import { selectItem } from 'src/app/state/ui/ui.action';
 
 @Component({
   selector: 'app-item-list-element',
@@ -35,6 +35,5 @@ export class ItemListElementComponent {
 
   edit(item: Item) {
     this.store.dispatch(selectItem({ item }));
-    this.store.dispatch(editItem());
   }
 }

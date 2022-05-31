@@ -7,14 +7,8 @@ import { CHARACTER_TYPE } from 'src/app/common/constant';
 import { DbService } from 'src/app/db/db.service';
 import Character from 'src/app/model/character.model';
 import { addCharacter } from 'src/app/state/character/character.action';
-import {
-  closeForm,
-  editCharachter,
-  selectCharachter,
-} from 'src/app/state/character/ui/character.ui.action';
-import { characterUISelector } from 'src/app/state/character/ui/character.ui.selector';
-import { CharacterUIState } from 'src/app/state/state';
-import { v4 } from 'uuid';
+import { closeForm } from 'src/app/state/ui/ui.action';
+import { uiSelector } from 'src/app/state/ui/ui.selector';
 
 @Component({
   selector: 'app-character-form',
@@ -34,7 +28,7 @@ export class CharacterFormComponent {
   });
 
   ui$ = this.store
-    .select(characterUISelector)
+    .select(uiSelector)
     .subscribe((x) => this.mapForm(x.selectedCharacter));
 
   constructor(private store: Store, private dbService: DbService) {}

@@ -1,3 +1,4 @@
+import { version } from 'src/app/common/constant';
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppMainComponent } from './app.main.component';
@@ -7,6 +8,6 @@ import { AppMainComponent } from './app.main.component';
   templateUrl: './app.footer.component.html',
 })
 export class AppFooterComponent {
-  version: string = environment.version;
+  version: string = version;
   constructor(public appMain: AppMainComponent) {}
 }

@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import Character from '../model/character.model';
 import { CHARACTER_TYPE, ITEM_TYPE } from '../common/constant';
 import Item from '../model/item.model';
-
+import pouchdbfind from 'pouchdb-find';
+PouchDB.plugin(pouchdbfind);
 @Injectable({
   providedIn: 'root',
 })
@@ -40,12 +41,10 @@ export class DbService {
   }
 
   async getAllCharacter(): Promise<Character[]> {
-    let result = await this.db.allDocs<Character>({
-      include_docs: true,
-      attachments: true,
-      startkey: `${this.campaign_id}/${CHARACTER_TYPE}/`,
+    let result = await this.db.find({
+      selector: { type: CHARACTER_TYPE },
     });
-    return result.rows.map((x) => x.doc);
+    return result.docs as Character[];
   }
 
   async removeCharacter(character: Character): Promise<boolean> {
@@ -56,13 +55,10 @@ export class DbService {
   }
 
   async getAllItems(): Promise<Item[]> {
-    const result = await this.db.allDocs<Item>({
-      include_docs: true,
-      attachments: true,
-      startkey: `${this.campaign_id}/${ITEM_TYPE}/`,
+    let result = await this.db.find({
+      selector: { type: ITEM_TYPE },
     });
-
-    return result.rows.map((x) => x.doc);
+    return result.docs as Item[];
   }
 
   async saveItem(item: Item): Promise<Item> {

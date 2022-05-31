@@ -24,6 +24,7 @@ import { v4 } from 'uuid';
 export class CharacterFormComponent {
   characterForm = new FormGroup({
     id: new FormControl(),
+    _rev: new FormControl(),
     name: new FormControl(''),
     race: new FormControl(''),
     class: new FormControl(''),
@@ -43,6 +44,7 @@ export class CharacterFormComponent {
     else
       this.characterForm.patchValue({
         id: x._id,
+        _rev: x._rev,
         name: x.name,
         race: x.race,
         class: x.class,
@@ -55,6 +57,7 @@ export class CharacterFormComponent {
   onSubmit() {
     let char: Character = {
       _id: this.characterForm.controls['id'].value,
+      _rev: this.characterForm.controls['_rev'].value,
       name: this.characterForm.controls['name'].value,
       race: this.characterForm.controls['race'].value,
       class: this.characterForm.controls['class'].value,
@@ -63,7 +66,7 @@ export class CharacterFormComponent {
       age: this.characterForm.controls['age'].value,
       type: CHARACTER_TYPE,
       description: this.characterForm.controls['description'].value,
-    };    
+    };
 
     this.store.dispatch(addCharacter({ character: char }));
     this.closeForm();

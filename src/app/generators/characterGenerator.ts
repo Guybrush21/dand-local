@@ -29,12 +29,14 @@ export default class CharacterGenerator extends Generator {
 
   next() {
     let character: Character = {
+      _id: null,
       class: this.classGenrator.next(),
       race: this.raceGenerator.next(),
       sex: this.sexGenerator.next(),
       name: this.maleGenerator.next(),
       isFavorite: false,
       type: CHARACTER_TYPE,
+      _rev: null,
     };
 
     //fix name according to sex

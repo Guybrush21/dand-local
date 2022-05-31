@@ -15,6 +15,7 @@ import { v4 } from 'uuid';
 export class ItemsFormComponent {
   form = new FormGroup({
     id: new FormControl(),
+    _rev: new FormControl(),
     name: new FormControl(''),
     description: new FormControl(''),
     isFavorite: new FormControl(false),
@@ -31,6 +32,7 @@ export class ItemsFormComponent {
     else
       this.form.patchValue({
         id: x._id,
+        _rev: x._rev,
         name: x.name,
         description: x.description,
         isFavorite: x.isFavorite,
@@ -40,6 +42,7 @@ export class ItemsFormComponent {
   onSubmit() {
     const item: Item = {
       _id: this.form.controls['id'].value,
+      _rev: this.form.controls['_rev'].value,
       name: this.form.controls['name'].value,
       isFavorite: this.form.controls['isFavorite'].value,
       type: ITEM_TYPE,

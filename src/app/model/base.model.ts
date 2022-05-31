@@ -1,7 +1,7 @@
 export default interface Base {
-  _id?: string;
-  _rev?: string;
+  _id: string | null;
+  _rev: string | null;
   _attachments?: any;
-  type?: string;
+  type: string;
   isFavorite: Boolean;
 }

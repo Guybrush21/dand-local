@@ -45,7 +45,6 @@ export class DbService {
       attachments: true,
       startkey: `${this.campaign_id}/${CHARACTER_TYPE}/`,
     });
-
     return result.rows.map((x) => x.doc);
   }
 
@@ -68,7 +67,6 @@ export class DbService {
 
   async saveItem(item: Item): Promise<Item> {
     if (!item._id) item = { ...item, _id: this.getItemId(item) };
-
     const doc = await this.db.put<Item>(item);
     return { ...item, _rev: doc.rev };
   }

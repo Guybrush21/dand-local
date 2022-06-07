@@ -4,22 +4,53 @@ import Character from '../model/character.model';
 import { CHARACTER_TYPE, ITEM_TYPE } from '../common/constant';
 import Item from '../model/item.model';
 import pouchdbfind from 'pouchdb-find';
+import { getAuth } from 'firebase/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { filter } from 'rxjs';
+
 PouchDB.plugin(pouchdbfind);
 @Injectable({
   providedIn: 'root',
 })
 export class DbService {
   campaign_id = 'dand';
-  remoteDB = new PouchDB('https://couchdb.elaine.pw/dand');
+  remoteurl = 'couchdb.elaine.pw';
+  remoteDB: PouchDB.Database<{}>;
+
   db: PouchDB.Database<{}>;
-  constructor() {
+
+  constructor(public auth: AngularFireAuth) {
     this.db = new PouchDB(this.campaign_id);
-    this.db
-      .sync(this.remoteDB, {
-        live: true,
-      })
-      .on('change', (change) => console.log(change))
-      .on('error', (error) => console.log(error));
+
+    this.auth.user.pipe(filter((user) => user != null)).subscribe((user) => {
+      const userdb = this.getUserDb(user.uid);
+      user.getIdTokenResult().then((t) => {
+        const token = t.claims.couchtoken;
+        if (!token) user.getIdToken(true);
+        debugger;
+        console.assert(token != null, 'couchtoken is missing');
+        console.log(token);
+        this.remoteDB = new PouchDB(
+          `https://${user.uid}:${token}@${this.remoteurl}/${userdb}`
+        );
+        this.db
+          .sync(this.remoteDB, {
+            live: true,
+          })
+          .on('change', (change) => console.log(change))
+          .on('error', (error) => console.log(error));
+      });
+    });
+  }
+
+  getUserDb(userid: string): string {
+    return (
+      'userdb-' +
+      userid
+        .split('')
+        .map((c) => c.charCodeAt(0).toString(16).padStart(2, '0'))
+        .join('')
+    );
   }
 
   getCharacterId = (character: Character): string =>

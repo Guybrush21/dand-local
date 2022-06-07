@@ -53,7 +53,12 @@ import { CharacterEffects } from './state/character/character.effects';
 import { ItemsEffects } from './state/items/item.effects';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MultiSidebarComponent } from './components/common/multi-sidebar/multi-sidebar.component';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { LoginComponent } from './components/login/login.component';
+import {
+  AngularFireAuth,
+  AngularFireAuthModule,
+} from '@angular/fire/compat/auth';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -94,6 +99,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
       maxAge: 25,
       logOnly: environment.production,
     }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
   ],
   declarations: [
     AppComponent,
@@ -114,6 +121,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     ItemsFormComponent,
     ItemListElementComponent,
     MultiSidebarComponent,
+    LoginComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

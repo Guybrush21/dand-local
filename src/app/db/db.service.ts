@@ -1,12 +1,13 @@
 import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
 import Character from '../model/character.model';
-import { CHARACTER_TYPE, ITEM_TYPE } from '../common/constant';
+import { CHARACTER_TYPE, ITEM_TYPE, LOCATION_TYPE } from '../common/constant';
 import Item from '../model/item.model';
 import pouchdbfind from 'pouchdb-find';
 import { getAuth } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { filter } from 'rxjs';
+import Location from '../model/location.model';
 
 PouchDB.plugin(pouchdbfind);
 @Injectable({
@@ -27,9 +28,7 @@ export class DbService {
       user.getIdTokenResult().then((t) => {
         const token = t.claims.couchtoken;
         if (!token) user.getIdToken(true);
-        debugger;
-        console.assert(token != null, 'couchtoken is missing');
-        console.log(token);
+
         this.remoteDB = new PouchDB(
           `https://${user.uid}:${token}@${this.remoteurl}/${userdb}`
         );
@@ -58,6 +57,9 @@ export class DbService {
 
   getItemId = (item: Item): string =>
     `${this.campaign_id}/${ITEM_TYPE}/${item.name}`;
+
+  getLocationId = (item: Item): string =>
+    `${this.campaign_id}/${LOCATION_TYPE}/${item.name}`;
 
   async saveCharacter(character: Character): Promise<Character> {
     if (!character._id)
@@ -103,5 +105,27 @@ export class DbService {
     let result = await this.db.remove(doc);
 
     return result.ok;
+  }
+
+  async removeLocation(location: Location): Promise<boolean> {
+    let doc = await this.db.get<Location>(location._id);
+    let result = await this.db.remove(doc);
+
+    return result.ok;
+  }
+
+  async saveLocation(location: Location): Promise<Location> {
+    if (!location._id)
+      location = { ...location, _id: this.getLocationId(location) };
+    const doc = await this.db.put<Location>(location);
+    return { ...location, _rev: doc.rev };
+  }
+
+  async getAllLocations(): Promise<Location[]> {
+    let result = await this.db.find({
+      selector: { type: LOCATION_TYPE },
+    });
+
+    return result.docs as Location[];
   }
 }

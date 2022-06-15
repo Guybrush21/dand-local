@@ -19,5 +19,6 @@ export interface UIState {
   isFormOpen: boolean;
   selectedItem?: Item;
   selectedCharacter?: Character;
+  selectedLocation?: Location;
   selectedType: string;
 }

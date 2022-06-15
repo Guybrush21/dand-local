@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { LOCATION_TYPE } from 'src/app/common/constant';
+import {
+  generateRandomlocation,
+  loadLocations,
+} from 'src/app/state/location/location.actions';
+import { openForm } from 'src/app/state/ui/ui.action';
 
 @Component({
   selector: 'app-locations',
@@ -6,5 +13,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./locations.component.scss'],
 })
 export class LocationsComponent {
-  constructor() {}
+  constructor(private store: Store) {
+    this.store.dispatch(loadLocations());
+  }
+
+  openNewForm() {
+    this.store.dispatch(openForm({ newFormType: LOCATION_TYPE }));
+  }
+
+  generateRandomLocation() {
+    this.store.dispatch(generateRandomlocation());
+  }
 }

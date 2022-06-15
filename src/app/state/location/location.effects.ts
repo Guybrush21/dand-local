@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { EMPTY, from, pipe } from 'rxjs';
+import { from } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { DbService } from 'src/app/db/db.service';
-import { loadItems } from '../items/item.actions';
+
 import {
   loadLocations,
   loadLocationsFail,

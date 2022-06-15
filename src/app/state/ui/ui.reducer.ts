@@ -1,6 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import produce from 'immer';
-import { CHARACTER_TYPE, ITEM_TYPE } from 'src/app/common/constant';
+import {
+  CHARACTER_TYPE,
+  ITEM_TYPE,
+  LOCATION_TYPE,
+} from 'src/app/common/constant';
 import { AppState, UIState } from '../state';
 import {
   closeForm,
@@ -9,6 +13,7 @@ import {
   openForm,
   selectCharachter,
   selectItem,
+  selectLocation,
 } from './ui.action';
 
 export const initialState: UIState = {
@@ -16,6 +21,7 @@ export const initialState: UIState = {
   selectedCharacter: null,
   selectedItem: null,
   selectedType: null,
+  selectedLocation: null,
 };
 
 export const uiReducer = createReducer(
@@ -29,6 +35,7 @@ export const uiReducer = createReducer(
     isFormOpen: false,
     selectedCharacter: null,
     selectedItem: null,
+    selectedLocation: null,
     selectedType: null,
   })),
   on(selectCharachter, (state, { character }) => ({
@@ -49,6 +56,16 @@ export const uiReducer = createReducer(
   on(deselectItem, (state) => ({
     ...state,
     selectedItem: null,
+    selectedType: null,
+  })),
+  on(selectLocation, (state, { location }) => ({
+    ...state,
+    selectedLocation: location,
+    selectedType: LOCATION_TYPE,
+  })),
+  on(deselectItem, (state) => ({
+    ...state,
+    selectedLocation: null,
     selectedType: null,
   }))
 );

@@ -58,7 +58,7 @@ export class DbService {
   getItemId = (item: Item): string =>
     `${this.campaign_id}/${ITEM_TYPE}/${item.name}`;
 
-  getLocationId = (item: Item): string =>
+  getLocationId = (item: Location): string =>
     `${this.campaign_id}/${LOCATION_TYPE}/${item.name}`;
 
   async saveCharacter(character: Character): Promise<Character> {

@@ -59,6 +59,11 @@ import {
   AngularFireAuth,
   AngularFireAuthModule,
 } from '@angular/fire/compat/auth';
+import { LocationsListComponent } from './components/locations/locations-list/locations-list.component';
+import { LocationsFormComponent } from './components/locations/locations-form/locations-form.component';
+import { LocationListItemComponent } from './components/locations/locations-list/location-list-item/location-list-item.component';
+import { locationsReducer } from './state/location/location.reducer';
+import { LocationsEffects } from './state/location/location.effects';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -86,6 +91,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
         characters: charactersReducer,
         characterUI: uiReducer,
         items: itemsReducer,
+        locations: locationsReducer,
         ui: uiReducer,
       }
       //{ metaReducers }
@@ -94,6 +100,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
       //HydrationEffects,
       CharacterEffects,
       ItemsEffects,
+      LocationsEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -122,6 +129,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     ItemListElementComponent,
     MultiSidebarComponent,
     LoginComponent,
+    LocationsListComponent,
+    LocationsFormComponent,
+    LocationListItemComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

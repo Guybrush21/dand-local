@@ -1,0 +1,8 @@
+<p-dataView [value]="locations$ | async">
+  <ng-template pTemplate="header">Items list</ng-template>
+  <ng-template let-i pTemplate="listItem">
+    <div class="col-12">
+      <app-location-list-item [location]="i"></app-location-list-item>
+    </div>
+  </ng-template>
+</p-dataView>

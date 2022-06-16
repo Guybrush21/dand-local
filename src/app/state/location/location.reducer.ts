@@ -1,5 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import produce from 'immer';
+import LocationGenerator from 'src/app/generators/locationGenerator';
 import Location from 'src/app/model/location.model';
 import { LocationState } from '../state';
 import {
@@ -32,7 +33,11 @@ export const locationsReducer = createReducer(
       if (index !== -1) draft.locations.splice(index, 1);
     })
   ),
-  on(generateRandomLocation, (state) => {
-    throw new Error('not implemented');
-  })
+  on(generateRandomLocation, (state) =>
+    produce(state, (draft) => {
+      const generator = new LocationGenerator();
+      const randomitem = generator.next();
+      draft.locations.push(randomitem);
+    })
+  )
 );

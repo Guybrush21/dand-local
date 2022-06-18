@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ITEM_TYPE } from '../common/constant';
 import Item from '../model/item.model';
 
-export default class CharacterGenerator extends Generator {
+export default class ItemGenerator extends Generator {
   constructor() {
     const items = [
       "Benevolent Titan's War-axe of Ice Circles",

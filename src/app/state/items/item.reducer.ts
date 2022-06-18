@@ -36,12 +36,5 @@ export const itemsReducer = createReducer(
       const index = draft.findIndex((c) => c._id === item._id);
       if (index !== -1) draft.splice(index, 1);
     })
-  ),
-  on(generateRandomItem, (state) =>
-    produce(state, (draft) => {
-      const generator = new itemGenerator();
-      const randomitem = generator.next();
-      draft.push(randomitem);
-    })
   )
 );

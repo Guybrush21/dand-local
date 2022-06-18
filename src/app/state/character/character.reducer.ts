@@ -36,12 +36,5 @@ export const charactersReducer = createReducer(
       const index = draft.findIndex((c) => c._id === character._id);
       if (index !== -1) draft.splice(index, 1);
     })
-  ),
-  on(generateRandomCharacter, (state) =>
-    produce(state, (draft) => {
-      const generator = new CharacterGenerator();
-      const randomCharacter = generator.next();
-      draft.push(randomCharacter);
-    })
   )
 );

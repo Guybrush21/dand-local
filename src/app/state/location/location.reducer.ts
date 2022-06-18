@@ -32,12 +32,5 @@ export const locationsReducer = createReducer(
       const index = draft.locations.findIndex((c) => c._id === location._id);
       if (index !== -1) draft.locations.splice(index, 1);
     })
-  ),
-  on(generateRandomLocation, (state) =>
-    produce(state, (draft) => {
-      const generator = new LocationGenerator();
-      const randomitem = generator.next();
-      draft.locations.push(randomitem);
-    })
   )
 );

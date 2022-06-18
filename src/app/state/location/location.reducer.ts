@@ -24,7 +24,7 @@ export const locationsReducer = createReducer(
     produce(state, (draft) => {
       const id = draft.locations.findIndex((x) => x._id == location._id);
       if (id === -1) draft.locations.push(location);
-      else draft[id] = location;
+      else draft.locations[id] = location;
     })
   ),
   on(removeLocationSuccess, (state, { location }) =>

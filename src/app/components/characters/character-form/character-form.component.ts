@@ -31,7 +31,7 @@ export class CharacterFormComponent {
     .select(uiSelector)
     .subscribe((x) => this.mapForm(x.selectedCharacter));
 
-  constructor(private store: Store, private dbService: DbService) {}
+  constructor(private store: Store) {}
 
   mapForm(x: Character): void {
     if (x == null) this.characterForm.reset();

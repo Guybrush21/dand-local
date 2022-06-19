@@ -5,12 +5,13 @@ import PouchDB from 'pouchdb';
 import { v4 } from 'uuid';
 import { DbService } from './db.service';
 import { removeCharacter } from '../state/character/character.action';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 describe('DbService', () => {
   let service: DbService;
 
   const defaultCharacter: Character = {
-    _id: 'mario',
+    _id: null,
     _rev: null,
     name: 'mario',
     class: 'developer',
@@ -21,12 +22,7 @@ describe('DbService', () => {
   };
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({}).compileComponents();
-  });
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DbService);
+    service = new DbService(null);
     service.db = new PouchDB(v4());
 
     service.saveCharacter(defaultCharacter);
@@ -38,7 +34,7 @@ describe('DbService', () => {
 
   it('should save new character', async () => {
     const character: Character = {
-      _id: 'nicholas',
+      _id: null,
       _rev: null,
       name: 'nicholas',
       class: 'developer',

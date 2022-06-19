@@ -1,0 +1,29 @@
+<div class="grid">
+  <div class="col">
+    <div class="card p-fluid">
+      <h5>Log Record</h5>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="formgroup-inline">
+          <div class="field">
+            <label for="description">Description</label>
+            <textarea
+              pInputTextarea
+              formControlName="message"
+              id="message"
+            ></textarea>
+          </div>
+          <div class="field">
+            <label for="isFavorite">Favorite</label>
+            <div>
+              <p-inputSwitch
+                formControlName="isFavorite"
+                id="isFavorite"
+              ></p-inputSwitch>
+            </div>
+          </div>
+          <p-button type="submit" [disabled]="!form.valid"> Save </p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

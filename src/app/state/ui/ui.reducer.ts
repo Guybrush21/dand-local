@@ -8,9 +8,11 @@ import {
 import { AppState, UIState } from '../state';
 import {
   closeForm,
+  closeLogForm,
   deselectCharachter,
   deselectItem,
   openForm,
+  openLogForm,
   selectCharachter,
   selectItem,
   selectLocation,
@@ -18,6 +20,8 @@ import {
 
 export const initialState: UIState = {
   isFormOpen: false,
+  isLogMessageOpen: false,
+  selectedLogRecord: null,
   selectedCharacter: null,
   selectedItem: null,
   selectedType: null,
@@ -32,6 +36,7 @@ export const uiReducer = createReducer(
     selectedType: newFormType,
   })),
   on(closeForm, (state) => ({
+    ...state,
     isFormOpen: false,
     selectedCharacter: null,
     selectedItem: null,
@@ -67,5 +72,7 @@ export const uiReducer = createReducer(
     ...state,
     selectedLocation: null,
     selectedType: null,
-  }))
+  })),
+  on(openLogForm, (state) => ({ ...state, isLogMessageOpen: true })),
+  on(closeLogForm, (state) => ({ ...state, isLogMessageOpen: false }))
 );

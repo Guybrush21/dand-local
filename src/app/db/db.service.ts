@@ -71,6 +71,9 @@ export class DbService {
   getRecordLogId = (record: LogRecord): string =>
     `${this.campaign_id}/${LOG_RECORD_TYPE}/${record.number}`;
 
+  composeRecordLogId = (number: number): string =>
+    `${this.campaign_id}/${LOG_RECORD_TYPE}/${number}`;
+
   async saveCharacter(character: Character): Promise<Character> {
     if (!character._id)
       character = { ...character, _id: this.getCharacterId(character) };
@@ -174,15 +177,15 @@ export class DbService {
 
   async saveLogRecord(record: LogRecord): Promise<LogRecord> {
     if (!record._id) {
-      const lastnumber = await this.getLastLogRecord();
-      if (lastnumber) record.number = lastnumber.number + 1;
-      else record.number = 0;
-
-      if (!record.timestamp) record.timestamp = new Date();
+      const lastRecord = await this.getLastLogRecord();
+      let lastNumber = 0;
+      if (lastRecord) lastNumber = lastRecord.number + 1;
 
       record = {
         ...record,
-        _id: this.getRecordLogId(record),
+        _id: this.composeRecordLogId(lastNumber),
+        number: lastNumber,
+        timestamp: new Date(),
         type: LOG_RECORD_TYPE,
       };
     }

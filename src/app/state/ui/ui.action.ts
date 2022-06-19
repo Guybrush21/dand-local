@@ -34,3 +34,7 @@ export const selectLocation = createAction(
   '[UI - Location] Select location',
   props<{ location: Location }>()
 );
+
+export const openLogForm = createAction('[UI - Log Record] Open Log Form');
+
+export const closeLogForm = createAction('[UI - Log Record] Close Log Form');

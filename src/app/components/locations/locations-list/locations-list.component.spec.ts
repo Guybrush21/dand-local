@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { LocationsListComponent } from './locations-list.component';
 
@@ -8,9 +9,9 @@ describe('LocationsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LocationsListComponent ]
-    })
-    .compileComponents();
+      declarations: [LocationsListComponent],
+      providers: [provideMockStore({ initialState: {} })],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -20,6 +20,8 @@ describe('CharacterItemListComponent', () => {
     fixture = TestBed.createComponent(CharacterItemListComponent);
     component = fixture.componentInstance;
     component.character = {
+      _id: 'nic',
+      _rev: null,
       name: 'nic',
       race: 'human',
       class: 'developer',

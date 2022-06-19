@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { MultiSidebarComponent } from './multi-sidebar.component';
 
@@ -8,9 +9,9 @@ describe('MultiSidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MultiSidebarComponent ]
-    })
-    .compileComponents();
+      declarations: [MultiSidebarComponent],
+      providers: [provideMockStore({ initialState: {} })],
+    }).compileComponents();
   });
 
   beforeEach(() => {

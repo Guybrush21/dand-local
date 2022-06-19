@@ -22,24 +22,25 @@ export class DbService {
 
   constructor(public auth: AngularFireAuth) {
     this.db = new PouchDB(this.campaign_id);
+    
+    if (auth)
+      this.auth.user.pipe(filter((user) => user != null)).subscribe((user) => {
+        const userdb = this.getUserDb(user.uid);
+        user.getIdTokenResult().then((t) => {
+          const token = t.claims.couchtoken;
+          if (!token) user.getIdToken(true);
 
-    this.auth.user.pipe(filter((user) => user != null)).subscribe((user) => {
-      const userdb = this.getUserDb(user.uid);
-      user.getIdTokenResult().then((t) => {
-        const token = t.claims.couchtoken;
-        if (!token) user.getIdToken(true);
-
-        this.remoteDB = new PouchDB(
-          `https://${user.uid}:${token}@${this.remoteurl}/${userdb}`
-        );
-        this.db
-          .sync(this.remoteDB, {
-            live: true,
-          })
-          .on('change', (change) => console.log(change))
-          .on('error', (error) => console.log(error));
+          this.remoteDB = new PouchDB(
+            `https://${user.uid}:${token}@${this.remoteurl}/${userdb}`
+          );
+          this.db
+            .sync(this.remoteDB, {
+              live: true,
+            })
+            .on('change', (change) => console.log(change))
+            .on('error', (error) => console.log(error));
+        });
       });
-    });
   }
 
   getUserDb(userid: string): string {

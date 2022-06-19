@@ -10,6 +10,8 @@ describe('DbService', () => {
   let service: DbService;
 
   const defaultCharacter: Character = {
+    _id: 'mario',
+    _rev: null,
     name: 'mario',
     class: 'developer',
     isFavorite: false,
@@ -17,6 +19,10 @@ describe('DbService', () => {
     sex: 'male',
     type: CHARACTER_TYPE,
   };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({}).compileComponents();
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -32,6 +38,8 @@ describe('DbService', () => {
 
   it('should save new character', async () => {
     const character: Character = {
+      _id: 'nicholas',
+      _rev: null,
       name: 'nicholas',
       class: 'developer',
       isFavorite: false,

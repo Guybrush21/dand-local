@@ -20,6 +20,8 @@ describe('ItemLitsElementComponent', () => {
     fixture = TestBed.createComponent(ItemListElementComponent);
     component = fixture.componentInstance;
     component.item = {
+      _id: 'sword',
+      _rev: null,
       description: '',
       isFavorite: false,
       name: 'sword',

@@ -1,13 +1,19 @@
 import PouchDB from 'pouchdb';
 import { Injectable } from '@angular/core';
 import Character from '../model/character.model';
-import { CHARACTER_TYPE, ITEM_TYPE, LOCATION_TYPE } from '../common/constant';
+import {
+  CHARACTER_TYPE,
+  ITEM_TYPE,
+  LOCATION_TYPE,
+  LOG_RECORD_TYPE,
+} from '../common/constant';
 import Item from '../model/item.model';
 import pouchdbfind from 'pouchdb-find';
 import { getAuth } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { filter } from 'rxjs';
+import { filter, find } from 'rxjs';
 import Location from '../model/location.model';
+import LogRecord from '../model/logRecord.model';
 
 PouchDB.plugin(pouchdbfind);
 @Injectable({
@@ -22,7 +28,7 @@ export class DbService {
 
   constructor(public auth: AngularFireAuth) {
     this.db = new PouchDB(this.campaign_id);
-    
+
     if (auth)
       this.auth.user.pipe(filter((user) => user != null)).subscribe((user) => {
         const userdb = this.getUserDb(user.uid);
@@ -61,6 +67,9 @@ export class DbService {
 
   getLocationId = (item: Location): string =>
     `${this.campaign_id}/${LOCATION_TYPE}/${item.name}`;
+
+  getRecordLogId = (record: LogRecord): string =>
+    `${this.campaign_id}/${LOG_RECORD_TYPE}/${record.number}`;
 
   async saveCharacter(character: Character): Promise<Character> {
     if (!character._id)
@@ -128,5 +137,56 @@ export class DbService {
     });
 
     return result.docs as Location[];
+  }
+
+  async getAllLogs(count: number = 0, page: number = 0): Promise<LogRecord[]> {
+    let result = await this.db.find({
+      selector: { type: LOG_RECORD_TYPE },
+      limit: count ?? null,
+      skip: page ? page * count : null,
+    });
+
+    return result.docs as LogRecord[];
+  }
+
+  async removeLogRecord(record: LogRecord): Promise<boolean> {
+    let doc = await this.db.get<LogRecord>(record._id);
+    let result = await this.db.remove(doc);
+
+    return result.ok;
+  }
+
+  async getLastLogRecord(): Promise<LogRecord | null> {
+    const idx = await this.db.createIndex({
+      index: {
+        fields: ['number'],
+        name: 'logrecordidx',
+      },
+    });
+
+    let doc = await this.db.find({
+      selector: { type: LOG_RECORD_TYPE, number: { $gte: null } },
+      limit: 1,
+      sort: [{ number: 'desc' }],
+    });
+    return (doc.docs[0] as LogRecord) ?? null;
+  }
+
+  async saveLogRecord(record: LogRecord): Promise<LogRecord> {
+    if (!record._id) {
+      const lastnumber = await this.getLastLogRecord();
+      if (lastnumber) record.number = lastnumber.number + 1;
+      else record.number = 0;
+
+      if (!record.timestamp) record.timestamp = new Date();
+
+      record = {
+        ...record,
+        _id: this.getRecordLogId(record),
+        type: LOG_RECORD_TYPE,
+      };
+    }
+    const doc = await this.db.put<LogRecord>(record);
+    return { ...record, _rev: doc.rev };
   }
 }

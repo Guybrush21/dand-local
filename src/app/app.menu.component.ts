@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AppMainComponent } from './app.main.component';
+import { openLogForm } from './state/ui/ui.action';
 
 @Component({
   selector: 'app-menu',
@@ -29,13 +31,14 @@ import { AppMainComponent } from './app.main.component';
           </ul>
         </li>
       </ul>
+      <p-button (onClick)="addLogRecord()">Add Log Record</p-button>
     </div>
   `,
 })
 export class AppMenuComponent implements OnInit {
   model: any[];
 
-  constructor(public appMain: AppMainComponent) {}
+  constructor(public appMain: AppMainComponent, private store: Store) {}
 
   ngOnInit() {
     this.model = [
@@ -83,5 +86,8 @@ export class AppMenuComponent implements OnInit {
       nodeElement.click();
       event.preventDefault();
     }
+  }
+  addLogRecord() {
+    this.store.dispatch(openLogForm());
   }
 }

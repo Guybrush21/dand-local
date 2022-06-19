@@ -2,6 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import Character from '../model/character.model';
 import Item from '../model/item.model';
 import Location from '../model/location.model';
+import LogRecord from '../model/logRecord.model';
 
 export interface AppState {
   uid: string;
@@ -9,14 +10,20 @@ export interface AppState {
   ui: UIState;
   items: Item[];
   locations: LocationState;
+  logs: LogRecordState;
 }
 
+export interface LogRecordState {
+  logRecords: LogRecord[];
+}
 export interface LocationState {
   locations: Location[];
 }
 
 export interface UIState {
   isFormOpen: boolean;
+  isLogMessageOpen: boolean;
+  selectedLogRecord: LogRecord;
   selectedItem?: Item;
   selectedCharacter?: Character;
   selectedLocation?: Location;

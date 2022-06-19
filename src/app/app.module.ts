@@ -64,6 +64,11 @@ import { LocationsFormComponent } from './components/locations/locations-form/lo
 import { LocationListItemComponent } from './components/locations/locations-list/location-list-item/location-list-item.component';
 import { locationsReducer } from './state/location/location.reducer';
 import { LocationsEffects } from './state/location/location.effects';
+import { LogComponent } from './components/log/log.component';
+import { LogBottomBarComponent } from './components/log/log-bottom-bar/log-bottom-bar.component';
+import { LogRecordsEffects } from './state/logrecord/logrecord.effects';
+import { logRecordReducer } from './state/logrecord/logrecord.reducer';
+import { LogFormComponent } from './components/log/log-form/log-form.component';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -92,6 +97,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
         characterUI: uiReducer,
         items: itemsReducer,
         locations: locationsReducer,
+        logs: logRecordReducer,
         ui: uiReducer,
       }
       //{ metaReducers }
@@ -101,6 +107,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
       CharacterEffects,
       ItemsEffects,
       LocationsEffects,
+      LogRecordsEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -132,6 +139,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     LocationsListComponent,
     LocationsFormComponent,
     LocationListItemComponent,
+    LogComponent,
+    LogBottomBarComponent,
+    LogFormComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

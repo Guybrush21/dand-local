@@ -5,6 +5,7 @@ import { CharactersComponent } from './components/characters/characters.componen
 import { ItemsComponent } from './components/items/items.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LogComponent } from './components/log/log.component';
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -32,6 +33,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
             {
               path: 'locations',
               component: LocationsComponent,
+            },
+            {
+              path: 'logs',
+              component: LogComponent,
             },
           ],
         },

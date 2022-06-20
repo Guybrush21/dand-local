@@ -143,11 +143,16 @@ export class DbService {
   }
 
   async getAllLogs(count: number = 0, page: number = 0): Promise<LogRecord[]> {
-    let result = await this.db.find({
+    const pagination = { limit: count, skip: page };
+    let selector = {
       selector: { type: LOG_RECORD_TYPE },
-      limit: count ?? null,
-      skip: page ? page * count : null,
-    });
+    };
+
+    if (count !== 0) {
+      selector = { ...selector, ...pagination };
+    }
+
+    let result = await this.db.find(selector);
 
     return result.docs as LogRecord[];
   }

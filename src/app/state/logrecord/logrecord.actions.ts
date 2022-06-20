@@ -31,7 +31,7 @@ export const removeLogRecordFail = createAction(
   props<{ logRecord: LogRecord; error: string }>()
 );
 
-export const loadLogRecords = createAction('[LogRecords] Load all logRecords');
+export const loadLogRecords = createAction('[LogRecords] Load all Log Records');
 
 export const loadLogRecordsSuccess = createAction(
   '[LogRecords] Load all logRecords Success',

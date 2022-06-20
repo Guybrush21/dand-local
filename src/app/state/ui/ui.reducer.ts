@@ -11,11 +11,13 @@ import {
   closeLogForm,
   deselectCharachter,
   deselectItem,
+  deselectLogRecord,
   openForm,
   openLogForm,
   selectCharachter,
   selectItem,
   selectLocation,
+  selectLogRecord,
 } from './ui.action';
 
 export const initialState: UIState = {
@@ -74,5 +76,14 @@ export const uiReducer = createReducer(
     selectedType: null,
   })),
   on(openLogForm, (state) => ({ ...state, isLogMessageOpen: true })),
-  on(closeLogForm, (state) => ({ ...state, isLogMessageOpen: false }))
+  on(closeLogForm, (state) => ({
+    ...state,
+    isLogMessageOpen: false,
+    selectedLogRecord: null,
+  })),
+  on(selectLogRecord, (state, { log }) => ({
+    ...state,
+    selectedLogRecord: log,
+  })),
+  on(deselectLogRecord, (state) => ({ ...state, selectedLogRecord: null }))
 );

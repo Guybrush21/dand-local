@@ -1,6 +1,25 @@
-# dand
+# DanD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+DanD is an agnostic tool for dungeon masters, it help dungeon master in organizing their sessions and their world building. DanD is inspired by the Lazy Dungeon Master guide.
+
+DanD manages your characters, locations and items, you can create your own or let it randomly generate. You can also record some log message where something interesting happen during your session or when you are preparing your sessions.
+
+## Feature
+
+- [x] Character
+- [x] Location
+- [x] Items
+- [ ] Diary Logs
+- [ ] Quests and hooks
+- [ ] Attachments
+- [ ] Sessions
+- [ ] Tag system
+- [ ] Multi campaign
+- [ ] Fancy Map organizer
+
+## Technology
+
+DanD is entirely developed in Angular, it saves informations in the browser with PouchDB and sync with a CouchDB instance with a database-per-user pattern. UI components are from PrimeNG. Authentication is using Firebase (for now).
 
 ## Development server
 
@@ -17,11 +36,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

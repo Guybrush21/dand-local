@@ -1,0 +1,26 @@
+<p-dataView [value]="logs$ | async">
+  <ng-template pTemplate="header">Log records</ng-template>
+  <ng-template let-i pTemplate="listItem">
+    <div class="col-12">
+      <div class="flex align-items-center">
+        <div class="m-3 flex-grow-1">
+          {{ i.message }}
+        </div>
+        <p-button
+          class="mx-2"
+          (onClick)="edit(i)"
+          label="Edit"
+          icon="pi pi-user-edit"
+          disabled="true"
+        ></p-button>
+        <p-button
+          class="mx-2"
+          (onClick)="confirmDelete($event, i)"
+          label="Delete"
+          icon="pi pi-trash"
+        ></p-button>
+      </div>
+      <p-confirmPopup></p-confirmPopup>
+    </div>
+  </ng-template>
+</p-dataView>

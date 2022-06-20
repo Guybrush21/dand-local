@@ -69,6 +69,7 @@ import { LogBottomBarComponent } from './components/log/log-bottom-bar/log-botto
 import { LogRecordsEffects } from './state/logrecord/logrecord.effects';
 import { logRecordReducer } from './state/logrecord/logrecord.reducer';
 import { LogFormComponent } from './components/log/log-form/log-form.component';
+import { LogListComponent } from './components/log/log-list/log-list.component';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -142,6 +143,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     LogComponent,
     LogBottomBarComponent,
     LogFormComponent,
+    LogListComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

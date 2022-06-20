@@ -50,7 +50,10 @@ export class LogRecordsEffects {
           map((a) =>
             removeLogRecordSuccess({ logRecord: removeAction.logRecord })
           ),
-          catchError(async (err) => removeLogRecordFail(err))
+          catchError(async (err) => {
+            console.error(err);
+            return removeLogRecordFail(err);
+          })
         )
       )
     )

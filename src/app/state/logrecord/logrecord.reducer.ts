@@ -22,7 +22,7 @@ export const logRecordReducer = createReducer(
     produce(state, (draft) => {
       const id = draft.logRecords.findIndex((x) => x._id == logRecord._id);
       if (id === -1) draft.logRecords.push(logRecord);
-      else draft[id] = logRecord;
+      else draft.logRecords[id] = logRecord;
     })
   ),
   on(removeLogRecordSuccess, (state, { logRecord }) =>

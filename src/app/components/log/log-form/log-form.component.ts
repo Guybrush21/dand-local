@@ -17,6 +17,8 @@ export class LogFormComponent {
     id: new FormControl(),
     _rev: new FormControl(),
     message: new FormControl(''),
+    number: new FormControl(),
+    timestamp: new FormControl(),
     isFavorite: new FormControl(false),
   });
 
@@ -33,6 +35,8 @@ export class LogFormComponent {
         id: x._id,
         _rev: x._rev,
         message: x.message,
+        number: x.number,
+        timestamp: x.timestamp,
         isFavorite: x.isFavorite,
       });
   }
@@ -41,6 +45,8 @@ export class LogFormComponent {
     const tosave: LogRecord = {
       _id: this.form.controls['id'].value,
       _rev: this.form.controls['_rev'].value,
+      number: this.form.controls['number'].value,
+      timestamp: this.form.controls['timestamp'].value,
       message: this.form.controls['message'].value,
       isFavorite: this.form.controls['isFavorite'].value,
       type: LOG_RECORD_TYPE,

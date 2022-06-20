@@ -4,6 +4,7 @@ import { ConfirmationService } from 'primeng/api';
 import LogRecord from 'src/app/model/logRecord.model';
 import { removeLogRecord } from 'src/app/state/logrecord/logrecord.actions';
 import { selectLogRecords } from 'src/app/state/logrecord/logrecord.selector';
+import { openLogForm, selectLogRecord } from 'src/app/state/ui/ui.action';
 
 @Component({
   selector: 'app-log-list',
@@ -33,6 +34,7 @@ export class LogListComponent {
   }
 
   edit(log: LogRecord) {
-    //this.store.dispatch(({ logs }));
+    this.store.dispatch(selectLogRecord({ log }));
+    this.store.dispatch(openLogForm());
   }
 }

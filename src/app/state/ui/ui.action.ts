@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import Character from 'src/app/model/character.model';
 import Item from 'src/app/model/item.model';
 import Location from 'src/app/model/location.model';
+import LogRecord from 'src/app/model/logRecord.model';
 
 export const openForm = createAction(
   '[UI] Open form',
@@ -38,3 +39,11 @@ export const selectLocation = createAction(
 export const openLogForm = createAction('[UI - Log Record] Open Log Form');
 
 export const closeLogForm = createAction('[UI - Log Record] Close Log Form');
+
+export const selectLogRecord = createAction(
+  '[UI - Log Record] Select Log Record',
+  props<{ log: LogRecord }>()
+);
+export const deselectLogRecord = createAction(
+  '[UI - Log Record] Deselect Log Record'
+);

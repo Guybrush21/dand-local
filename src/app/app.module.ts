@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import '@angular/common/locales/global/en';
+import '@angular/common/locales/global/de';
+import '@angular/common/locales/global/it';
+
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -147,6 +151,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: LOCALE_ID, useValue: navigator.language },
     MenuService,
     ConfigService,
     ConfirmationService,

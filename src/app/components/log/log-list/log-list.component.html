@@ -4,14 +4,16 @@
     <div class="col-12">
       <div class="flex align-items-center">
         <div class="m-3 flex-grow-1">
-          {{ i.message }}
+          <h5>
+            #{{ i.number }} <small> {{ i.timestamp | date: "short" }}</small>
+          </h5>
+          <span>{{ i.message }}</span>
         </div>
         <p-button
           class="mx-2"
           (onClick)="edit(i)"
           label="Edit"
           icon="pi pi-user-edit"
-          disabled="true"
         ></p-button>
         <p-button
           class="mx-2"

@@ -15,6 +15,7 @@ import { filter, find } from 'rxjs';
 import Location from '../model/location.model';
 import LogRecord from '../model/logRecord.model';
 import Base from '../model/base.model';
+import { Image } from 'primeng/image';
 
 PouchDB.plugin(pouchdbfind);
 @Injectable({
@@ -75,14 +76,29 @@ export class DbService {
   composeRecordLogId = (number: number): string =>
     `${this.campaign_id}/${LOG_RECORD_TYPE}/${number}`;
 
-  async addAttachment(entity: Base, filename: string, data: Blob) {
-    await this.db.putAttachment(
-      entity._id,
-      filename,
-      entity._rev,
-      data,
-      'image'
-    );
+  async addAttachment(entity: Base, data: Blob) {
+    await this.db
+      .putAttachment(entity._id, 'picture', entity._rev, data, 'image')
+      .catch(async (err) => {
+        if (err.name === 'conflict') {
+          await this.db.removeAttachment(entity._id, 'picture', entity._rev);
+          await this.db.putAttachment(
+            entity._id,
+            'picture',
+            entity._rev,
+            data,
+            'image'
+          );
+        } else console.error(err);
+      });
+  }
+
+  async removeImages(entity: Base) {
+    return await this.db.removeAttachment(entity._id, 'picture', entity._rev);
+  }
+
+  async getImages(entity: Base): Promise<Blob> {
+    return (await this.db.getAttachment(entity._id, 'picture')) as Blob;
   }
 
   async saveCharacter(character: Character): Promise<Character> {

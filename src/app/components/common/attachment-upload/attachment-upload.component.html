@@ -2,6 +2,7 @@
   *ngIf="entity"
   name="fileupload"
   [customUpload]="true"
+  [multiple]="false"
   accept="image/*"
   (uploadHandler)="uploadFile($event)"
 ></p-fileUpload>

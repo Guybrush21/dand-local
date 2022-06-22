@@ -1,4 +1,9 @@
-<p-sidebar [visible]="visibile" (onHide)="closeForm()" position="right">
+<p-sidebar
+  [visible]="visibile"
+  (onHide)="closeForm()"
+  position="right"
+  styleClass="p-sidebar-md"
+>
   <app-items-form *ngIf="typeSelected === itemType"></app-items-form>
   <app-character-form
     *ngIf="typeSelected === characterType"

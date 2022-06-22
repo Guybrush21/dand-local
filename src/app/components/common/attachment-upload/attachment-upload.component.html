@@ -1,5 +1,7 @@
 <p-fileUpload
+  *ngIf="entity"
   name="fileupload"
   [customUpload]="true"
+  accept="image/*"
   (uploadHandler)="uploadFile($event)"
 ></p-fileUpload>

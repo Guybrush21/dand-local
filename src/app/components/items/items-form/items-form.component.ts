@@ -20,9 +20,11 @@ export class ItemsFormComponent {
     isFavorite: new FormControl(false),
   });
 
-  ui$ = this.store
-    .select(uiSelector)
-    .subscribe((x) => this.mapForm(x.selectedItem));
+  ui$ = this.store.select(uiSelector).subscribe((x) => {
+    this.item = x.selectedItem;
+    this.mapForm(x.selectedItem);
+  });
+  item: Item;
 
   constructor(private store: Store) {}
 

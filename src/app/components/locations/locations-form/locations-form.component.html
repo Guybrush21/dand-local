@@ -1,31 +1,31 @@
-<div class="grid">
-  <div class="col">
-    <div class="card p-fluid">
-      <h5>Item</h5>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="field">
-          <label for="name">Name</label>
-          <input pInputText formControlName="name" id="name" type="text" />
+<div class="flex flex-column">
+  <div class="card p-fluid">
+    <h5>Item</h5>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label for="name">Name</label>
+        <input pInputText formControlName="name" id="name" type="text" />
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea
+          pInputTextarea
+          formControlName="description"
+          id="description"
+        ></textarea>
+      </div>
+      <div class="field">
+        <label for="isFavorite">Favorite</label>
+        <div>
+          <p-inputSwitch
+            formControlName="isFavorite"
+            id="isFavorite"
+          ></p-inputSwitch>
         </div>
-        <div class="field">
-          <label for="description">Description</label>
-          <textarea
-            pInputTextarea
-            formControlName="description"
-            id="description"
-          ></textarea>
-        </div>
-        <div class="field">
-          <label for="isFavorite">Favorite</label>
-          <div>
-            <p-inputSwitch
-              formControlName="isFavorite"
-              id="isFavorite"
-            ></p-inputSwitch>
-          </div>
-        </div>
-        <p-button type="submit" [disabled]="!form.valid"> Save </p-button>
-      </form>
-    </div>
+      </div>
+      <p-button type="submit" [disabled]="!form.valid"> Save </p-button>
+    </form>
   </div>
+  <app-gallery [entity]="location"></app-gallery>
+  <app-attachment-upload [entity]="location"></app-attachment-upload>
 </div>

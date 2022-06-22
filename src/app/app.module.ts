@@ -53,6 +53,7 @@ import { itemsReducer } from './state/items/item.reducer';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { FileUploadModule } from 'primeng/fileupload';
 import { CharacterEffects } from './state/character/character.effects';
 import { ItemsEffects } from './state/items/item.effects';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -74,6 +75,7 @@ import { LogRecordsEffects } from './state/logrecord/logrecord.effects';
 import { logRecordReducer } from './state/logrecord/logrecord.reducer';
 import { LogFormComponent } from './components/log/log-form/log-form.component';
 import { LogListComponent } from './components/log/log-list/log-list.component';
+import { AttachmentUploadComponent } from './components/common/attachment-upload/attachment-upload.component';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -96,6 +98,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     CheckboxModule,
     ToggleButtonModule,
     InputSwitchModule,
+    FileUploadModule,
     StoreModule.forRoot(
       {
         characters: charactersReducer,
@@ -148,6 +151,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     LogBottomBarComponent,
     LogFormComponent,
     LogListComponent,
+    AttachmentUploadComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

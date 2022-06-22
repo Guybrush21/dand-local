@@ -14,6 +14,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { filter, find } from 'rxjs';
 import Location from '../model/location.model';
 import LogRecord from '../model/logRecord.model';
+import Base from '../model/base.model';
 
 PouchDB.plugin(pouchdbfind);
 @Injectable({
@@ -73,6 +74,16 @@ export class DbService {
 
   composeRecordLogId = (number: number): string =>
     `${this.campaign_id}/${LOG_RECORD_TYPE}/${number}`;
+
+  async addAttachment(entity: Base, filename: string, data: Blob) {
+    await this.db.putAttachment(
+      entity._id,
+      filename,
+      entity._rev,
+      data,
+      'image'
+    );
+  }
 
   async saveCharacter(character: Character): Promise<Character> {
     if (!character._id)

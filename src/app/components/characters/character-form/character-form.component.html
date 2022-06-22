@@ -1,4 +1,4 @@
-<div class="flex-column">
+<div class="flex flex-column">
   <div class="card p-fluid">
     <h5>Character</h5>
     <form [formGroup]="characterForm" (ngSubmit)="onSubmit()">
@@ -51,9 +51,6 @@
       </p-button>
     </form>
   </div>
-  <app-gallery class="col" [entity]="character"></app-gallery>
-  <app-attachment-upload
-    class="col"
-    [entity]="character"
-  ></app-attachment-upload>
+  <app-gallery [entity]="character"></app-gallery>
+  <app-attachment-upload [entity]="character"></app-attachment-upload>
 </div>

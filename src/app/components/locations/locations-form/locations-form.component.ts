@@ -21,9 +21,11 @@ export class LocationsFormComponent {
     isFavorite: new FormControl(false),
   });
 
-  ui$ = this.store
-    .select(uiSelector)
-    .subscribe((x) => this.mapForm(x.selectedLocation));
+  ui$ = this.store.select(uiSelector).subscribe((x) => {
+    this.mapForm(x.selectedLocation);
+    this.location = x.selectedLocation;
+  });
+  location: Location;
 
   constructor(private store: Store) {}
 

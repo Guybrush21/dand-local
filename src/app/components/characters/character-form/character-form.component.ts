@@ -27,9 +27,13 @@ export class CharacterFormComponent {
     isFavorite: new FormControl(false),
   });
 
+  character: Character;
   ui$ = this.store
     .select(uiSelector)
-    .subscribe((x) => this.mapForm(x.selectedCharacter));
+    .subscribe((x) => {      
+      this.mapForm(x.selectedCharacter)
+      this.character = x.selectedCharacter
+    });
 
   constructor(private store: Store) {}
 

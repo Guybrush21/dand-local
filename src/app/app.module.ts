@@ -34,6 +34,7 @@ import { CharactersListComponent } from './components/characters/characters-list
 import { DataViewModule } from 'primeng/dataview';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
+import { GalleriaModule } from 'primeng/galleria';
 import { CharacterFormComponent } from './components/characters/character-form/character-form.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { uiReducer } from './state/ui/ui.reducer';
@@ -54,6 +55,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
 import { CharacterEffects } from './state/character/character.effects';
 import { ItemsEffects } from './state/items/item.effects';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -76,6 +78,7 @@ import { logRecordReducer } from './state/logrecord/logrecord.reducer';
 import { LogFormComponent } from './components/log/log-form/log-form.component';
 import { LogListComponent } from './components/log/log-list/log-list.component';
 import { AttachmentUploadComponent } from './components/common/attachment-upload/attachment-upload.component';
+import { GalleryComponent } from './components/common/gallery/gallery.component';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -99,6 +102,8 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     ToggleButtonModule,
     InputSwitchModule,
     FileUploadModule,
+    GalleriaModule,
+    ImageModule,
     StoreModule.forRoot(
       {
         characters: charactersReducer,
@@ -152,6 +157,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     LogFormComponent,
     LogListComponent,
     AttachmentUploadComponent,
+    GalleryComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

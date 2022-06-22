@@ -14,6 +14,6 @@ export class AttachmentUploadComponent {
   constructor(private db: DbService) {}
 
   uploadFile(event: FileUpload) {
-    this.db.addAttachment(this.entity, event.files[0].name, event.files[0]);
+    this.db.addAttachment(this.entity, event.files[0]);
   }
 }

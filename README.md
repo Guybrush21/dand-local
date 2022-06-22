@@ -9,9 +9,9 @@ DanD manages your characters, locations and items, you can create your own or le
 - [x] Character
 - [x] Location
 - [x] Items
-- [ ] Diary Logs
+- [x] Diary Logs
 - [ ] Quests and hooks
-- [ ] Attachments
+- [x] Attachments
 - [ ] Sessions
 - [ ] Tag system
 - [ ] Multi campaign

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { ConfirmationService } from 'primeng/api';
 
 import { LogListComponent } from './log-list.component';
 
@@ -10,7 +11,7 @@ describe('LogListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LogListComponent],
-      providers: [provideMockStore({})],
+      providers: [provideMockStore({}), ConfirmationService],
     }).compileComponents();
   });
 

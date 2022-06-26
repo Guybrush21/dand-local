@@ -11,7 +11,7 @@ import Base from 'src/app/model/base.model';
 export class AttachmentUploadComponent {
   @Input() entity: Base;
 
-  constructor(private db: DbService) {}
+  constructor(public db: DbService) {}
 
   uploadFile(event: FileUpload) {
     this.db.addAttachment(this.entity, event.files[0]);

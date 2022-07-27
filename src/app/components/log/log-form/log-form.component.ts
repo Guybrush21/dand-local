@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LOG_RECORD_TYPE } from 'src/app/common/constant';
 import LogRecord from 'src/app/model/logRecord.model';
@@ -13,13 +13,13 @@ import { uiSelector } from 'src/app/state/ui/ui.selector';
   styleUrls: ['./log-form.component.scss'],
 })
 export class LogFormComponent {
-  form = new FormGroup({
-    id: new FormControl(),
-    _rev: new FormControl(),
-    message: new FormControl(''),
-    number: new FormControl(),
-    timestamp: new FormControl(),
-    isFavorite: new FormControl(false),
+  form = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    _rev: new UntypedFormControl(),
+    message: new UntypedFormControl(''),
+    number: new UntypedFormControl(),
+    timestamp: new UntypedFormControl(),
+    isFavorite: new UntypedFormControl(false),
   });
 
   ui$ = this.store

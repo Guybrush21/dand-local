@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, take, takeLast, tap } from 'rxjs';
 import { CHARACTER_TYPE } from 'src/app/common/constant';
@@ -16,15 +16,15 @@ import { uiSelector } from 'src/app/state/ui/ui.selector';
   styleUrls: ['./character-form.component.scss'],
 })
 export class CharacterFormComponent {
-  characterForm = new FormGroup({
-    id: new FormControl(),
-    _rev: new FormControl(),
-    name: new FormControl(''),
-    race: new FormControl(''),
-    class: new FormControl(''),
-    age: new FormControl(''),
-    description: new FormControl(''),
-    isFavorite: new FormControl(false),
+  characterForm = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    _rev: new UntypedFormControl(),
+    name: new UntypedFormControl(''),
+    race: new UntypedFormControl(''),
+    class: new UntypedFormControl(''),
+    age: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
+    isFavorite: new UntypedFormControl(false),
   });
 
   character: Character;

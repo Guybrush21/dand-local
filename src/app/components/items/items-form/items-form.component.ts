@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ITEM_TYPE } from 'src/app/common/constant';
 import Item from 'src/app/model/item.model';
@@ -12,12 +12,12 @@ import { uiSelector } from 'src/app/state/ui/ui.selector';
   styleUrls: ['./items-form.component.scss'],
 })
 export class ItemsFormComponent {
-  form = new FormGroup({
-    id: new FormControl(),
-    _rev: new FormControl(),
-    name: new FormControl(''),
-    description: new FormControl(''),
-    isFavorite: new FormControl(false),
+  form = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    _rev: new UntypedFormControl(),
+    name: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
+    isFavorite: new UntypedFormControl(false),
   });
 
   ui$ = this.store.select(uiSelector).subscribe((x) => {

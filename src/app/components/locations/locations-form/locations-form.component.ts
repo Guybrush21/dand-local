@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { uiSelector } from 'src/app/state/ui/ui.selector';
 import Location from 'src/app/model/location.model';
@@ -12,13 +12,13 @@ import { closeForm } from 'src/app/state/ui/ui.action';
   styleUrls: ['./locations-form.component.scss'],
 })
 export class LocationsFormComponent {
-  form = new FormGroup({
-    id: new FormControl(),
-    _rev: new FormControl(),
-    name: new FormControl(''),
-    description: new FormControl(''),
-    area: new FormControl(''),
-    isFavorite: new FormControl(false),
+  form = new UntypedFormGroup({
+    id: new UntypedFormControl(),
+    _rev: new UntypedFormControl(),
+    name: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
+    area: new UntypedFormControl(''),
+    isFavorite: new UntypedFormControl(false),
   });
 
   ui$ = this.store.select(uiSelector).subscribe((x) => {

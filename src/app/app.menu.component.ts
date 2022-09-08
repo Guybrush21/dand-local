@@ -57,23 +57,28 @@ export class AppMenuComponent implements OnInit {
         items: [
           {
             label: 'Characters',
-            icon: 'pi pi-fw pi-home',
+            icon: 'pi pi-fw pi-users',
             routerLink: ['/characters'],
           },
           {
             label: 'Locations',
-            icon: 'pi pi-fw pi-home',
+            icon: 'pi pi-fw pi-map-marker',
             routerLink: ['/locations'],
           },
           {
             label: 'Items',
-            icon: 'pi pi-fw pi-home',
+            icon: 'pi pi-fw pi-shield',
             routerLink: ['/items'],
           },
           {
             label: 'Diary logs',
-            icon: 'pi pi-fw pi-home',
+            icon: 'pi pi-fw pi-book',
             routerLink: ['/logs'],
+          },
+          {
+            label: 'Sessions',
+            icon: 'pi pi-fw pi-compass',
+            routerLink: ['/sessions'],
           },
         ],
       },

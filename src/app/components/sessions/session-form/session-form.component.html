@@ -1,0 +1,28 @@
+<div class="grid">
+  <div class="col">
+    <div class="card">
+      <h2>New Session</h2>
+      <div class="py-3">
+        <div class="flex flex-column">
+          <div class="card p-fluid">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="field">
+                <label for="title">Title</label>
+                <input pInputText formControlName="title" id="title" />
+              </div>
+              <div class="field">
+                <label for="Strong start">Strong start</label>
+                <textarea
+                  pInputTextarea
+                  formControlName="start"
+                  id="start"
+                ></textarea>
+              </div>
+              <p-button type="submit" [disabled]="!form.valid"> Save </p-button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

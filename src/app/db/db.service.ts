@@ -6,6 +6,7 @@ import {
   ITEM_TYPE,
   LOCATION_TYPE,
   LOG_RECORD_TYPE,
+  SESSION_TYPE,
 } from '../common/constant';
 import Item from '../model/item.model';
 import pouchdbfind from 'pouchdb-find';
@@ -16,6 +17,7 @@ import Location from '../model/location.model';
 import LogRecord from '../model/logRecord.model';
 import Base from '../model/base.model';
 import { Image } from 'primeng/image';
+import Session from '../model/session.model';
 
 PouchDB.plugin(pouchdbfind);
 @Injectable({
@@ -69,6 +71,9 @@ export class DbService {
 
   getLocationId = (item: Location): string =>
     `${this.campaign_id}/${LOCATION_TYPE}/${item.name}`;
+
+  getSessionId = (item: Session): string =>
+    `${this.campaign_id}/${SESSION_TYPE}/${item.title}`;
 
   getRecordLogId = (record: LogRecord): string =>
     `${this.campaign_id}/${LOG_RECORD_TYPE}/${record.number}`;
@@ -223,5 +228,25 @@ export class DbService {
     }
     const doc = await this.db.put<LogRecord>(record);
     return { ...record, _rev: doc.rev };
+  }
+
+  async removeSession(session: Session): Promise<boolean> {
+    let doc = await this.db.get<Session>(session._id);
+    let result = await this.db.remove(doc);
+
+    return result.ok;
+  }
+
+  async saveSession(session: Session): Promise<Session> {
+    if (!session._id) session = { ...session, _id: this.getSessionId(session) };
+    const doc = await this.db.put<Session>(session);
+    return { ...session, _rev: doc.rev };
+  }
+
+  async getAllSession(): Promise<Session[]> {
+    let result = await this.db.find({
+      selector: { type: SESSION_TYPE },
+    });
+    return result.docs as Session[];
   }
 }

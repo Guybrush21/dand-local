@@ -79,6 +79,11 @@ import { LogFormComponent } from './components/log/log-form/log-form.component';
 import { LogListComponent } from './components/log/log-list/log-list.component';
 import { AttachmentUploadComponent } from './components/common/attachment-upload/attachment-upload.component';
 import { GalleryComponent } from './components/common/gallery/gallery.component';
+import { SessionsComponent } from './components/sessions/sessions.component';
+import { SessionFormComponent } from './components/sessions/session-form/session-form.component';
+import { SessionListComponent } from './components/sessions/session-list/session-list.component';
+import { SessionEffects } from './state/session/session.effects';
+import { sessionReducer } from './state/session/session.reducer';
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
 
 @NgModule({
@@ -112,6 +117,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
         locations: locationsReducer,
         logs: logRecordReducer,
         ui: uiReducer,
+        sessions: sessionReducer,
       }
       //{ metaReducers }
     ),
@@ -121,6 +127,7 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
       ItemsEffects,
       LocationsEffects,
       LogRecordsEffects,
+      SessionEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -158,6 +165,9 @@ export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
     LogListComponent,
     AttachmentUploadComponent,
     GalleryComponent,
+    SessionsComponent,
+    SessionFormComponent,
+    SessionListComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

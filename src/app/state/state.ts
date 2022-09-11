@@ -12,6 +12,7 @@ export interface AppState {
   items: Item[];
   locations: LocationState;
   logs: LogRecordState;
+  sessions: SessionState;
 }
 
 export interface LogRecordState {

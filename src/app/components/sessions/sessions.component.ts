@@ -16,6 +16,6 @@ export class SessionsComponent {
   }
 
   public openNewForm() {
-    this.router.navigateByUrl('/new-session');
+    this.router.navigateByUrl('/session');
   }
 }

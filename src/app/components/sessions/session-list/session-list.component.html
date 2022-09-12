@@ -1,12 +1,12 @@
 <p-dataView [value]="sessions$ | async">
-  <ng-template pTemplate="header">Items list</ng-template>
+  <ng-template pTemplate="header">Sessions list</ng-template>
   <ng-template let-session pTemplate="listItem">
     <div class="col-12">
       <div class="flex align-items-center">
         <div class="m-3 flex-grow-1">{{ session.title }}</div>
         <p-button
           class="mx-2"
-          (onClick)="(null)"
+          (onClick)="goToSession(session._id)"
           label="Edit"
           icon="pi pi-user-edit"
         ></p-button>

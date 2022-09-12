@@ -45,7 +45,7 @@ import { SessionFormComponent } from './components/sessions/session-form/session
               component: SessionsComponent,
             },
             {
-              path: 'new-session',
+              path: 'session',
               component: SessionFormComponent,
             },
           ],
